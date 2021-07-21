@@ -7,7 +7,8 @@ Android application Stabilization / iOS application build&Stabilization
 ![Hanssem Square plane detection](/image/1.PNG)
 
 
-### Prerequisites 
+### Application Flow
+![Hanssem Square plane detection Flow](/image/Frame 1.jpg)
 
 ```
 
