@@ -5,7 +5,7 @@ Android application Stabilization / iOS application build&Stabilization
 
 ## Application Operation Screen
 <img src = "image/1.PNG" width ="300" /> <img src = "image/2.png" width ="300" /><br>
-<img src = "image/3.PNG" width ="300" /> <img src = "image/3.PNG" width ="300" />
+<img src = "image/3.PNG" width ="300" /> <img src = "image/4.PNG" width ="300" />
 
 
 
