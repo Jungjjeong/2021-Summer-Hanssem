@@ -4,12 +4,13 @@
 Android application Stabilization / iOS application build&Stabilization
 
 ## Application Operation Screen
-<img src = "image/1.PNG" width ="200" /> <img src = "image/2.PNG" width ="200" />
+<img src = "image/1.PNG" width ="300" /> <img src = "image/2.png" width ="300" />
+<img src = "image/3.PNG" width ="300" /> <img src = "image/3.PNG" width ="300" />
 
 
 
 ### Application Flow
-![Hanssem Square plane detection Flow](/image/2.png)
+![Hanssem Square plane detection Flow](/image/frame.png)
 
 
 
