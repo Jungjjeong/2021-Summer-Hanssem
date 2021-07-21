@@ -4,7 +4,7 @@
 Android application Stabilization / iOS application build&Stabilization
 
 ## Description
-![Hanssem Square plane detection](/image/1.PNG){: width="50%" height="50%"}
+![Hanssem Square plane detection](/image/1.PNG)
 
 
 ### Prerequisites 
