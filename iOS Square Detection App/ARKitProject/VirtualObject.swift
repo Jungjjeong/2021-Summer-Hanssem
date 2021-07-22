@@ -45,7 +45,7 @@ class VirtualObject: SCNNode {
 	func loadModel() {
 		guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)",
 												inDirectory: "Models.scnassets/\(modelName)") else {
-            print("return 됩니다.")
+            print("모델을 찾지 못해 return.")
 			return
 		}
         
