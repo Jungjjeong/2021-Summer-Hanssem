@@ -54,6 +54,17 @@ class VirtualObject: SCNNode {
 		for child in virtualObjectScene.rootNode.childNodes {
 			child.geometry?.firstMaterial?.lightingModel = .physicallyBased
 			child.movabilityHint = .movable
+            if self.modelName == "sofa" || self.modelName == "teapot" { // usdz file scale format
+                let scale = 0.005
+                child.scale = SCNVector3(scale, scale, scale)
+//                child.light?.castsShadow = true
+            }
+//            wrapperNode.light = SCNLight()
+//            wrapperNode.light!.type = .spot
+            wrapperNode.light?.castsShadow = true
+//            wrapperNode.light!.shadowMode = .deferred
+//            wrapperNode.rotation = SCNVector4(x:-1, y:0, z:0, w: CGFloat.pi/2)
+//            wrapperNode.position = SCNVector3(x:0, y:20, z:0)
 			wrapperNode.addChildNode(child)
 		}
         print("loadModel func")
