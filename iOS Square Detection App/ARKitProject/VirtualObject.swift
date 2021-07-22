@@ -45,9 +45,10 @@ class VirtualObject: SCNNode {
 	func loadModel() {
 		guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)",
 												inDirectory: "Models.scnassets/\(modelName)") else {
+            print("return 됩니다.")
 			return
 		}
-
+        
 		let wrapperNode = SCNNode()
 
 		for child in virtualObjectScene.rootNode.childNodes {
@@ -55,6 +56,7 @@ class VirtualObject: SCNNode {
 			child.movabilityHint = .movable
 			wrapperNode.addChildNode(child)
 		}
+        print("loadModel func")
 		self.addChildNode(wrapperNode)
 
 		modelLoaded = true
@@ -65,7 +67,7 @@ class VirtualObject: SCNNode {
 		for child in self.childNodes {
 			child.removeFromParentNode()
 		}
-
+        print("unloadModel func")
 		modelLoaded = false
 	}
 
