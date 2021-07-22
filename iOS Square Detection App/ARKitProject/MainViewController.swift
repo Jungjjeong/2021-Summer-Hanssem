@@ -493,9 +493,9 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 
 	func loadVirtualObject(object: VirtualObject) {
 		// Show progress indicator
-        // 근데 이거 안뜸
+        // 근데 이거 왜 안뜨는거야?
 		let spinner = UIActivityIndicatorView()
-        print("아니왜안떠")
+        print("모델을 로드합니다.")
 		spinner.center = addObjectButton.center
 		spinner.bounds.size = CGSize(width: addObjectButton.bounds.width - 5, height: addObjectButton.bounds.height - 5)
 		addObjectButton.setImage(#imageLiteral(resourceName: "buttonring"), for: [])
@@ -509,6 +509,7 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 			VirtualObjectsManager.shared.setVirtualObjectSelected(virtualObject: object)
 
 			object.loadModel()
+            print("모델 로드 성공")
 
 			DispatchQueue.main.async {
 				if let lastFocusSquarePos = self.focusSquare?.lastPosition {
@@ -718,7 +719,7 @@ extension MainViewController {
 			return
 		}
 
-		recentVirtualObjectDistances.removeAll() // 그 전의 virtureobject distance가 존재할 경우 초기화.
+		recentVirtualObjectDistances.removeAll() // 그 전의 virtualobject distance가 존재할 경우 초기화.
 
 		let cameraWorldPos = SCNVector3.positionFromTransform(cameraTransform) // camera에 대한 position 반환
 		var cameraToPosition = pos - cameraWorldPos
