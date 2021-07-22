@@ -35,6 +35,7 @@
 		E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */; };
 		E7963A9226A8EBED00BDF22D /* Sofa.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9126A8EBED00BDF22D /* Sofa.swift */; };
 		E7963A9426A8FDB600BDF22D /* Teapot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9326A8FDB600BDF22D /* Teapot.swift */; };
+		E7963A9626A943F500BDF22D /* LemonMeringuePie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9526A943F500BDF22D /* LemonMeringuePie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
 		E7963A9126A8EBED00BDF22D /* Sofa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sofa.swift; sourceTree = "<group>"; };
 		E7963A9326A8FDB600BDF22D /* Teapot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teapot.swift; sourceTree = "<group>"; };
+		E7963A9526A943F500BDF22D /* LemonMeringuePie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LemonMeringuePie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				A3D672F41EF0E8DF00110E48 /* Vase.swift */,
 				E7963A9126A8EBED00BDF22D /* Sofa.swift */,
 				E7963A9326A8FDB600BDF22D /* Teapot.swift */,
+				E7963A9526A943F500BDF22D /* LemonMeringuePie.swift */,
 			);
 			path = "Virtual Objects";
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				3987BEDC1E9E057F00167FAC /* Gesture.swift in Sources */,
 				C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */,
 				39D4A8BE1EA1AF530006EC65 /* PlaneDebugVisualization.swift in Sources */,
+				E7963A9626A943F500BDF22D /* LemonMeringuePie.swift in Sources */,
 				39C0B9591E9C6B1F003FCA0C /* SettingsViewController.swift in Sources */,
 				A3D672ED1EF0E7C500110E48 /* Cup.swift in Sources */,
 				C490DAC41E9AB63400210960 /* VirtualObjectSelectionViewController.swift in Sources */,
