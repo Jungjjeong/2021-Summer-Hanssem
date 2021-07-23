@@ -54,7 +54,8 @@ class VirtualObject: SCNNode {
 		for child in virtualObjectScene.rootNode.childNodes {
 			child.geometry?.firstMaterial?.lightingModel = .physicallyBased
 			child.movabilityHint = .movable
-            if self.modelName == "sofa" || self.modelName == "teapot" { // usdz file scale format
+            print(self.modelName)
+            if self.modelName == "746525_close" || self.modelName == "teapot" { // usdz file scale format
                 let scale = 0.005
                 child.scale = SCNVector3(scale, scale, scale)
 //                child.f

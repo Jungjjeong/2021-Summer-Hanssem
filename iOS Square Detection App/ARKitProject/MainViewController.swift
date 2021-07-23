@@ -67,12 +67,16 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 	func toggleAmbientLightEstimation(_ enabled: Bool) { // 조명 추적 여부 -> bool
         if enabled {
 			if !sessionConfig.isLightEstimationEnabled {
+                print("조명 추적")
 				sessionConfig.isLightEstimationEnabled = true
+                sceneView.autoenablesDefaultLighting = true
 				session.run(sessionConfig)
 			}
         } else {
 			if sessionConfig.isLightEstimationEnabled {
+                print("조명 비추적")
 				sessionConfig.isLightEstimationEnabled = false
+                sceneView.autoenablesDefaultLighting = false
 				session.run(sessionConfig)
 			}
         }
@@ -285,7 +289,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		imagePlane.firstMaterial?.lightingModel = .constant
 
 		let planeNode = SCNNode(geometry: imagePlane)
-		sceneView.scene.rootNode.addChildNode(planeNode)
+		sceneView.scene.rootNode.addChildNode(planeNode) // 현재 화면에 사진을 띄울 수 있다.
 
 		focusSquare?.isHidden = false // 다시 나타내기
 	}
@@ -373,8 +377,9 @@ extension MainViewController {
 			textManager.escalateFeedback(for: camera.trackingState, inSeconds: 5.0)
 		case .limited:
 			if use3DOFTrackingFallback {
-				// After 10 seconds of limited quality, fall back to 3DOF mode.
+				// 10초의 limited quality 이후, 다시 3DOF 모드로 fall back.
 				trackingFallbackTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false, block: { _ in
+                    print("Fallback")
 					self.use3DOFTracking = true
 					self.trackingFallbackTimer?.invalidate()
 					self.trackingFallbackTimer = nil
@@ -506,7 +511,7 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 			VirtualObjectsManager.shared.setVirtualObjectSelected(virtualObject: object)
 
 			object.loadModel()
-            print("모델 로드 성공")
+            print("모델 로드")
 
 			DispatchQueue.main.async {
 				if let lastFocusSquarePos = self.focusSquare?.lastPosition {
@@ -539,9 +544,10 @@ extension MainViewController: ARSCNViewDelegate {
 
 			// If light estimation is enabled, update the intensity of the model's lights and the environment map
 			if let lightEstimate = self.session.currentFrame?.lightEstimate {
-				self.sceneView.enableEnvironmentMapWithIntensity(lightEstimate.ambientIntensity / 40) // 조명 업데이트를 사용한 환경 맵 업데이트
+				self.sceneView.enableEnvironmentMapWithIntensity(lightEstimate.ambientIntensity / 100)
+                print(lightEstimate.ambientIntensity / 100)// 조명 업데이트를 사용한 환경 맵 업데이트
 			} else {
-				self.sceneView.enableEnvironmentMapWithIntensity(25)
+				self.sceneView.enableEnvironmentMapWithIntensity(10)
 			}
 		}
 	}

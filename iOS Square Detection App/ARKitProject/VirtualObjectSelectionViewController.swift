@@ -17,7 +17,7 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
 	}
 
 	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		fatalError("init(coder:) 가 구현되지 않았습니다.")
 	}
 
 	override func viewDidLoad() {
@@ -42,25 +42,23 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
 		case 0:
 			return Candle()
 		case 1:
-			return Cup()
-		case 2:
 			return Vase()
-		case 3:
+		case 2:
 			return Lamp()
-		case 4:
+		case 3:
 			return Chair()
-        case 5:
+        case 4:
             return Sofa()
-        case 6:
+        case 5:
             return Teapot()
-        case 7:
+        case 6:
             return LemonMeringuePie()
 		default:
-			return Cup()
+			return Candle()
 		}
 	}
 
-	static let COUNT_OBJECTS = 8
+	static let COUNT_OBJECTS = 7
 
 	// MARK: - UITableViewDelegate
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
