@@ -1,8 +1,6 @@
+// MARK: - ObjectList
+
 import UIKit
-
-
-// ObjectList 보여주는 view controller
-
 
 
 class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {

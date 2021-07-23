@@ -1,11 +1,5 @@
-//
-//
-//
-//
-// Object define
-//
-//
-//
+// MARK: - Object define
+
 
 import Foundation
 import SceneKit.ModelIO
@@ -55,10 +49,14 @@ class VirtualObject: SCNNode {
 			child.geometry?.firstMaterial?.lightingModel = .physicallyBased
 			child.movabilityHint = .movable
             print(self.modelName)
-            if self.modelName == "746525_close" || self.modelName == "teapot" { // usdz file scale format
+            if self.modelName == "teapot" { // usdz file scale format
                 let scale = 0.005
                 child.scale = SCNVector3(scale, scale, scale)
 //                child.f
+            }
+            else if self.modelName == "746525_close" {
+                let scale = 0.01
+                child.scale = SCNVector3(scale, scale, scale)
             }
 			wrapperNode.addChildNode(child)
 		}

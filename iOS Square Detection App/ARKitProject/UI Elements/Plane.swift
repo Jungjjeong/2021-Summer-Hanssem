@@ -1,9 +1,8 @@
+// MARK: - Plane
+
+
 import Foundation
 import ARKit
-
-
-// Plane
-
 
 
 class Plane: SCNNode {

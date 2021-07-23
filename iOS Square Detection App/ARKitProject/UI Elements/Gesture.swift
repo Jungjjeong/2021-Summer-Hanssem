@@ -1,9 +1,8 @@
+// MARK: - touch type define
+
+
 import Foundation
 import ARKit
-
-
-// touch type define
-
 
 
 class Gesture {

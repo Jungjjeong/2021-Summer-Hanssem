@@ -1,9 +1,8 @@
+// MARK: - debug 시각화를 눌렀을 시, 나오는 평면 debug grid 시각화 여부
+
+
 import Foundation
 import ARKit
-
-
-// debug 시각화를 눌렀을 시, 나오는 평면 debug grid 시각화 여부
-
 
 
 class PlaneDebugVisualization: SCNNode {

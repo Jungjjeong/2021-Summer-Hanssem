@@ -1,8 +1,6 @@
+// MARK: - PlanesSetting 화면
+
 import UIKit
-
-// Setting 화면 ViewController
-
-
 
 enum Setting: String {
     // Bool settings with SettingsViewController switches

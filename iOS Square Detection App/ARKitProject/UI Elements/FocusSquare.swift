@@ -1,10 +1,7 @@
+// MARK: - focussquare -> plane detection, object placement 가능 여부
+
 import Foundation
 import ARKit
-
-
-
-// focussquare -> plane detection, object placement 가능 여부
-
 
 
 class FocusSquare: SCNNode {

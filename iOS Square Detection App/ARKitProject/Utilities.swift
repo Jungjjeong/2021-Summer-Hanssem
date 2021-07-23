@@ -1,7 +1,9 @@
+// MARK: - UIImage extensions
+
+
 import Foundation
 import ARKit
 
-// - MARK: UIImage extensions
 
 extension UIImage {
 	func inverted() -> UIImage? {

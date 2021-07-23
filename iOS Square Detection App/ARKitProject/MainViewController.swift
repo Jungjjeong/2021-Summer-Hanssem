@@ -150,7 +150,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 			trackingFallbackTimer = nil // timer 초기화해준다.
 		}
 
-		textManager.scheduleMessage("FIND A SURFACE TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .planeEstimation)
+		textManager.scheduleMessage("OBJECT를 배치할 평면을 찾습니다.", inSeconds: 7.5, messageType: .planeEstimation)
 	}
 
     // MARK: - Focus Square
@@ -162,7 +162,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		focusSquare = FocusSquare()
 		sceneView.scene.rootNode.addChildNode(focusSquare!) // 장면 위 Node에 focusSquare 붙인다.
 
-		textManager.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
+		textManager.scheduleMessage("왼쪽 또는 오른쪽으로 이동해 보세요.", inSeconds: 5.0, messageType: .focusSquare)
     }
 
 	func updateFocusSquare() {
@@ -263,7 +263,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
             
 			self.textManager.cancelAllScheduledMessages()
 			self.textManager.dismissPresentedAlert()
-			self.textManager.showMessage("STARTING A NEW SESSION")
+			self.textManager.showMessage("새로운 SESSION을 시작합니다.")
 			self.use3DOFTracking = false // 3DOFTracking 끄기
 
 			self.setupFocusSquare() // focusSquare 초기화 및 사용하기 위해 세팅
@@ -324,7 +324,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
     @objc
     func dismissSettings() {
 		self.dismiss(animated: true, completion: nil) // click done
-        print("Click Done button")
+        print("Done 버튼을 눌렀습니다.")
 		updateSettings() // update
 	}
 
@@ -410,9 +410,9 @@ extension MainViewController {
 
 		let isRecoverable = (arError.code == .worldTrackingFailed)
 		if isRecoverable {
-			sessionErrorMsg += "\nYou can try resetting the session or quit the application."
+			sessionErrorMsg += "\nSession을 재설정하거나, Application을 종료할 수 있습니다."
 		} else {
-			sessionErrorMsg += "\nThis is an unrecoverable error that requires to quit the application."
+			sessionErrorMsg += "\nApplication을 종료해야 하는 복구할 수 없는 오류입니다."
 		}
 
 		displayErrorMessage(title: "We're sorry!", message: sessionErrorMsg, allowRestart: isRecoverable)
@@ -421,7 +421,7 @@ extension MainViewController {
 	func sessionWasInterrupted(_ session: ARSession) {
 		textManager.blurBackground()
 		textManager.showAlert(title: "Session Interrupted",
-		                      message: "The session will be reset after the interruption has ended.")
+		                      message: "interruption이 종료된 후, session이 재설정됩니다.")
 	}
 
 	func sessionInterruptionEnded(_ session: ARSession) {
@@ -495,7 +495,6 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 
 	func loadVirtualObject(object: VirtualObject) {
 		// Show progress indicator
-        // 근데 이거 왜 안뜨는거야?
 		let spinner = UIActivityIndicatorView()
         print("모델을 로드합니다.")
 		spinner.center = addObjectButton.center
@@ -612,7 +611,7 @@ extension MainViewController {
 	func moveVirtualObjectToPosition(_ pos: SCNVector3?, _ instantly: Bool, _ filterPosition: Bool) {
 
 		guard let newPosition = pos else {
-			textManager.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
+			textManager.showMessage("Object를 배치할 수 없습니다.\n왼쪽 또는 오른쪽으로 이동해 보세요.")
 			// Reset the content selection in the menu only if the content has not yet been initially placed.
 			if !VirtualObjectsManager.shared.isAVirtualObjectPlaced() {
 				resetVirtualObject()
@@ -808,7 +807,7 @@ extension MainViewController {
 		// Drop the object onto the plane if it is near it.
 		let verticalAllowance: Float = 0.03
 		if objectPos.y > -verticalAllowance && objectPos.y < verticalAllowance {
-			textManager.showDebugMessage("OBJECT MOVED\nSurface detected nearby")
+			textManager.showDebugMessage("OBJECT MOVED\n근처에 평면이 존재합니다.")
 
 			SCNTransaction.begin()
 			SCNTransaction.animationDuration = 0.5
