@@ -1,13 +1,10 @@
+// Main화면 ViewController
+
 import ARKit
 //import Foundation -> UIKit에 포함됨
 //import SceneKit -> ARkit에 포함됨
 import UIKit // app의 model 객체를 정의하는데 필요한 기본 타입들을 제공한다.
 import Photos
-
-
-// Main화면 ViewController
-
-
 
 class MainViewController: UIViewController { // 가장 상위에 위치할 Controller
 	var dragOnInfinitePlanesEnabled = false // 평면이 있다는 가정 하에 계속 드래그할 수 있는 선택창
@@ -56,7 +53,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		didSet { // 값이 변경된 직후에 호출된다. (willSet은 값이 변경되기 직전에 호출)
 			if use3DOFTracking {
 				sessionConfig = ARWorldTrackingConfiguration() // 장치의 움직임을 추적하고 앵커 고정하는 역할의 class
-			}
+			} // 3DOF(3 degrees of freedom) : 회전 운동만 추적할 수 있는 디바이스
 			sessionConfig.isLightEstimationEnabled = UserDefaults.standard.bool(for: .ambientLightEstimation)
             // user의 현재 ambientLightEstimation 상태 여부를 sessionConfig의 조명 추정 여부에 입힌다.
 			session.run(sessionConfig) // session run
