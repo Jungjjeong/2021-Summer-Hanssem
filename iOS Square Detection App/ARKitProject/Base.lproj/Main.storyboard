@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -77,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcf-ic-uGo" userLabel="Add Object Button">
-                                <rect key="frame" x="190" y="829" width="48" height="48"/>
+                                <rect key="frame" x="131" y="829" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="NZv-Ts-4dl"/>
                                     <constraint firstAttribute="height" constant="48" id="Z1M-DD-gjO"/>
@@ -171,6 +172,18 @@
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdq-uk-bRZ">
+                                <rect key="frame" x="254" y="843" width="48" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31.333333333333371" id="g1T-yQ-xSM"/>
+                                    <constraint firstAttribute="width" constant="48" id="jII-fK-svM"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" backgroundImage="ruler" catalog="system"/>
+                                <connections>
+                                    <segue destination="c53-68-VlE" kind="push" id="V6Z-eZ-Ibp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GBj-4O-Whc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -178,6 +191,7 @@
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="35g-18-nn3"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" constant="-15" id="6c1-k7-y99"/>
                             <constraint firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="6h6-BI-mhL"/>
+                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="Cdq-uk-bRZ" secondAttribute="bottom" constant="22.666666666666629" id="6xb-8D-yaX"/>
                             <constraint firstItem="E6c-py-dvH" firstAttribute="top" secondItem="RLh-bf-1c3" secondAttribute="top" id="7gH-DS-Crg"/>
                             <constraint firstItem="E6c-py-dvH" firstAttribute="leading" secondItem="GBj-4O-Whc" secondAttribute="leading" id="8nh-ZQ-AuM"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="qI1-of-tgS" secondAttribute="bottom" constant="15" id="EoQ-R6-wLs"/>
@@ -191,7 +205,8 @@
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" id="UMK-or-VVf"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" constant="20" id="V7S-nn-Lcz"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" id="YbV-6m-kVC"/>
-                            <constraint firstItem="xcf-ic-uGo" firstAttribute="centerX" secondItem="GBj-4O-Whc" secondAttribute="centerX" id="ZCe-ld-yQW"/>
+                            <constraint firstItem="xcf-ic-uGo" firstAttribute="centerX" secondItem="GBj-4O-Whc" secondAttribute="centerX" constant="-59" id="ZCe-ld-yQW"/>
+                            <constraint firstItem="Cdq-uk-bRZ" firstAttribute="leading" secondItem="xcf-ic-uGo" secondAttribute="trailing" constant="75" id="aEC-Ob-cLt"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="fjf-Mj-ALG"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" constant="15" id="iIf-WZ-kZj"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="lHd-lf-g1u"/>
@@ -215,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="98.50074962518741"/>
+            <point key="canvasLocation" x="995.32710280373828" y="98.488120950323975"/>
         </scene>
         <!--settingsViewController-->
         <scene sceneID="i51-5j-JLv">
@@ -555,6 +570,33 @@
             </objects>
             <point key="canvasLocation" x="-623.20000000000005" y="98.50074962518741"/>
         </scene>
+        <!--Distance View Controller-->
+        <scene sceneID="PGb-6u-bFC">
+            <objects>
+                <viewController id="c53-68-VlE" customClass="DistanceViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A9D-KE-JbQ" customClass="ARSCNView" customModule="ARKitProject" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPw-XN-wJp" customClass="ARSCNView">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </sceneKitView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7ul-p6-n21"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YPw-XN-wJp" firstAttribute="leading" secondItem="7ul-p6-n21" secondAttribute="leading" id="9K9-va-UC5"/>
+                            <constraint firstItem="YPw-XN-wJp" firstAttribute="trailing" secondItem="7ul-p6-n21" secondAttribute="trailing" id="Bx1-4V-87q"/>
+                            <constraint firstItem="YPw-XN-wJp" firstAttribute="top" secondItem="A9D-KE-JbQ" secondAttribute="top" id="YNq-7m-erT"/>
+                            <constraint firstAttribute="bottom" secondItem="YPw-XN-wJp" secondAttribute="bottom" id="vLi-TN-a3f"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="t1D-hO-NYy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="16A-z6-JbM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="995" y="774"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Backgroud" width="1200" height="1800"/>
@@ -562,12 +604,16 @@
         <image name="add" width="48" height="48"/>
         <image name="restart" width="20" height="23"/>
         <image name="restartPressed" width="20" height="23"/>
+        <image name="ruler" catalog="system" width="128" height="57"/>
         <image name="settings" width="41" height="48"/>
         <image name="settingsPressed" width="41" height="48"/>
         <image name="shutter" width="512" height="512"/>
         <image name="shutterPressed" width="512" height="512"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
