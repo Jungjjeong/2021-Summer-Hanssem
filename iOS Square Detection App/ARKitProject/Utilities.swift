@@ -234,7 +234,8 @@ extension CGPoint {
 	}
 
 	init(_ vector: SCNVector3) {
-		self.x = CGFloat(vector.x)
+        self.init()
+        self.x = CGFloat(vector.x)
 		self.y = CGFloat(vector.y)
 	}
 

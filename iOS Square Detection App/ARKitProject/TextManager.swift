@@ -1,4 +1,4 @@
-// MARK: - debug message viewer
+// MARK: - Debug message viewer
 
 
 import Foundation

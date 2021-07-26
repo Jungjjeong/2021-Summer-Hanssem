@@ -1,9 +1,8 @@
-// MARK: - View setting controller
+// MARK: - View setting
 
 
 import ARKit
 import Foundation
-//import SceneKit
 
 
 extension ARSCNView {

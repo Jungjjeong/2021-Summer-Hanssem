@@ -1,8 +1,9 @@
-// MARK: - hittest 시각화를 눌렀을 때
+// MARK: - HitTest 시각화를 눌렀을 때
 
 
 import Foundation
 import ARKit
+
 
 class HitTestVisualization {
 

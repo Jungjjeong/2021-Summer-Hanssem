@@ -1,4 +1,5 @@
-// MARK: - ObjectList
+// MARK: - Object list View Controller
+
 
 import UIKit
 

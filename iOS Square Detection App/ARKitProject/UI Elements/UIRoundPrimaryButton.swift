@@ -1,11 +1,10 @@
 //
-//  UIRoundPrimaryButton.swift
+// MARK: - Button design
 //  ARKitProject
 //
 //  Created by JungJiyoung on 2021/07/19.
 //  Copyright © 2021 Apple. All rights reserved.
 //
-// MARK: - Button design
 
 
 import Foundation
