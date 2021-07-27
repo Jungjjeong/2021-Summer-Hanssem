@@ -4,6 +4,7 @@
 import Foundation
 import SceneKit.ModelIO
 import ARKit
+import RealityKit
 
 
 class VirtualObject: SCNNode {
@@ -43,7 +44,23 @@ class VirtualObject: SCNNode {
             print("모델을 찾지 못해 return.")
 			return
 		}
+        if let url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/blob/main/models/746525_close.glb"){
+            do{
+                let virtualObjectScene2 = try SCNScene(url: url, options: nil)
+                print(virtualObjectScene2)
+            }
+            catch let error
+            {
+                print("url에서 받아오기 실패 : \(error)")
+                return
+            }
+        }
         
+
+        
+        //        let entity = try? Entity.load(contentsOf: url)
+//        let virtualObjectScene2 = SCNScene(url: url, options: <#T##[SCNSceneSource.LoadingOption : Any]?#>)
+//        print(self.modelName)
         
 		let wrapperNode = SCNNode()
 
