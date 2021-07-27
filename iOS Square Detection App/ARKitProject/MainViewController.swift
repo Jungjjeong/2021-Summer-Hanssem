@@ -495,9 +495,8 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 
 	func loadVirtualObject(object: VirtualObject) {
 		// Show progress indicator
-        // 근데 이거 왜 안뜨는거야?
 		let spinner = UIActivityIndicatorView()
-        print("모델을 로드합니다.")
+        print("Main - loadVirtualObject function")
 		spinner.center = addObjectButton.center
 		spinner.bounds.size = CGSize(width: addObjectButton.bounds.width - 5, height: addObjectButton.bounds.height - 5)
 		addObjectButton.setImage(#imageLiteral(resourceName: "buttonring"), for: [])
@@ -507,11 +506,14 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 		DispatchQueue.global().async {
 			self.isLoadingObject = true
 			object.viewController = self
+            print("Main - manager addvirtualObject")
 			VirtualObjectsManager.shared.addVirtualObject(virtualObject: object)
+            print("Main - manager setvirtualObject")
 			VirtualObjectsManager.shared.setVirtualObjectSelected(virtualObject: object)
 
+            print("Main - loadModel function")
 			object.loadModel()
-            print("모델 로드")
+            print(object.usdzFileLoad())
 
 			DispatchQueue.main.async {
 				if let lastFocusSquarePos = self.focusSquare?.lastPosition {
@@ -545,7 +547,7 @@ extension MainViewController: ARSCNViewDelegate {
 			// If light estimation is enabled, update the intensity of the model's lights and the environment map
 			if let lightEstimate = self.session.currentFrame?.lightEstimate {
 				self.sceneView.enableEnvironmentMapWithIntensity(lightEstimate.ambientIntensity / 100)
-                print(lightEstimate.ambientIntensity / 100)// 조명 업데이트를 사용한 환경 맵 업데이트
+//                print(lightEstimate.ambientIntensity / 100)// 조명 업데이트를 사용한 환경 맵 업데이트
 			} else {
 				self.sceneView.enableEnvironmentMapWithIntensity(10)
 			}
@@ -782,12 +784,12 @@ extension MainViewController {
 			let planeAnchorNode = sceneView.node(for: anchor) else { // 모델이 선택되어 있고, scene에 node가 존재해야 실행된다.
 			return
 		}
-        print("평면 위 object 움직임")
+//        print("평면 위 object 움직임")
 		// Get the object's position in the plane's coordinate system.
 		let objectPos = planeAnchorNode.convertPosition(object.position, from: object.parent)
 
 		if objectPos.y == 0 {
-            print("물체가 이미 평면 위에 있어요.")
+//            print("물체가 이미 평면 위에 있어요.")
 			return; // The object is already on the plane
 		}
 
