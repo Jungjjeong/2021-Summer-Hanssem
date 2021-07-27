@@ -1,10 +1,4 @@
-//
-//  FocusEntity+Classic.swift
-//  FocusEntity
-//
-//  Created by Max Cobb on 8/28/19.
-//  Copyright © 2019 Max Cobb. All rights reserved.
-//
+
 
 #if canImport(ARKit)
 import RealityKit
