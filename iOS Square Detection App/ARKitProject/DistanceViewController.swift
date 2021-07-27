@@ -17,14 +17,28 @@ class DistanceViewController : UIViewController {
     @IBOutlet var arview: ARView!
     @IBOutlet weak var usdzButton: UIButton!
 
+    
     @IBAction func usdzFileLoad(_ button: UIButton) {
-        print("virtualObejct - download function")
+        
+        print("-------------------------------spinner activate-------------------------------")
+        let spinner = UIActivityIndicatorView()
+        spinner.center = usdzButton.center
+        spinner.bounds.size = CGSize(width: usdzButton.bounds.width - 5, height: usdzButton.bounds.height - 5)
+        usdzButton.setImage(#imageLiteral(resourceName: "buttonring"), for: [])
+        arview.addSubview(spinner)
+        spinner.startAnimating()
+        
+        
+        
+        print("-------------------------------download function-------------------------------")
         let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let destinationUrl = documentsUrl.appendingPathComponent(url!.lastPathComponent)
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
+        
+        
         
         let downloadTask = session.downloadTask(with: request, completionHandler: {
             (location:URL?, response:URLResponse?, error:Error?) -> Void in
@@ -39,14 +53,21 @@ class DistanceViewController : UIViewController {
                     let anchor = AnchorEntity(world: [0,0,0])
                     anchor.addChild(object)
                     self.arview.scene.addAnchor(anchor)
+                    
+                    print("-------------------------------spinner deactivate-------------------------------")
+                    spinner.removeFromSuperview()
+                    self.usdzButton.setImage(#imageLiteral(resourceName: "add"), for: [])
+                    self.usdzButton.setImage(#imageLiteral(resourceName: "addPressed"), for: [.highlighted])
                 }
                 catch {
                     print("Fail load entity: \(error.localizedDescription)")
                 }
             }
         })
+        
+        
+        print("-------------------------------downloadTask resume-------------------------------")
         downloadTask.resume()
+        
     }
-    
-    
 }
