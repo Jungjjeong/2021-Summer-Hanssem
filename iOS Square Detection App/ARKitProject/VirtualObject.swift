@@ -5,6 +5,7 @@ import Foundation
 import SceneKit.ModelIO
 import ARKit
 
+
 class VirtualObject: SCNNode {
 	static let ROOT_NAME = "Virtual object root node"
 	var fileExtension: String = ""
@@ -42,6 +43,7 @@ class VirtualObject: SCNNode {
             print("모델을 찾지 못해 return.")
 			return
 		}
+        
         
 		let wrapperNode = SCNNode()
 
