@@ -10,18 +10,12 @@
 import ARKit
 import UIKit
 import RealityKit
-import SwiftUI
-
 
 
 class DistanceViewController : UIViewController {
     @IBOutlet var arview: ARView!
     @IBOutlet weak var usdzButton: UIButton!
 
-    var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-    }
-    
     @IBAction func usdzFileLoad(_ button: UIButton) {
         
         print("-------------------------------spinner activate-------------------------------")
@@ -72,16 +66,6 @@ class DistanceViewController : UIViewController {
         
         print("-------------------------------downloadTask resume-------------------------------")
         downloadTask.resume()
-        
-    }
-}
-
-struct ARViewContainer: UIViewRepresentable {
-    func makeUIView(context: Context) -> FocusARView {
-        FocusARView(frame: .zero)
-    }
-    
-    func updateUIView(_ uiView: FocusARView, context: Context) {
         
     }
 }

@@ -34,14 +34,6 @@
 		E75F21A126AE93C900A9B5FF /* DistanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */; };
 		E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */; };
 		E7921B1726AFE3E800E39631 /* RealityFocusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B1626AFE3E800E39631 /* RealityFocusEntity.swift */; };
-		E7921B2326AFE69F00E39631 /* FocusEntity+Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B1C26AFE69F00E39631 /* FocusEntity+Segment.swift */; };
-		E7921B2426AFE69F00E39631 /* float4x4+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B1D26AFE69F00E39631 /* float4x4+Extension.swift */; };
-		E7921B2526AFE69F00E39631 /* FocusEntity+Colored.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B1E26AFE69F00E39631 /* FocusEntity+Colored.swift */; };
-		E7921B2626AFE69F00E39631 /* FocusEntityComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B1F26AFE69F00E39631 /* FocusEntityComponent.swift */; };
-		E7921B2726AFE69F00E39631 /* FocusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B2026AFE69F00E39631 /* FocusEntity.swift */; };
-		E7921B2826AFE69F00E39631 /* FocusEntity+Classic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B2126AFE69F00E39631 /* FocusEntity+Classic.swift */; };
-		E7921B2926AFE69F00E39631 /* FocusEntity+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B2226AFE69F00E39631 /* FocusEntity+Alignment.swift */; };
-		E7921B2B26AFEE1200E39631 /* FocusARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B2A26AFEE1200E39631 /* FocusARView.swift */; };
 		E7963A9226A8EBED00BDF22D /* Sofa.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9126A8EBED00BDF22D /* Sofa.swift */; };
 		E7963A9426A8FDB600BDF22D /* Teapot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9326A8FDB600BDF22D /* Teapot.swift */; };
 		E7963A9626A943F500BDF22D /* LemonMeringuePie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9526A943F500BDF22D /* LemonMeringuePie.swift */; };
@@ -78,14 +70,6 @@
 		E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceViewController.swift; sourceTree = "<group>"; };
 		E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
 		E7921B1626AFE3E800E39631 /* RealityFocusEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityFocusEntity.swift; sourceTree = "<group>"; };
-		E7921B1C26AFE69F00E39631 /* FocusEntity+Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FocusEntity+Segment.swift"; sourceTree = "<group>"; };
-		E7921B1D26AFE69F00E39631 /* float4x4+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "float4x4+Extension.swift"; sourceTree = "<group>"; };
-		E7921B1E26AFE69F00E39631 /* FocusEntity+Colored.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FocusEntity+Colored.swift"; sourceTree = "<group>"; };
-		E7921B1F26AFE69F00E39631 /* FocusEntityComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusEntityComponent.swift; sourceTree = "<group>"; };
-		E7921B2026AFE69F00E39631 /* FocusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusEntity.swift; sourceTree = "<group>"; };
-		E7921B2126AFE69F00E39631 /* FocusEntity+Classic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FocusEntity+Classic.swift"; sourceTree = "<group>"; };
-		E7921B2226AFE69F00E39631 /* FocusEntity+Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FocusEntity+Alignment.swift"; sourceTree = "<group>"; };
-		E7921B2A26AFEE1200E39631 /* FocusARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusARView.swift; sourceTree = "<group>"; };
 		E7963A9126A8EBED00BDF22D /* Sofa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sofa.swift; sourceTree = "<group>"; };
 		E7963A9326A8FDB600BDF22D /* Teapot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teapot.swift; sourceTree = "<group>"; };
 		E7963A9526A943F500BDF22D /* LemonMeringuePie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LemonMeringuePie.swift; sourceTree = "<group>"; };
@@ -137,8 +121,6 @@
 				39C0B9581E9C6B1F003FCA0C /* Utilities.swift */,
 				C41366B81EB80DD400EC054A /* TextManager.swift */,
 				E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */,
-				E7921B2A26AFEE1200E39631 /* FocusARView.swift */,
-				E7921B1B26AFE69F00E39631 /* FocusEntity */,
 				113B64D01ECA81CA0071CBD1 /* UI Elements */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
 				3929C49E1E89EE4400E00B60 /* Models.scnassets */,
@@ -166,21 +148,6 @@
 			);
 			path = "Virtual Objects";
 			sourceTree = "<group>";
-		};
-		E7921B1B26AFE69F00E39631 /* FocusEntity */ = {
-			isa = PBXGroup;
-			children = (
-				E7921B1C26AFE69F00E39631 /* FocusEntity+Segment.swift */,
-				E7921B2026AFE69F00E39631 /* FocusEntity.swift */,
-				E7921B1D26AFE69F00E39631 /* float4x4+Extension.swift */,
-				E7921B1E26AFE69F00E39631 /* FocusEntity+Colored.swift */,
-				E7921B1F26AFE69F00E39631 /* FocusEntityComponent.swift */,
-				E7921B2126AFE69F00E39631 /* FocusEntity+Classic.swift */,
-				E7921B2226AFE69F00E39631 /* FocusEntity+Alignment.swift */,
-			);
-			name = FocusEntity;
-			path = ARKitProject/FocusEntity;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -283,30 +250,22 @@
 				E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */,
 				C41366B91EB80DD400EC054A /* TextManager.swift in Sources */,
 				E7963A9426A8FDB600BDF22D /* Teapot.swift in Sources */,
-				E7921B2826AFE69F00E39631 /* FocusEntity+Classic.swift in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
 				392BB82C1EA19A7C00FBBAC8 /* Plane.swift in Sources */,
 				E75F21A126AE93C900A9B5FF /* DistanceViewController.swift in Sources */,
 				A3D672F11EF0E81B00110E48 /* Chair.swift in Sources */,
 				E7921B1726AFE3E800E39631 /* RealityFocusEntity.swift in Sources */,
-				E7921B2526AFE69F00E39631 /* FocusEntity+Colored.swift in Sources */,
 				A3D672F51EF0E8DF00110E48 /* Vase.swift in Sources */,
 				3987BEDC1E9E057F00167FAC /* Gesture.swift in Sources */,
-				E7921B2B26AFEE1200E39631 /* FocusARView.swift in Sources */,
 				C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */,
-				E7921B2426AFE69F00E39631 /* float4x4+Extension.swift in Sources */,
-				E7921B2726AFE69F00E39631 /* FocusEntity.swift in Sources */,
 				39D4A8BE1EA1AF530006EC65 /* PlaneDebugVisualization.swift in Sources */,
 				E7963A9626A943F500BDF22D /* LemonMeringuePie.swift in Sources */,
 				39C0B9591E9C6B1F003FCA0C /* SettingsViewController.swift in Sources */,
 				C490DAC41E9AB63400210960 /* VirtualObjectSelectionViewController.swift in Sources */,
-				E7921B2626AFE69F00E39631 /* FocusEntityComponent.swift in Sources */,
-				E7921B2326AFE69F00E39631 /* FocusEntity+Segment.swift in Sources */,
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
 				A3D672EF1EF0E80200110E48 /* Candle.swift in Sources */,
 				C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */,
-				E7921B2926AFE69F00E39631 /* FocusEntity+Alignment.swift in Sources */,
 				58DE9FC71FDDA042008E25AF /* VirtualObjectsManager.swift in Sources */,
 				A3D672F31EF0E84D00110E48 /* Lamp.swift in Sources */,
 			);
