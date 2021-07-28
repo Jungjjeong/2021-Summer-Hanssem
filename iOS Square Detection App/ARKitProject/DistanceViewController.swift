@@ -58,14 +58,20 @@ class DistanceViewController : UIViewController {
                 try! fileManager.removeItem(atPath: destinationUrl.path)
             }
             try! fileManager.moveItem(atPath: location!.path, toPath: destinationUrl.path)
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 do {
                     let object = try Entity.load(contentsOf: destinationUrl) // It is work
                     object.name = "TEAPOT"
+                    object.generateCollisionShapes(recursive: true)
                     
+
                     let anchor = AnchorEntity(plane: .horizontal, minimumBounds:[0.2,0.2])
                     anchor.addChild(object)
-                    self.arview.scene.addAnchor(anchor)
+                    arview.scene.addAnchor(anchor)
+                    
+                    
+//                    arview.installGestures([.all], for: object as! Entity & HasCollision)
+//                    arview.debugOptions = .showPhysics
                     
                     print("-------------------------------spinner deactivate-------------------------------")
                     spinner.removeFromSuperview()
