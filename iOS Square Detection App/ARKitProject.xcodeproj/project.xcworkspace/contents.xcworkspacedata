@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/jungjiyoung/Documents/GitHub/2021-Summer-Hanssem/iOS Square Detection App/ARKitProject/Sources">
-   </FileRef>
-   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>
