@@ -111,7 +111,8 @@ extension SCNNode {
 extension SCNVector3 {
 
 	init(_ vec: vector_float3) {
-		self.x = vec.x
+        self.init()
+        self.x = vec.x
 		self.y = vec.y
 		self.z = vec.z
 	} // intialized
@@ -229,7 +230,8 @@ extension SCNMaterial {
 extension CGPoint {
 
 	init(_ size: CGSize) {
-		self.x = size.width
+        self.init()
+        self.x = size.width
 		self.y = size.height
 	}
 
@@ -293,7 +295,8 @@ func *= (left: inout CGPoint, right: CGFloat) {
 extension CGSize {
 
 	init(_ point: CGPoint) {
-		self.width = point.x
+        self.init()
+        self.width = point.x
 		self.height = point.y
 	}
 
