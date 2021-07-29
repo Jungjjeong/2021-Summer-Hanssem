@@ -53,31 +53,29 @@ class VirtualObject: SCNNode, URLSessionDelegate {
         
         let asset = MDLAsset(url: downloadedScenePath)
         asset.loadTextures()
-        let scene = SCNScene(mdlAsset: asset)
-
-        let wrapperNode = SCNNode()
+//        let scene = SCNScene(mdlAsset: asset)
         
-        for child in scene.rootNode.childNodes {
-            print("in")
-            child.geometry?.firstMaterial?.lightingModel = .physicallyBased
-            child.movabilityHint = .movable
-            print(self.modelName)
-            
-            let scale = 0.01
-            child.scale = SCNVector3(scale, scale, scale)
-//            if self.modelName == "teapot" { // usdz file scale format
-//                let scale = 0.005
-//                child.scale = SCNVector3(scale, scale, scale)
-//            }
-//            else if self.modelName == "746525_close" {
-//                let scale = 0.01
-//                child.scale = SCNVector3(scale, scale, scale)
-//            }
-            wrapperNode.addChildNode(child)
-        }
+        let object = asset.object(at: 0)
+        print(object)
+
+        
+        let node = SCNNode.init(mdlObject: object)
+
+        let wrapperNode = SCNNode.init(mdlObject: object)
+        print(node)
+        let scale = 0.01
+        wrapperNode.scale = SCNVector3(scale, scale, scale)
+//        for child in scene.rootNode.childNodes {
+//            print("in")
+//            child.geometry?.firstMaterial?.lightingModel = .physicallyBased
+//            child.movabilityHint = .movable
+//            print(self.modelName)
+//
+//        }
         self.addChildNode(wrapperNode)
         print(self) // Virtual object root node
         modelLoaded = true
+        
         
     }
     
