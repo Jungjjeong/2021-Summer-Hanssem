@@ -41,19 +41,7 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
 		case 0:
 			return Candle()
 		case 1:
-			return Vase()
-		case 2:
-			return Lamp()
-		case 3:
-			return Chair()
-        case 4:
-            return Sofa()
-        case 5:
-            return Teapot()
-        case 6:
-            return LemonMeringuePie()
-		default:
-			return Candle()
+			return Teapot()
 		}
 	}
 

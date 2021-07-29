@@ -25,18 +25,16 @@
 		A3D672EF1EF0E80200110E48 /* Candle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D672EE1EF0E80200110E48 /* Candle.swift */; };
 		A3D672F11EF0E81B00110E48 /* Chair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D672F01EF0E81B00110E48 /* Chair.swift */; };
 		A3D672F31EF0E84D00110E48 /* Lamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D672F21EF0E84D00110E48 /* Lamp.swift */; };
-		A3D672F51EF0E8DF00110E48 /* Vase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D672F41EF0E8DF00110E48 /* Vase.swift */; };
 		C41366B91EB80DD400EC054A /* TextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* TextManager.swift */; };
 		C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42A71BC1E9C0AF200944367 /* FocusSquare.swift */; };
 		C490DAC41E9AB63400210960 /* VirtualObjectSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C490DAC31E9AB63400210960 /* VirtualObjectSelectionViewController.swift */; };
 		C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E87DD81EA6B40F002117D6 /* VirtualObject.swift */; };
 		C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */; };
+		E7078CA126B23D1D0032C856 /* GetFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7078CA026B23D1D0032C856 /* GetFileController.swift */; };
 		E75F21A126AE93C900A9B5FF /* DistanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */; };
 		E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */; };
-		E7921B1726AFE3E800E39631 /* RealityFocusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7921B1626AFE3E800E39631 /* RealityFocusEntity.swift */; };
 		E7963A9226A8EBED00BDF22D /* Sofa.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9126A8EBED00BDF22D /* Sofa.swift */; };
 		E7963A9426A8FDB600BDF22D /* Teapot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9326A8FDB600BDF22D /* Teapot.swift */; };
-		E7963A9626A943F500BDF22D /* LemonMeringuePie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9526A943F500BDF22D /* LemonMeringuePie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,18 +59,16 @@
 		A3D672EE1EF0E80200110E48 /* Candle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candle.swift; sourceTree = "<group>"; };
 		A3D672F01EF0E81B00110E48 /* Chair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chair.swift; sourceTree = "<group>"; };
 		A3D672F21EF0E84D00110E48 /* Lamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lamp.swift; sourceTree = "<group>"; };
-		A3D672F41EF0E8DF00110E48 /* Vase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vase.swift; sourceTree = "<group>"; };
 		C41366B81EB80DD400EC054A /* TextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextManager.swift; sourceTree = "<group>"; };
 		C42A71BC1E9C0AF200944367 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		C490DAC31E9AB63400210960 /* VirtualObjectSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualObjectSelectionViewController.swift; sourceTree = "<group>"; };
 		C4E87DD81EA6B40F002117D6 /* VirtualObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VirtualObject.swift; path = ../VirtualObject.swift; sourceTree = "<group>"; };
 		C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARCameraTrackingState.swift; sourceTree = "<group>"; };
+		E7078CA026B23D1D0032C856 /* GetFileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFileController.swift; sourceTree = "<group>"; };
 		E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceViewController.swift; sourceTree = "<group>"; };
 		E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
-		E7921B1626AFE3E800E39631 /* RealityFocusEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityFocusEntity.swift; sourceTree = "<group>"; };
 		E7963A9126A8EBED00BDF22D /* Sofa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sofa.swift; sourceTree = "<group>"; };
 		E7963A9326A8FDB600BDF22D /* Teapot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teapot.swift; sourceTree = "<group>"; };
-		E7963A9526A943F500BDF22D /* LemonMeringuePie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LemonMeringuePie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +91,6 @@
 				39D4A8BD1EA1AF530006EC65 /* PlaneDebugVisualization.swift */,
 				39C0B9501E9C63CB003FCA0C /* HitTestVisualization.swift */,
 				E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */,
-				E7921B1626AFE3E800E39631 /* RealityFocusEntity.swift */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -121,6 +116,7 @@
 				39C0B9581E9C6B1F003FCA0C /* Utilities.swift */,
 				C41366B81EB80DD400EC054A /* TextManager.swift */,
 				E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */,
+				E7078CA026B23D1D0032C856 /* GetFileController.swift */,
 				113B64D01ECA81CA0071CBD1 /* UI Elements */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
 				3929C49E1E89EE4400E00B60 /* Models.scnassets */,
@@ -141,10 +137,8 @@
 				A3D672EE1EF0E80200110E48 /* Candle.swift */,
 				A3D672F01EF0E81B00110E48 /* Chair.swift */,
 				A3D672F21EF0E84D00110E48 /* Lamp.swift */,
-				A3D672F41EF0E8DF00110E48 /* Vase.swift */,
 				E7963A9126A8EBED00BDF22D /* Sofa.swift */,
 				E7963A9326A8FDB600BDF22D /* Teapot.swift */,
-				E7963A9526A943F500BDF22D /* LemonMeringuePie.swift */,
 			);
 			path = "Virtual Objects";
 			sourceTree = "<group>";
@@ -254,12 +248,10 @@
 				392BB82C1EA19A7C00FBBAC8 /* Plane.swift in Sources */,
 				E75F21A126AE93C900A9B5FF /* DistanceViewController.swift in Sources */,
 				A3D672F11EF0E81B00110E48 /* Chair.swift in Sources */,
-				E7921B1726AFE3E800E39631 /* RealityFocusEntity.swift in Sources */,
-				A3D672F51EF0E8DF00110E48 /* Vase.swift in Sources */,
 				3987BEDC1E9E057F00167FAC /* Gesture.swift in Sources */,
 				C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */,
+				E7078CA126B23D1D0032C856 /* GetFileController.swift in Sources */,
 				39D4A8BE1EA1AF530006EC65 /* PlaneDebugVisualization.swift in Sources */,
-				E7963A9626A943F500BDF22D /* LemonMeringuePie.swift in Sources */,
 				39C0B9591E9C6B1F003FCA0C /* SettingsViewController.swift in Sources */,
 				C490DAC41E9AB63400210960 /* VirtualObjectSelectionViewController.swift in Sources */,
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,

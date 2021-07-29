@@ -7,7 +7,7 @@ import ARKit
 import RealityKit
 
 
-class VirtualObject: SCNNode {
+class VirtualObject: SCNNode, URLSessionDelegate {
 	static let ROOT_NAME = "Virtual object root node"
 	var fileExtension: String = ""
 	var thumbImage: UIImage!
@@ -40,42 +40,39 @@ class VirtualObject: SCNNode {
     // MARK: - 3D model load function
 	func loadModel() {
         print("VirtualObject - loadModel function")
-		guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)",
-												inDirectory: "Models.scnassets/\(modelName)") else {
-            print("모델을 찾지 못해 return.")
-			return
-		}
-        let wrapperNode = SCNNode()
-//
-//        let url = URL(fileURLWithPath: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")
-//        if let virtualObjectScene = try? SCNScene(url: url, options: [.checkConsistency: true]){
-//            print("불러왔따")
-//            for child in virtualObjectScene.rootNode.childNodes {
-//                wrapperNode.addChildNode(child)
-//                print("Add child")
-//            }
-//            print("loadModel func")
-//            self.addChildNode(wrapperNode)
-//        } else {
-//            print("Error loading")
-//            return
-//        }
-//        modelLoaded = true
+//		guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)",
+//												inDirectory: "Models.scnassets/\(modelName)") else {
+//            print("모델을 찾지 못해 return.")
+//			return
+//		}
         
-        for child in virtualObjectScene.rootNode.childNodes {
+        downloadSceneTask()
+        
+        
+        let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("teapot.usdz")
+        
+        let asset = MDLAsset(url: downloadedScenePath)
+        asset.loadTextures()
+        let scene = SCNScene(mdlAsset: asset)
+
+        let wrapperNode = SCNNode()
+        
+        for child in scene.rootNode.childNodes {
             print("in")
             child.geometry?.firstMaterial?.lightingModel = .physicallyBased
             child.movabilityHint = .movable
             print(self.modelName)
-            if self.modelName == "teapot" { // usdz file scale format
-                let scale = 0.005
-                child.scale = SCNVector3(scale, scale, scale)
-//                child.f
-            }
-            else if self.modelName == "746525_close" {
-                let scale = 0.01
-                child.scale = SCNVector3(scale, scale, scale)
-            }
+            
+            let scale = 0.01
+            child.scale = SCNVector3(scale, scale, scale)
+//            if self.modelName == "teapot" { // usdz file scale format
+//                let scale = 0.005
+//                child.scale = SCNVector3(scale, scale, scale)
+//            }
+//            else if self.modelName == "746525_close" {
+//                let scale = 0.01
+//                child.scale = SCNVector3(scale, scale, scale)
+//            }
             wrapperNode.addChildNode(child)
         }
         self.addChildNode(wrapperNode)
@@ -83,43 +80,58 @@ class VirtualObject: SCNNode {
         modelLoaded = true
         
     }
+    
+    // MARK: - usdz file download
+
+    func downloadSceneTask(){
+        
+        //1. Get The URL Of The SCN File
+        guard let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz") else {
+            return
+        }
+        
+        //2. Create The Download Session
+        let downloadSession = URLSession(configuration: URLSession.shared.configuration, delegate: self, delegateQueue: nil)
+        
+        //3. Create The Download Task & Run It
+        let downloadTask = downloadSession.downloadTask(with: url)
+        downloadTask.resume()
+    }
         
     
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
-    // MARK: - 3D usdz file load function
-
-    func usdzFileLoad() {
-        print("virtualObejct - download function")
-        let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")
-        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let destinationUrl = documentsUrl.appendingPathComponent(url!.lastPathComponent)
-        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
+        //1. Create The Filename
+        let fileURL = getDocumentsDirectory().appendingPathComponent("teapot.usdz")
         
-        let downloadTask = session.downloadTask(with: request, completionHandler: {
-            (location:URL?, response:URLResponse?, error:Error?) -> Void in
-            let fileManager = FileManager.default
-            if fileManager.fileExists(atPath: destinationUrl.path) {
-                try! fileManager.removeItem(atPath: destinationUrl.path)
-            }
-            try! fileManager.moveItem(atPath: location!.path, toPath: destinationUrl.path)
-            DispatchQueue.main.async {
-                do {
-                    let object = try Entity.load(contentsOf: destinationUrl) // It is work
-                    print(object)
-                    for child in object.children {
-                        print(child)
-                    }
-                }
-                catch {
-                    print("Fail load entity: \(error.localizedDescription)")
-                }
-            }
-        })
-        downloadTask.resume()
-	}
-
+        //2. Copy It To The Documents Directory
+        do {
+            try FileManager.default.copyItem(at: location, to: fileURL)
+            
+            print("Successfuly Saved File \(fileURL)")
+            
+            //3. Load The Model
+            loadModel()
+            
+        } catch {
+            
+            print("Error Saving: \(error)")
+            loadModel()
+        }
+        
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+        
+    }
+    
+    
+    
     
     // MARK: - Model unload function
 	func unloadModel() {

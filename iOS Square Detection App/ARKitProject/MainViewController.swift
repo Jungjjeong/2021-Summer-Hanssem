@@ -88,7 +88,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 			DispatchQueue.main.async { // DispatchQueue -> 동시성 프로그래밍 (async)
 				self.settingsButton.isEnabled = !self.isLoadingObject
 				self.addObjectButton.isEnabled = !self.isLoadingObject
-				self.screenshotButton.isEnabled = !self.isLoadingObject
+//				self.screenshotButton.isEnabled = !self.isLoadingObject
 				self.restartExperienceButton.isEnabled = !self.isLoadingObject
 			}
 		}
@@ -279,20 +279,20 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		}
 	}
 
-	@IBOutlet weak var screenshotButton: UIButton! // 스크린샷 버튼
-	@IBAction func takeSnapShot() {
-		guard sceneView.session.currentFrame != nil else { return } // 현재 프래임이 비어 있으면 return
-		focusSquare?.isHidden = true // focusSquare은 숨긴다.
-
-		let imagePlane = SCNPlane(width: sceneView.bounds.width / 6000, height: sceneView.bounds.height / 6000)
-		imagePlane.firstMaterial?.diffuse.contents = sceneView.snapshot()
-		imagePlane.firstMaterial?.lightingModel = .constant
-
-		let planeNode = SCNNode(geometry: imagePlane)
-		sceneView.scene.rootNode.addChildNode(planeNode) // 현재 화면에 사진을 띄울 수 있다.
-
-		focusSquare?.isHidden = false // 다시 나타내기
-	}
+//	@IBOutlet weak var screenshotButton: UIButton! // 스크린샷 버튼
+//	@IBAction func takeSnapShot() {
+//		guard sceneView.session.currentFrame != nil else { return } // 현재 프래임이 비어 있으면 return
+//		focusSquare?.isHidden = true // focusSquare은 숨긴다.
+//
+//		let imagePlane = SCNPlane(width: sceneView.bounds.width / 6000, height: sceneView.bounds.height / 6000)
+//		imagePlane.firstMaterial?.diffuse.contents = sceneView.snapshot()
+//		imagePlane.firstMaterial?.lightingModel = .constant
+//
+//		let planeNode = SCNNode(geometry: imagePlane)
+//		sceneView.scene.rootNode.addChildNode(planeNode) // 현재 화면에 사진을 띄울 수 있다.
+//
+//		focusSquare?.isHidden = false // 다시 나타내기
+//	}
 
 	// MARK: - Settings
 
@@ -513,7 +513,6 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 
             print("Main - loadModel function")
 			object.loadModel()
-            print(object.usdzFileLoad())
 
 			DispatchQueue.main.async {
 				if let lastFocusSquarePos = self.focusSquare?.lastPosition {
