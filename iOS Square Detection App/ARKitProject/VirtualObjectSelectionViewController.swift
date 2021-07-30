@@ -42,12 +42,14 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
 			return Teapot()
 		case 1:
 			return AirForce()
+        case 2:
+            return fender_stratocaster()
 		default:
 			return Teapot()
 		}
 	}
 
-	static let COUNT_OBJECTS = 2
+	static let COUNT_OBJECTS = 3
 
 	// MARK: - UITableViewDelegate
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

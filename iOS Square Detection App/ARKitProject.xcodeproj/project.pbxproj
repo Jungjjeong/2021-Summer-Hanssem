@@ -32,6 +32,7 @@
 		E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */; };
 		E7963A9426A8FDB600BDF22D /* Teapot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9326A8FDB600BDF22D /* Teapot.swift */; };
 		E79813A726B3861300712D98 /* AirForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79813A626B3861300712D98 /* AirForce.swift */; };
+		E79813A926B3D9A600712D98 /* fender_stratocaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79813A826B3D9A600712D98 /* fender_stratocaster.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
 		E7963A9326A8FDB600BDF22D /* Teapot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teapot.swift; sourceTree = "<group>"; };
 		E79813A626B3861300712D98 /* AirForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirForce.swift; sourceTree = "<group>"; };
+		E79813A826B3D9A600712D98 /* fender_stratocaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fender_stratocaster.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				58DE9FC61FDDA041008E25AF /* VirtualObjectsManager.swift */,
 				E7963A9326A8FDB600BDF22D /* Teapot.swift */,
 				E79813A626B3861300712D98 /* AirForce.swift */,
+				E79813A826B3D9A600712D98 /* fender_stratocaster.swift */,
 			);
 			path = "Virtual Objects";
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
 				C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */,
+				E79813A926B3D9A600712D98 /* fender_stratocaster.swift in Sources */,
 				58DE9FC71FDDA042008E25AF /* VirtualObjectsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
