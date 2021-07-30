@@ -479,7 +479,6 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 	func loadVirtualObject(object: VirtualObject) { // Virtual Object loading
 		// Show progress indicator
 		let spinner = UIActivityIndicatorView()
-        print("Main - loadVirtualObject function")
 		spinner.center = addObjectButton.center // addObejctButton 안 중간에 spinner bar가 생성된다.
 		spinner.bounds.size = CGSize(width: addObjectButton.bounds.width - 5, height: addObjectButton.bounds.height - 5)
 		addObjectButton.setImage(#imageLiteral(resourceName: "buttonring"), for: [])
@@ -489,9 +488,7 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 		DispatchQueue.global().async {
 			self.isLoadingObject = true
 			object.viewController = self
-            print("Main - manager addvirtualObject")
 			VirtualObjectsManager.shared.addVirtualObject(virtualObject: object)
-            print("Main - manager setvirtualObject")
 			VirtualObjectsManager.shared.setVirtualObjectSelected(virtualObject: object)
 
             print("Main - loadModel function")

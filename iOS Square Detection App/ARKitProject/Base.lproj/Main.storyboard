@@ -140,10 +140,10 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4It-Iv-01H">
-                                <rect key="frame" x="104" y="844" width="70" height="39"/>
+                                <rect key="frame" x="104" y="846" width="61" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="3FJ-cZ-8Ls"/>
-                                    <constraint firstAttribute="height" constant="48.333333333333371" id="z0z-7U-aHQ"/>
+                                    <constraint firstAttribute="width" constant="61" id="3FJ-cZ-8Ls"/>
+                                    <constraint firstAttribute="height" constant="40.333333333333371" id="z0z-7U-aHQ"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="ruler" catalog="system"/>
                                 <connections>
@@ -160,10 +160,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8E5-Yv-rA0">
-                                <rect key="frame" x="254" y="844" width="70" height="39"/>
+                                <rect key="frame" x="263" y="848" width="61" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="0f8-KI-ViJ"/>
-                                    <constraint firstAttribute="height" constant="48.333333333333371" id="xIE-B1-bJJ"/>
+                                    <constraint firstAttribute="width" constant="61" id="0f8-KI-ViJ"/>
+                                    <constraint firstAttribute="height" constant="40.333333333333371" id="xIE-B1-bJJ"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="ruler.fill" catalog="system"/>
                                 <connections>
@@ -174,9 +174,9 @@
                         <viewLayoutGuide key="safeArea" id="GBj-4O-Whc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="4It-Iv-01H" secondAttribute="bottom" constant="4.6666666666666288" id="2tq-lx-YrQ"/>
+                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="4It-Iv-01H" secondAttribute="bottom" constant="10.666666666666629" id="2tq-lx-YrQ"/>
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="35g-18-nn3"/>
-                            <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="j8v-6q-UBb" secondAttribute="centerY" id="5XO-r9-Hyj"/>
+                            <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="j8v-6q-UBb" secondAttribute="centerY" constant="-2" id="5XO-r9-Hyj"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" constant="-15" id="6c1-k7-y99"/>
                             <constraint firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="6h6-BI-mhL"/>
                             <constraint firstItem="E6c-py-dvH" firstAttribute="top" secondItem="RLh-bf-1c3" secondAttribute="top" id="7gH-DS-Crg"/>
@@ -187,8 +187,8 @@
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="leading" secondItem="9e0-zv-RiN" secondAttribute="trailing" constant="15" id="MwJ-LS-qaQ"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="NdC-Ig-ZW6"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="Nov-Ar-ZZv"/>
-                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="8E5-Yv-rA0" secondAttribute="bottom" constant="4.6666666666666288" id="NrS-hO-Zru"/>
-                            <constraint firstItem="8E5-Yv-rA0" firstAttribute="leading" secondItem="SPB-Sb-hjO" secondAttribute="trailing" constant="8" id="OTO-fW-JJ0"/>
+                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="8E5-Yv-rA0" secondAttribute="bottom" constant="8.6666666666666288" id="NrS-hO-Zru"/>
+                            <constraint firstItem="8E5-Yv-rA0" firstAttribute="leading" secondItem="SPB-Sb-hjO" secondAttribute="trailing" constant="17" id="OTO-fW-JJ0"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="centerX" secondItem="E6c-py-dvH" secondAttribute="centerX" id="SHv-Jn-H5B"/>
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" id="UMK-or-VVf"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" constant="20" id="V7S-nn-Lcz"/>
@@ -196,10 +196,10 @@
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="fjf-Mj-ALG"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" constant="15" id="iIf-WZ-kZj"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="lHd-lf-g1u"/>
-                            <constraint firstItem="SPB-Sb-hjO" firstAttribute="leading" secondItem="4It-Iv-01H" secondAttribute="trailing" constant="8" id="nW7-gq-BEs"/>
+                            <constraint firstItem="SPB-Sb-hjO" firstAttribute="leading" secondItem="4It-Iv-01H" secondAttribute="trailing" constant="17" id="nW7-gq-BEs"/>
                             <constraint firstItem="xcf-ic-uGo" firstAttribute="leading" secondItem="RLh-bf-1c3" secondAttribute="leadingMargin" id="tCP-Yd-GSD"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="uvV-bc-TtK"/>
-                            <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="xcf-ic-uGo" secondAttribute="centerY" id="vPU-9e-B4O"/>
+                            <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="xcf-ic-uGo" secondAttribute="centerY" constant="-2" id="vPU-9e-B4O"/>
                             <constraint firstItem="j8v-6q-UBb" firstAttribute="trailing" secondItem="BgI-fb-Vqi" secondAttribute="trailing" id="vW7-nn-nn3"/>
                         </constraints>
                     </view>

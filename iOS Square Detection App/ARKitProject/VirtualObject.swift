@@ -7,9 +7,9 @@ import ARKit
 import RealityKit
 
 
-class VirtualObject: SCNNode, URLSessionDelegate {
+class VirtualObject: SCNNode, URLSessionDownloadDelegate {
 	static let ROOT_NAME = "Virtual object root node"
-	var fileExtension: String = ""
+//	var fileExtension: String = ""
 	var thumbImage: UIImage!
 	var title: String = ""
 	var modelName: String = ""
@@ -23,12 +23,12 @@ class VirtualObject: SCNNode, URLSessionDelegate {
 		self.name = VirtualObject.ROOT_NAME
 	}
 
-	init(modelName: String, fileExtension: String, thumbImageFilename: String, title: String) {
+	init(modelName: String, thumbImageFilename: String, title: String) {
 		super.init()
 		self.id = VirtualObjectsManager.shared.generateUid()
 		self.name = VirtualObject.ROOT_NAME
 		self.modelName = modelName
-		self.fileExtension = fileExtension
+//		self.fileExtension = fileExtension
 		self.thumbImage = UIImage(named: thumbImageFilename)
 		self.title = title
 	}
@@ -49,20 +49,19 @@ class VirtualObject: SCNNode, URLSessionDelegate {
         downloadSceneTask()
         
         
-        let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("teapot.usdz")
+        let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
         
         let asset = MDLAsset(url: downloadedScenePath)
         asset.loadTextures()
 //        let scene = SCNScene(mdlAsset: asset)
         
         let object = asset.object(at: 0)
-        print(object)
-
+        print("1: \(object)")
         
-        let node = SCNNode.init(mdlObject: object)
-
+        
         let wrapperNode = SCNNode.init(mdlObject: object)
-        print(node)
+        print("3: \(wrapperNode)")
+        
         let scale = 0.01
         wrapperNode.scale = SCNVector3(scale, scale, scale)
 //        for child in scene.rootNode.childNodes {
@@ -75,18 +74,27 @@ class VirtualObject: SCNNode, URLSessionDelegate {
         self.addChildNode(wrapperNode)
         print(self) // Virtual object root node
         modelLoaded = true
-        
-        
     }
     
     // MARK: - usdz file download
 
     func downloadSceneTask(){
+//        var url = URL(string: "happy")
+//
+//        //1. Get The URL Of The SCN File
+//        if modelName == "teapot" {
+//            url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/redchair/chair_swan.usdz")
+//        }
+//        else if modelName == "airforce" {
+//            url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/redchair/chair_swan.usdz")
+//        }
         
-        //1. Get The URL Of The SCN File
-        guard let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz") else {
+        guard let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/redchair/chair_swan.usdz") else {
             return
         }
+        print(url)
+        print(modelName)
+        
         
         //2. Create The Download Session
         let downloadSession = URLSession(configuration: URLSession.shared.configuration, delegate: self, delegateQueue: nil)
@@ -101,7 +109,8 @@ class VirtualObject: SCNNode, URLSessionDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
         //1. Create The Filename
-        let fileURL = getDocumentsDirectory().appendingPathComponent("teapot.usdz")
+        let fileURL = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
+        print(fileURL)
         
         //2. Copy It To The Documents Directory
         do {
@@ -113,7 +122,6 @@ class VirtualObject: SCNNode, URLSessionDelegate {
             loadModel()
             
         } catch {
-            
             print("Error Saving: \(error)")
             loadModel()
         }

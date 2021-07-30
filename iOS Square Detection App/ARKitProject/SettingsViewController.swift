@@ -5,7 +5,7 @@ import UIKit
 
 
 enum Setting: String {
-    // Bool settings with SettingsViewController switches
+    // SettingsViewController 스위치 bool
     case debugMode
     case scaleWithPinchGesture
     case ambientLightEstimation
