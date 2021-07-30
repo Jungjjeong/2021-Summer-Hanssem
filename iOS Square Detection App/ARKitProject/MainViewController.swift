@@ -401,7 +401,7 @@ extension MainViewController {
 		displayErrorMessage(title: "We're sorry!", message: sessionErrorMsg, allowRestart: isRecoverable)
 	}
 
-	func sessionWasInterrupted(_ session: ARSession) {
+	func sessionWasInterrupted(_ session: ARSession) { // 잠깐 어플리케이션을 나갔거나 하면 session이 중단된다.
 		textManager.blurBackground()
 		textManager.showAlert(title: "Session 중단",
 		                      message: "중단이 회복된 이후, Session이 재 시작 됩니다.")
@@ -524,12 +524,12 @@ extension MainViewController: ARSCNViewDelegate {
 			self.hitTestVisualization?.render()
 
 			// If light estimation is enabled, update the intensity of the model's lights and the environment map
-			if let lightEstimate = self.session.currentFrame?.lightEstimate {
-				self.sceneView.enableEnvironmentMapWithIntensity(lightEstimate.ambientIntensity / 100)
-//                print(lightEstimate.ambientIntensity / 100)// 조명 업데이트를 사용한 환경 맵 업데이트
-			} else {
-				self.sceneView.enableEnvironmentMapWithIntensity(10) // light Estimate false -> 고정된 조명 값으로 rendering
-			}
+//			if let lightEstimate = self.session.currentFrame?.lightEstimate {
+//				self.sceneView.enableEnvironmentMapWithIntensity(lightEstimate.ambientIntensity / 100)
+////                print(lightEstimate.ambientIntensity / 100)// 조명 업데이트를 사용한 환경 맵 업데이트
+//			} else {
+//                self.sceneView.enableEnvironmentMapWithIntensity(1) // light Estimate false -> 고정된 조명 값으로 rendering
+//			}
 		}
 	}
 
@@ -776,7 +776,7 @@ extension MainViewController {
 		// Drop the object onto the plane if it is near it.
 		let verticalAllowance: Float = 0.03
 		if objectPos.y > -verticalAllowance && objectPos.y < verticalAllowance {
-			textManager.showDebugMessage("OBJECT MOVED\nSurface detected nearby")
+			textManager.showDebugMessage("OBJECT MOVED\n근처에서 지표면이 감지됨.")
 
 			SCNTransaction.begin()
 			SCNTransaction.animationDuration = 0.5

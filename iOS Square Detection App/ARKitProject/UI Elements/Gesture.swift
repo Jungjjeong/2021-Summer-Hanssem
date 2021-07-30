@@ -25,8 +25,7 @@ class Gesture {
 		self.sceneView = sceneView
 		self.virtualObject = virtualObject
 
-		// Refresh the current gesture at 60 Hz - This ensures smooth updates even when no
-		// new touch events are incoming (but the camera might have moved).
+		// 현재 제스처를 6Hz로 새로고침 -> 새로운 터치 이벤트가 수신되지 않는 상황에서도 원활한 업데이트 가능
 		self.refreshTimer = Timer.scheduledTimer(withTimeInterval: 0.016_667, repeats: true, block: { _ in
 			self.refreshCurrentGesture()
 		})
@@ -67,11 +66,12 @@ class Gesture {
 		if let singleFingerGesture = self as? SingleFingerGesture {
 
 			if currentTouches.count == 1 {
-				// Update this gesture.
+				// 해당 제스처를 업데이트한다.
 				singleFingerGesture.updateGesture()
 				return singleFingerGesture
 			} else {
-				// Finish this single finger gesture and switch to two finger or no gesture.
+				// 한 손가락 제스처 완료
+                // 두 손가락 제스처 또는 제스처 없음으로 전환
 				singleFingerGesture.finishGesture()
 				singleFingerGesture.refreshTimer?.invalidate()
 				singleFingerGesture.refreshTimer = nil
@@ -84,9 +84,7 @@ class Gesture {
 				twoFingerGesture.updateGesture()
 				return twoFingerGesture
 			} else {
-				// Finish this two finger gesture and switch to no gesture -> The user
-				// will have to release all other fingers and touch the screen again
-				// to start a new gesture.
+				// 두 손가락 제스처도 완료 -> 새 제스처 시작하기 위해선 손가락을 다 뗴고 화면을 새로 터치해야 함.
 				twoFingerGesture.finishGesture()
 				twoFingerGesture.refreshTimer?.invalidate()
 				twoFingerGesture.refreshTimer = nil
@@ -479,6 +477,6 @@ class TwoFingerGesture: Gesture {
     }
 
 	func finishGesture() {
-		// Nothing to do here for two finger gestures.
+        
 	}
 }

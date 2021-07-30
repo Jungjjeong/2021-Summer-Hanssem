@@ -39,41 +39,38 @@ class VirtualObject: SCNNode{
     // MARK: - 3D model load function
 	func loadModel() {
         print("VirtualObject - loadModel function")
-		guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)",
-												inDirectory: "Models.scnassets/\(modelName)") else {
+		guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)", inDirectory: "Models.scnassets/\(modelName)") else {
             print("모델을 찾지 못해 return.")
 			return
 		}
         
-//        downloadSceneTask()
-        
-        
-//        let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
-//
-//        let asset = MDLAsset(url: downloadedScenePath)
-//        asset.loadTextures()
-//
-//        let object = asset.object(at: 0)
-//        print("--------------------------1: \(object)")
-//
-//
-//        let wrapperNode = SCNNode.init(mdlObject: object)
-//        print("--------------------------2: \(wrapperNode)")
-        
-
         let wrapperNode = SCNNode()
 
-        for child in virtualObjectScene.rootNode.childNodes {
-            print("in")
-            child.geometry?.firstMaterial?.lightingModel = .physicallyBased
-            child.movabilityHint = .movable
-            print(self.modelName)
-            
-            let scale = 0.01
-            child.scale = SCNVector3(scale, scale, scale)
-            wrapperNode.addChildNode(child)
+//        for child in virtualObjectScene.rootNode.childNodes {
+//            print("in")
+////            child.geometry?.firstMaterial?.lightingModel = .physicallyBased
+//            child.movabilityHint = .movable
+//            print(self.modelName)
+//
+//            let scale = 0.01
+//            child.scale = SCNVector3(scale, scale, scale)
+//            wrapperNode.addChildNode(child)
+//        }
+        if let material = virtualObjectScene.rootNode.geometry?.firstMaterial {
+            material.ambient.contents = UIColor.white
+            material.lightingModel = .physicallyBased
         }
         
+//        virtualObjectScene.rootNode.geometry?.firstMaterial?.lightingModel = .physicallyBased
+//        print(virtualObjectScene.rootNode.geometry?.firstMaterial)
+//        virtualObjectScene.rootNode.movabilityHint = .movable
+        
+        let scale = 0.01
+        virtualObjectScene.rootNode.scale = SCNVector3(scale, scale, scale)
+        wrapperNode.addChildNode(virtualObjectScene.rootNode)
+//        wrapperNode.light = SCNLight()
+//        wrapperNode.light?.type = .directional
+//        wrapperNode.light?.intensity = 500
         
         self.addChildNode(wrapperNode)
         print("--------------------------\(self)") // Virtual object root node

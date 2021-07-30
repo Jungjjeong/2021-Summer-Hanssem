@@ -218,7 +218,7 @@ extension SCNMaterial {
 			material.locksAmbientWithDiffuse = true
 		} else {
 			material.ambient.contents = UIColor.black
-			material.lightingModel = .constant
+			material.lightingModel = .physicallyBased
 			material.emission.contents = diffuse
 		}
 		return material

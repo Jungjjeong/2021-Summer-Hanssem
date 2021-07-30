@@ -56,7 +56,7 @@ class VirtualObjectsManager {
 	}
 
 	func isAVirtualObjectPlaced() -> Bool {
-        print("isAVirtualObjectPlaced")
+//        print("isAVirtualObjectPlaced")
 		return virtualObjectSelected != nil
 	}
 

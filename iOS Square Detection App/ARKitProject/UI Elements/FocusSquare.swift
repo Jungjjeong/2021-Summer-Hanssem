@@ -130,10 +130,9 @@ class FocusSquare: SCNNode {
 	private func scaleBasedOnDistance(camera: ARCamera?) -> Float {
 		if let camera = camera {
 			let distanceFromCamera = (self.worldPosition - SCNVector3.positionFromTransform(camera.transform)).length()
-			// This function reduces size changes of the focus square based on the distance by scaling it up if it far away,
-			// and down if it is very close.
-			// The values are adjusted such that scale will be 1 in 0.7 m distance (estimated distance when looking at a table),
-			// and 1.2 in 1.5 m distance (estimated distance when looking at the floor).
+			// 거리가 멀면 scale up, 거리가 가까우면 scale down -> square 의 크기 조정
+            
+            // 0.7m정도에 1, 1.5m에 1.2로 설정
 			let newScale = distanceFromCamera < 0.7 ? (distanceFromCamera / 0.7) : (0.25 * distanceFromCamera + 0.825)
 
 			return newScale
@@ -304,7 +303,7 @@ class FocusSquare: SCNNode {
 
 	private func focusSquareNode() -> SCNNode {
 		/*
-		The focus square consists of eight segments as follows, which can be individually animated.
+		focus square 은 8개의 segment로 구성되며, 개별적으로 animated를 설정할 수 있다.
 		
 		    s1  s2
 		    _   _
@@ -314,7 +313,7 @@ class FocusSquare: SCNNode {
 		    -   -
 		    s7  s8
 		*/
-		let sl: Float = 0.5  // segment length
+		let sl: Float = 0.5  // segment 길이
 		let st = focusSquareThickness
 		let c: Float = focusSquareThickness / 2 // correction to align lines perfectly
 
