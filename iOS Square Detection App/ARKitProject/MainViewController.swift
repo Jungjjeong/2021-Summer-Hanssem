@@ -65,14 +65,14 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 
     // MARK: - Ambient Light Estimation
 	func toggleAmbientLightEstimation(_ enabled: Bool) { // 조명 추적 여부 -> bool
-        if enabled {
+        if enabled { // enabled -> true
 			if !sessionConfig.isLightEstimationEnabled {
                 print("조명 추적")
 				sessionConfig.isLightEstimationEnabled = true
                 sceneView.autoenablesDefaultLighting = true
 				session.run(sessionConfig)
 			}
-        } else {
+        } else { // false
 			if sessionConfig.isLightEstimationEnabled {
                 print("조명 비추적")
 				sessionConfig.isLightEstimationEnabled = false
@@ -86,10 +86,9 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 	var isLoadingObject: Bool = false { // 초기화 진행
 		didSet { // 값 변경된 직후에 수행
 			DispatchQueue.main.async { // DispatchQueue -> 동시성 프로그래밍 (async)
-				self.settingsButton.isEnabled = !self.isLoadingObject
-				self.addObjectButton.isEnabled = !self.isLoadingObject
-//				self.screenshotButton.isEnabled = !self.isLoadingObject
-				self.restartExperienceButton.isEnabled = !self.isLoadingObject
+				self.settingsButton.isEnabled = !self.isLoadingObject // setting list button
+				self.addObjectButton.isEnabled = !self.isLoadingObject // object add button
+				self.restartExperienceButton.isEnabled = !self.isLoadingObject // restart button (anchor init)
 			}
 		}
 	}
@@ -97,7 +96,6 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 	@IBOutlet weak var addObjectButton: UIButton!
 
 	@IBAction func chooseObject(_ button: UIButton) {
-		// Abort if we are about to load another object to avoid concurrent modifications of the scene.
 		if isLoadingObject { return } // loadingObject인 상태에서는 중단 (return)
 
 		textManager.cancelScheduledMessage(forType: .contentPlacement)
@@ -108,7 +106,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 
 		let objectViewController = VirtualObjectSelectionViewController(size: popoverSize) // tableview 정의한 class
 		objectViewController.delegate = self
-		objectViewController.modalPresentationStyle = .popover
+		objectViewController.modalPresentationStyle = .popover // model list -> pop over
 		objectViewController.popoverPresentationController?.delegate = self
 		self.present(objectViewController, animated: true, completion: nil)
 
@@ -242,7 +240,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 
 	var textManager: TextManager!
 
-    func setupUIControls() { // 초기화
+    func setupUIControls() { // message 창 초기화
 		textManager = TextManager(viewController: self)
 		debugMessageLabel.isHidden = true
 		featurePointCountLabel.text = ""
@@ -279,26 +277,11 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		}
 	}
 
-//	@IBOutlet weak var screenshotButton: UIButton! // 스크린샷 버튼
-//	@IBAction func takeSnapShot() {
-//		guard sceneView.session.currentFrame != nil else { return } // 현재 프래임이 비어 있으면 return
-//		focusSquare?.isHidden = true // focusSquare은 숨긴다.
-//
-//		let imagePlane = SCNPlane(width: sceneView.bounds.width / 6000, height: sceneView.bounds.height / 6000)
-//		imagePlane.firstMaterial?.diffuse.contents = sceneView.snapshot()
-//		imagePlane.firstMaterial?.lightingModel = .constant
-//
-//		let planeNode = SCNNode(geometry: imagePlane)
-//		sceneView.scene.rootNode.addChildNode(planeNode) // 현재 화면에 사진을 띄울 수 있다.
-//
-//		focusSquare?.isHidden = false // 다시 나타내기
-//	}
-
 	// MARK: - Settings
 
 	@IBOutlet weak var settingsButton: UIButton! // 세팅 선택 칸 보여주는 버튼
 
-	@IBAction func showSettings(_ button: UIButton) {
+	@IBAction func showSettings(_ button: UIButton) { // settingsbutton click -> action
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let settingsViewController = storyboard.instantiateViewController(
 			withIdentifier: "settingsViewController") as? SettingsViewController else {
@@ -314,7 +297,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		navigationController.modalPresentationStyle = .popover
 		navigationController.popoverPresentationController?.delegate = self
 		navigationController.preferredContentSize = CGSize(width: sceneView.bounds.size.width - 10,
-		                                                   height: sceneView.bounds.size.height)
+		                                                   height: sceneView.bounds.size.height) // 크기
 		self.present(navigationController, animated: true, completion: nil) // show
 
 		navigationController.popoverPresentationController?.sourceView = settingsButton
@@ -345,15 +328,15 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 	// MARK: - Error handling
 
 	func displayErrorMessage(title: String, message: String, allowRestart: Bool = false) {
-		textManager.blurBackground()
+		textManager.blurBackground() // error message 띄울 때, blur background
 
-		if allowRestart {
+		if allowRestart { // allowRestart -> true
 			let restartAction = UIAlertAction(title: "Reset", style: .default) { _ in
 				self.textManager.unblurBackground() // blur effect
 				self.restartExperience(self)
 			}
 			textManager.showAlert(title: title, message: message, actions: [restartAction])
-		} else {
+		} else { // false
 			textManager.showAlert(title: title, message: message, actions: [])
 		}
 	}
@@ -362,7 +345,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 // MARK: - ARKit / ARSCNView
 extension MainViewController {
 	func setupScene() {
-		sceneView.setUp(viewController: self, session: session)
+		sceneView.setUp(viewController: self, session: session) // ScieneView + Extension class -> setup function
 		DispatchQueue.main.async {
 			self.screenCenter = self.sceneView.bounds.mid // center setting
 		}
@@ -406,13 +389,13 @@ extension MainViewController {
 				sessionErrorMsg.append("\(option).")
 			}
 		}
-        // error
+        // case에 따른 error 다룬다.
 
 		let isRecoverable = (arError.code == .worldTrackingFailed)
 		if isRecoverable {
-			sessionErrorMsg += "\nYou can try resetting the session or quit the application."
+			sessionErrorMsg += "\nSession을 재시작 하거나 어플리케이션을 종료해주세요."
 		} else {
-			sessionErrorMsg += "\nThis is an unrecoverable error that requires to quit the application."
+			sessionErrorMsg += "\n회복할 수 없는 오류입니다. 어플리케이션을 종료해주세요."
 		}
 
 		displayErrorMessage(title: "We're sorry!", message: sessionErrorMsg, allowRestart: isRecoverable)
@@ -420,15 +403,15 @@ extension MainViewController {
 
 	func sessionWasInterrupted(_ session: ARSession) {
 		textManager.blurBackground()
-		textManager.showAlert(title: "Session Interrupted",
-		                      message: "The session will be reset after the interruption has ended.")
+		textManager.showAlert(title: "Session 중단",
+		                      message: "중단이 회복된 이후, Session이 재 시작 됩니다.")
 	}
 
 	func sessionInterruptionEnded(_ session: ARSession) {
 		textManager.unblurBackground()
 		session.run(sessionConfig, options: [.resetTracking, .removeExistingAnchors])
 		restartExperience(self)
-		textManager.showMessage("RESETTING SESSION")
+		textManager.showMessage("Session 재시작")
 	}
 }
 
@@ -493,11 +476,11 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 		loadVirtualObject(object: object)
 	}
 
-	func loadVirtualObject(object: VirtualObject) {
+	func loadVirtualObject(object: VirtualObject) { // Virtual Object loading
 		// Show progress indicator
 		let spinner = UIActivityIndicatorView()
         print("Main - loadVirtualObject function")
-		spinner.center = addObjectButton.center
+		spinner.center = addObjectButton.center // addObejctButton 안 중간에 spinner bar가 생성된다.
 		spinner.bounds.size = CGSize(width: addObjectButton.bounds.width - 5, height: addObjectButton.bounds.height - 5)
 		addObjectButton.setImage(#imageLiteral(resourceName: "buttonring"), for: [])
 		sceneView.addSubview(spinner)
@@ -512,17 +495,17 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 			VirtualObjectsManager.shared.setVirtualObjectSelected(virtualObject: object)
 
             print("Main - loadModel function")
-			object.loadModel()
+			object.loadModel() // Virtual Object class
 
 			DispatchQueue.main.async {
-				if let lastFocusSquarePos = self.focusSquare?.lastPosition {
+				if let lastFocusSquarePos = self.focusSquare?.lastPosition { // button을 누를때 저장된 마지막 사각형의 pos -> virtual object 배치
 					self.setNewVirtualObjectPosition(lastFocusSquarePos)
 				} else {
 					self.setNewVirtualObjectPosition(SCNVector3Zero)
 				}
 
 				spinner.removeFromSuperview()
-
+                // spinner remove
 				// Update the icon of the add object button
 				let buttonImage = UIImage.composeButtonImage(from: object.thumbImage)
 				let pressedButtonImage = UIImage.composeButtonImage(from: object.thumbImage, alpha: 0.3)
@@ -548,7 +531,7 @@ extension MainViewController: ARSCNViewDelegate {
 				self.sceneView.enableEnvironmentMapWithIntensity(lightEstimate.ambientIntensity / 100)
 //                print(lightEstimate.ambientIntensity / 100)// 조명 업데이트를 사용한 환경 맵 업데이트
 			} else {
-				self.sceneView.enableEnvironmentMapWithIntensity(10)
+				self.sceneView.enableEnvironmentMapWithIntensity(10) // light Estimate false -> 고정된 조명 값으로 rendering
 			}
 		}
 	}
@@ -558,7 +541,7 @@ extension MainViewController: ARSCNViewDelegate {
 		DispatchQueue.main.async {
 			if let planeAnchor = anchor as? ARPlaneAnchor {
 				self.addPlane(node: node, anchor: planeAnchor)
-				self.checkIfObjectShouldMoveOntoPlane(anchor: planeAnchor)
+				self.checkIfObjectShouldMoveOntoPlane(anchor: planeAnchor) // 반드시 인식된 평면 위에서만 rendering 해야 하는지의 여부 check
 			}
 		}
 	}
@@ -579,7 +562,7 @@ extension MainViewController: ARSCNViewDelegate {
 	func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
 		DispatchQueue.main.async {
 			if let planeAnchor = anchor as? ARPlaneAnchor, let plane = self.planes.removeValue(forKey: planeAnchor) {
-				plane.removeFromParentNode()
+				plane.removeFromParentNode() // 노드에서부터 삭제
 			}
 		}
 	}
@@ -595,8 +578,8 @@ extension MainViewController {
 
         
 		// Output the current translation, rotation & scale of the virtual object as text.
-		let cameraPos = SCNVector3.positionFromTransform(cameraTransform)
-		let vectorToCamera = cameraPos - object.position
+		let cameraPos = SCNVector3.positionFromTransform(cameraTransform) // cameraTransform에 따른 camera pos 반환
+		let vectorToCamera = cameraPos - object.position // object의 위치와의 차 -> 카메라까지의 거리
 
 		let distanceToUser = vectorToCamera.length() // 카메라와 유저 사이 거리
 
@@ -606,7 +589,7 @@ extension MainViewController {
 		}
 
 		let distance = String(format: "%.2f", distanceToUser)
-		let scale = String(format: "%.2f", object.scale.x)
+		let scale = String(format: "%.2f", object.scale.x) // distance, scale format
 		textManager.showDebugMessage("Distance: \(distance) m\nRotation: \(angleDegrees)°\nScale: \(scale)x")
 	}
 
@@ -614,7 +597,6 @@ extension MainViewController {
 
 		guard let newPosition = pos else {
 			textManager.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
-			// Reset the content selection in the menu only if the content has not yet been initially placed.
 			if !VirtualObjectsManager.shared.isAVirtualObjectPlaced() {
 				resetVirtualObject()
 			}
@@ -637,9 +619,7 @@ extension MainViewController {
         
         
 		// -------------------------------------------------------------------------------
-		// 1. Always do a hit test against exisiting plane anchors first.
-		//    (If any such anchors exist & only within their extents.)
-
+		// 1.
 		let planeHitTestResults = sceneView.hitTest(position, types: .existingPlaneUsingExtent)
         // 해당 장면의 위치에 대한 hitTest를 먼저 수행한다. -> 범위 내에서 anchor가 존재하는 경우
 		if let result = planeHitTestResults.first {
@@ -654,8 +634,7 @@ extension MainViewController {
 
         
 		// -------------------------------------------------------------------------------
-		// 2. Collect more information about the environment by hit testing against
-		//    the feature point cloud, but do not return the result yet.
+		// 2.
         
         // 최적의 결과가 나오지 않았을 시, 특징점들을 대상으로 hitTest를 수행한다.
 		var featureHitTestPosition: SCNVector3?
@@ -673,8 +652,7 @@ extension MainViewController {
 
         
 		// -------------------------------------------------------------------------------
-		// 3. If desired or necessary (no good feature hit test result): Hit test
-		//    against an infinite, horizontal plane (ignoring the real world).
+		// 3.
 
         // 결과가 또 안나올 경우, 이번에는 무한한 평면에 대한 hitTest를 수행한다.
 		if (infinitePlane && dragOnInfinitePlanesEnabled) || !highQualityFeatureHitTestResult {
@@ -691,9 +669,7 @@ extension MainViewController {
 
         
 		// -------------------------------------------------------------------------------
-		// 4. If available, return the result of the hit test against high quality
-		//    features if the hit tests against infinite planes were skipped or no
-		//    infinite plane was hit.
+		// 4.
 
 		if highQualityFeatureHitTestResult {
 //            print("3위 특징점 클라우드에 대한 position 반환")
@@ -702,8 +678,7 @@ extension MainViewController {
 
         
 		// -------------------------------------------------------------------------------
-		// 5. As a last resort, perform a second, unfiltered hit test against features.
-		//    If there are no features in the scene, the result returned here will be nil.
+		// 5.
 
 		let unfilteredFeatureHitTestResults = sceneView.hitTestWithFeatures(position) // 해당 위치에 대한 필터링 되지 않은 Featurepoints들에 대한 hitTest를 수행한다.
 		if !unfilteredFeatureHitTestResults.isEmpty {
@@ -756,11 +731,6 @@ extension MainViewController {
 		var cameraToPosition = pos - cameraWorldPos
 		cameraToPosition.setMaximumLength(DEFAULT_DISTANCE_CAMERA_TO_OBJECTS)
 
-		// Compute the average distance of the object from the camera over the last ten
-		// updates. If filterPosition is true, compute a new position for the object
-		// with this average. Notice that the distance is applied to the vector from
-		// the camera to the content, so it only affects the percieved distance of the
-		// object - the averaging does _not_ make the content "lag".
 		let hitTestResultDistance = CGFloat(cameraToPosition.length())
 
 		recentVirtualObjectDistances.append(hitTestResultDistance)
