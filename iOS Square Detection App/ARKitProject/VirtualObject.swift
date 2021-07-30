@@ -77,67 +77,6 @@ class VirtualObject: SCNNode{
         modelLoaded = true
     }
     
-//    // MARK: - usdz file download
-//
-//    func downloadSceneTask(){
-////        var url = URL(string: "happy")
-////
-////        //1. Get The URL Of The SCN File
-////        if modelName == "teapot" {
-////            url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/redchair/chair_swan.usdz")
-////        }
-////        else if modelName == "airforce" {
-////            url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/redchair/chair_swan.usdz")
-////        }
-//
-//        guard let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/redchair/chair_swan.usdz") else {
-//            return
-//        }
-//        print("--------------------------url & modelname --------------------------")
-//        print(url)
-//        print(modelName)
-//
-//
-//        //2. Create The Download Session
-//        let downloadSession = URLSession(configuration: URLSession.shared.configuration, delegate: self, delegateQueue: nil)
-//
-//        //3. Create The Download Task & Run It
-//        let downloadTask = downloadSession.downloadTask(with: url)
-//        downloadTask.resume()
-//    }
-//
-//
-//
-//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-//
-//        //1. Create The Filename
-//        let fileURL = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
-//        print("-------------------------- \(fileURL)")
-//
-//        //2. Copy It To The Documents Directory
-//        do {
-//            try FileManager.default.copyItem(at: location, to: fileURL)
-//
-//            print("--------------------------Successfuly Saved File \(fileURL)")
-//
-//            //3. Load The Model
-//            loadModel()
-//
-//        } catch {
-//            print("--------------------------Error Saving: \(error)")
-//            loadModel()
-//        }
-//
-//    }
-//
-//    func getDocumentsDirectory() -> URL {
-//
-//        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        let documentsDirectory = paths[0]
-//        return documentsDirectory
-//
-//    }
-    
     
     
     
