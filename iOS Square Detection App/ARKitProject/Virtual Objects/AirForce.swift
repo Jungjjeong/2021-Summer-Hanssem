@@ -13,7 +13,7 @@ import SceneKit
 class AirForce: VirtualObject{
 
     override init() {
-        super.init(modelName: "airforce", thumbImageFilename: "vase", title: "AirForce")
+        super.init(modelName: "airforce", fileExtension: "usdz", thumbImageFilename: "vase", title: "AirForce")
     }
 
     required init?(coder aDecoder: NSCoder) {
