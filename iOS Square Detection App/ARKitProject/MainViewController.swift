@@ -33,6 +33,10 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		setupFocusSquare()
 		updateSettings()
 		resetVirtualObject() // view가 처음 로드될 때 필요한 요소들 initialized
+        sessionConfig.isLightEstimationEnabled = true
+        sceneView.automaticallyUpdatesLighting = true
+        sceneView.autoenablesDefaultLighting = true
+        session.run(sessionConfig)
     }
 
 	override func viewDidAppear(_ animated: Bool) { // view 보여진 후, animation appear
@@ -54,7 +58,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 			if use3DOFTracking {
 				sessionConfig = ARWorldTrackingConfiguration() // 장치의 움직임을 추적하고 앵커 고정하는 역할의 class
 			} // 3DOF(3 degrees of freedom) : 회전 운동만 추적할 수 있는 디바이스
-			sessionConfig.isLightEstimationEnabled = UserDefaults.standard.bool(for: .ambientLightEstimation)
+			sessionConfig.isLightEstimationEnabled = true
             // user의 현재 ambientLightEstimation 상태 여부를 sessionConfig의 조명 추정 여부에 입힌다.
 			session.run(sessionConfig) // session run
 		}
@@ -64,23 +68,23 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
     // Scenekit의 가상 3D contents를 ar화면 위에 띄워주는 viewer
 
     // MARK: - Ambient Light Estimation
-	func toggleAmbientLightEstimation(_ enabled: Bool) { // 조명 추적 여부 -> bool
-        if enabled { // enabled -> true
-			if !sessionConfig.isLightEstimationEnabled {
-                print("조명 추적")
-				sessionConfig.isLightEstimationEnabled = true
-                sceneView.autoenablesDefaultLighting = true
-				session.run(sessionConfig)
-			}
-        } else { // false
-			if sessionConfig.isLightEstimationEnabled {
-                print("조명 비추적")
-				sessionConfig.isLightEstimationEnabled = false
-                sceneView.autoenablesDefaultLighting = false
-				session.run(sessionConfig)
-			}
-        }
-    }
+//	func toggleAmbientLightEstimation(_ enabled: Bool) { // 조명 추적 여부 -> bool
+//        if enabled { // enabled -> true
+//			if !sessionConfig.isLightEstimationEnabled {
+//                print("조명 추적")
+//				sessionConfig.isLightEstimationEnabled = true
+//                sceneView.autoenablesDefaultLighting = true
+//				session.run(sessionConfig)
+//			}
+//        } else { // false
+//			if sessionConfig.isLightEstimationEnabled {
+//                print("조명 비추적")
+//				sessionConfig.isLightEstimationEnabled = false
+//                sceneView.autoenablesDefaultLighting = false
+//				session.run(sessionConfig)
+//			}
+//        }
+//    }
 
     // MARK: - Virtual Object Loading
 	var isLoadingObject: Bool = false { // 초기화 진행
@@ -315,7 +319,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		let defaults = UserDefaults.standard
 
 		showDebugVisuals = defaults.bool(for: .debugMode)
-		toggleAmbientLightEstimation(defaults.bool(for: .ambientLightEstimation))
+//		toggleAmbientLightEstimation(defaults.bool(for: .ambientLightEstimation))
 		dragOnInfinitePlanesEnabled = defaults.bool(for: .dragOnInfinitePlanes)
 		showHitTestAPIVisualization = defaults.bool(for: .showHitTestAPI)
 		use3DOFTracking	= defaults.bool(for: .use3DOFTracking)
@@ -484,7 +488,10 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 		addObjectButton.setImage(#imageLiteral(resourceName: "buttonring"), for: [])
 		sceneView.addSubview(spinner)
 		spinner.startAnimating()
-
+        
+        
+        
+        
 		DispatchQueue.global().async {
 			self.isLoadingObject = true
 			object.viewController = self
@@ -493,6 +500,40 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 
             print("Main - loadModel function")
 			object.loadModel() // Virtual Object class
+            
+            
+            // light attribute
+            let light = SCNLight()
+            light.type = .directional
+            light.castsShadow = true
+            light.shadowRadius = 20
+            light.shadowSampleCount = 64
+            light.shadowColor = UIColor(white: 0, alpha: 0.5)
+            light.shadowMode = .deferred
+            let constraint = SCNLookAtConstraint(target: object)
+            
+            
+            
+            // light node
+            let lightNode = SCNNode()
+            lightNode.light = light
+            lightNode.position = SCNVector3(object.position.x + 10, object.position.y + 30, object.position.z + 30)
+            lightNode.eulerAngles = SCNVector3(45.0,0,0)
+            lightNode.constraints = [constraint]
+            self.sceneView.scene.rootNode.addChildNode(lightNode)
+            
+            // floor shadow node
+            let flourPlane = SCNFloor()
+            let groundPlane = SCNNode()
+            groundPlane.geometry = flourPlane
+
+            self.sceneView.scene.rootNode.addChildNode(groundPlane)
+            
+
+            
+            
+
+
 
 			DispatchQueue.main.async {
 				if let lastFocusSquarePos = self.focusSquare?.lastPosition { // button을 누를때 저장된 마지막 사각형의 pos -> virtual object 배치

@@ -56,10 +56,10 @@ class VirtualObject: SCNNode{
 //            child.scale = SCNVector3(scale, scale, scale)
 //            wrapperNode.addChildNode(child)
 //        }
-        if let material = virtualObjectScene.rootNode.geometry?.firstMaterial {
-            material.ambient.contents = UIColor.white
-            material.lightingModel = .physicallyBased
-        }
+//        if let material = virtualObjectScene.rootNode.geometry?.firstMaterial {
+//            material.ambient.contents = UIColor.white
+//            material.lightingModel = .physicallyBased
+//        }
         
 //        virtualObjectScene.rootNode.geometry?.firstMaterial?.lightingModel = .physicallyBased
 //        print(virtualObjectScene.rootNode.geometry?.firstMaterial)
@@ -67,11 +67,8 @@ class VirtualObject: SCNNode{
         
         let scale = 0.01
         virtualObjectScene.rootNode.scale = SCNVector3(scale, scale, scale)
-        wrapperNode.addChildNode(virtualObjectScene.rootNode)
-//        wrapperNode.light = SCNLight()
-//        wrapperNode.light?.type = .directional
-//        wrapperNode.light?.intensity = 500
         
+        wrapperNode.addChildNode(virtualObjectScene.rootNode)
         self.addChildNode(wrapperNode)
         print("--------------------------\(self)") // Virtual object root node
         modelLoaded = true

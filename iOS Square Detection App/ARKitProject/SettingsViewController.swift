@@ -8,7 +8,6 @@ enum Setting: String {
     // SettingsViewController 스위치 bool
     case debugMode
     case scaleWithPinchGesture
-    case ambientLightEstimation
     case dragOnInfinitePlanes
     case showHitTestAPI
     case use3DOFTracking
@@ -17,7 +16,6 @@ enum Setting: String {
 
     static func registerDefaults() {
         UserDefaults.standard.register(defaults: [
-            Setting.ambientLightEstimation.rawValue: true,
             Setting.dragOnInfinitePlanes.rawValue: true
         ])
     }
@@ -41,7 +39,6 @@ class SettingsViewController: UITableViewController {
 
 	@IBOutlet weak var debugModeSwitch: UISwitch!
 	@IBOutlet weak var scaleWithPinchGestureSwitch: UISwitch!
-	@IBOutlet weak var ambientLightEstimateSwitch: UISwitch!
 	@IBOutlet weak var dragOnInfinitePlanesSwitch: UISwitch!
 	@IBOutlet weak var showHitTestAPISwitch: UISwitch!
 	@IBOutlet weak var use3DOFTrackingSwitch: UISwitch!
@@ -60,8 +57,6 @@ class SettingsViewController: UITableViewController {
                 defaults.set(sender.isOn, for: .debugMode)
             case scaleWithPinchGestureSwitch:
                 defaults.set(sender.isOn, for: .scaleWithPinchGesture)
-            case ambientLightEstimateSwitch:
-                defaults.set(sender.isOn, for: .ambientLightEstimation)
             case dragOnInfinitePlanesSwitch:
                 defaults.set(sender.isOn, for: .dragOnInfinitePlanes)
             case showHitTestAPISwitch:
@@ -81,7 +76,6 @@ class SettingsViewController: UITableViewController {
 
 		debugModeSwitch.isOn = defaults.bool(for: Setting.debugMode)
 		scaleWithPinchGestureSwitch.isOn = defaults.bool(for: .scaleWithPinchGesture)
-		ambientLightEstimateSwitch.isOn = defaults.bool(for: .ambientLightEstimation)
 		dragOnInfinitePlanesSwitch.isOn = defaults.bool(for: .dragOnInfinitePlanes)
 		showHitTestAPISwitch.isOn = defaults.bool(for: .showHitTestAPI)
 		use3DOFTrackingSwitch.isOn = defaults.bool(for: .use3DOFTracking)
