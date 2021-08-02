@@ -523,11 +523,11 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
             self.sceneView.scene.rootNode.addChildNode(lightNode)
             
             // floor shadow node
-            let flourPlane = SCNFloor()
-            let groundPlane = SCNNode()
-            groundPlane.geometry = flourPlane
-
-            self.sceneView.scene.rootNode.addChildNode(groundPlane)
+//            let flourPlane = SCNFloor()
+//            let groundPlane = SCNNode()
+//            groundPlane.geometry = flourPlane
+//
+//            self.sceneView.scene.rootNode.addChildNode(groundPlane)
             
 
             
