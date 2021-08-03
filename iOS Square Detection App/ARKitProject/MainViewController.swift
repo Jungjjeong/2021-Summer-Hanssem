@@ -50,6 +50,8 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 	override func viewWillDisappear(_ animated: Bool) { // view 사라지기 전
 		super.viewWillDisappear(animated)
 		session.pause() // session 멈춘다.
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.isLightEstimationEnabled = true
 	}
 
     // MARK: - ARKit / ARSCNView
@@ -507,10 +509,15 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
             light.shadowMode = .deferred
             let constraint = SCNLookAtConstraint(target: object)
             
+            guard let lightEstimate = self.sceneView.session.currentFrame?.lightEstimate else {
+                return
+            }
             
             // light node
             let lightNode = SCNNode()
             lightNode.light = light
+            lightNode.light?.intensity = lightEstimate.ambientIntensity
+            lightNode.light?.temperature = lightEstimate.ambientColorTemperature
 //            lightNode.position = SCNVector3(object.position.x + 10, object.position.y + 30, object.position.z + 30)
             lightNode.eulerAngles = SCNVector3(45.0,0,0)
             lightNode.constraints = [constraint]
