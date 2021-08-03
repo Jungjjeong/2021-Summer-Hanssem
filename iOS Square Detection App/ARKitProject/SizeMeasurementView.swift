@@ -48,6 +48,8 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
             for dot in doteNodes{
                 dot.removeFromParentNode()
             }
+            textNode.removeFromParentNode()
+            textNode = SCNNode()
             doteNodes = [SCNNode]()
         }
         
