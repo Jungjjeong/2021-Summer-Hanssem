@@ -251,7 +251,7 @@ class FocusSquare: SCNNode {
 			let elapsedTimePercentage = elapsedTime / CGFloat(duration)
 			let saturation = 2.8 * (elapsedTimePercentage - 0.5) * (elapsedTimePercentage - 0.5) + 0.3
 			if let material = node.geometry?.firstMaterial {
-				material.diffuse.contents = UIColor(hue: 0.1333, saturation: 0, brightness: 1.0, alpha: 1.0)
+				material.diffuse.contents = UIColor(hue: 0.1333, saturation: saturation, brightness: 1.0, alpha: 1.0)
 			}
 		}
 		return action
