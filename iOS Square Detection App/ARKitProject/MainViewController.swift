@@ -252,7 +252,6 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 			self.use3DOFTracking = false // 3DOFTracking 끄기
 
 			self.setupFocusSquare() // focusSquare 초기화 및 사용하기 위해 세팅
-//			self.loadVirtualObject()
 			self.restartPlaneDetection() // planeDetection 다시 수행
 
 			self.restartExperienceButton.setImage(#imageLiteral(resourceName: "restart"), for: [])

@@ -27,7 +27,6 @@
 		C490DAC41E9AB63400210960 /* VirtualObjectSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C490DAC31E9AB63400210960 /* VirtualObjectSelectionViewController.swift */; };
 		C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E87DD81EA6B40F002117D6 /* VirtualObject.swift */; };
 		C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */; };
-		E7078CA126B23D1D0032C856 /* GetFileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7078CA026B23D1D0032C856 /* GetFileController.swift */; };
 		E75F21A126AE93C900A9B5FF /* DistanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */; };
 		E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */; };
 		E7963A9426A8FDB600BDF22D /* Teapot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9326A8FDB600BDF22D /* Teapot.swift */; };
@@ -59,7 +58,6 @@
 		C490DAC31E9AB63400210960 /* VirtualObjectSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualObjectSelectionViewController.swift; sourceTree = "<group>"; };
 		C4E87DD81EA6B40F002117D6 /* VirtualObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VirtualObject.swift; path = ../VirtualObject.swift; sourceTree = "<group>"; };
 		C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARCameraTrackingState.swift; sourceTree = "<group>"; };
-		E7078CA026B23D1D0032C856 /* GetFileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFileController.swift; sourceTree = "<group>"; };
 		E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceViewController.swift; sourceTree = "<group>"; };
 		E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
 		E7963A9326A8FDB600BDF22D /* Teapot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teapot.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				39C0B9581E9C6B1F003FCA0C /* Utilities.swift */,
 				C41366B81EB80DD400EC054A /* TextManager.swift */,
 				E75F21A026AE93C900A9B5FF /* DistanceViewController.swift */,
-				E7078CA026B23D1D0032C856 /* GetFileController.swift */,
 				113B64D01ECA81CA0071CBD1 /* UI Elements */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
 				3929C49E1E89EE4400E00B60 /* Models.scnassets */,
@@ -242,7 +239,6 @@
 				E75F21A126AE93C900A9B5FF /* DistanceViewController.swift in Sources */,
 				3987BEDC1E9E057F00167FAC /* Gesture.swift in Sources */,
 				C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */,
-				E7078CA126B23D1D0032C856 /* GetFileController.swift in Sources */,
 				E79813A726B3861300712D98 /* AirForce.swift in Sources */,
 				39D4A8BE1EA1AF530006EC65 /* PlaneDebugVisualization.swift in Sources */,
 				39C0B9591E9C6B1F003FCA0C /* SettingsViewController.swift in Sources */,

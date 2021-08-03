@@ -59,7 +59,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         
         
         
-        let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("teapot.usdz")
+        let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
         
         let asset = MDLAsset(url: downloadedScenePath)
         asset.loadTextures()
@@ -97,10 +97,27 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
     // MARK: - download from URL
     func downloadSceneTask(type : Bool) {
         if type == true {
+//            guard let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz") else {
+//                return
+//            }
             print("start downloadscenetask function")
-            guard let url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz") else {
-                return
+            let url : URL
+            switch modelName
+            {
+            case "Teapot":
+                print("Teapot")
+                url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!
+            case "AirForce":
+                print("AirForce")
+                url = URL(string: "https://devimages-cdn.apple.com/ar/photogrammetry/AirForce.usdz")!
+            case "fender_stratocaster":
+                print("fender_stratocaster")
+                url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/stratocaster/fender_stratocaster.usdz")!
+            default:
+                print("Default")
+                url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!
             }
+            
             
             //2. Create The Download Session
             print("create the download session")
@@ -123,13 +140,14 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
         //1. Create The Filename
-        let fileURL = getDocumentsDirectory().appendingPathComponent("teapot.usdz")
+        let fileURL = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
         
         //2. Copy It To The Documents Directory
         do {
             try FileManager.default.copyItem(at: location, to: fileURL)
             
             print("Successfuly Saved File \(fileURL)")
+            loadModel()
         } catch {
             
             print("Error Saving: \(error)")
@@ -153,12 +171,12 @@ extension VirtualObject {
 
 	static func isNodePartOfVirtualObject(_ node: SCNNode) -> Bool {
 		if node.name == VirtualObject.ROOT_NAME {
-            print("VirtualObject - isnodepartOfVirtualObject")
+//            print("VirtualObject - isnodepartOfVirtualObject")
 			return true
 		}
 
 		if node.parent != nil {
-            print("VirtualObeject - is Not nodepartofVirtualObject")
+//            print("VirtualObeject - is Not nodepartofVirtualObject")
 			return isNodePartOfVirtualObject(node.parent!)
 		}
 

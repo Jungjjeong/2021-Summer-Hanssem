@@ -139,17 +139,6 @@
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4It-Iv-01H">
-                                <rect key="frame" x="104" y="846" width="61" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="61" id="3FJ-cZ-8Ls"/>
-                                    <constraint firstAttribute="height" constant="40.333333333333371" id="z0z-7U-aHQ"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="ruler" catalog="system"/>
-                                <connections>
-                                    <segue destination="eU4-Da-GWO" kind="push" id="Fuw-4c-UqU"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcf-ic-uGo" userLabel="Add Object Button">
                                 <rect key="frame" x="20" y="839.33333333333337" width="48" height="47.666666666666629"/>
                                 <state key="normal" image="add">
@@ -159,24 +148,24 @@
                                     <action selector="chooseObject:" destination="BV1-FR-VrT" eventType="touchUpInside" id="6wa-rW-fJZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8E5-Yv-rA0">
-                                <rect key="frame" x="263" y="848" width="61" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4It-Iv-01H">
+                                <rect key="frame" x="184" y="848" width="61" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="61" id="0f8-KI-ViJ"/>
-                                    <constraint firstAttribute="height" constant="40.333333333333371" id="xIE-B1-bJJ"/>
+                                    <constraint firstAttribute="width" constant="61" id="3FJ-cZ-8Ls"/>
+                                    <constraint firstAttribute="height" constant="40.333333333333371" id="z0z-7U-aHQ"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="ruler.fill" catalog="system"/>
+                                <state key="normal" backgroundImage="ruler" catalog="system"/>
                                 <connections>
-                                    <segue destination="avb-hL-30m" kind="push" id="J0Z-8f-k4x"/>
+                                    <segue destination="eU4-Da-GWO" kind="push" id="Fuw-4c-UqU"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GBj-4O-Whc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="4It-Iv-01H" secondAttribute="bottom" constant="10.666666666666629" id="2tq-lx-YrQ"/>
+                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="4It-Iv-01H" secondAttribute="bottom" constant="8.6666666666666288" id="2tq-lx-YrQ"/>
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="35g-18-nn3"/>
-                            <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="j8v-6q-UBb" secondAttribute="centerY" constant="-2" id="5XO-r9-Hyj"/>
+                            <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="j8v-6q-UBb" secondAttribute="centerY" id="5XO-r9-Hyj"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" constant="-15" id="6c1-k7-y99"/>
                             <constraint firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="6h6-BI-mhL"/>
                             <constraint firstItem="E6c-py-dvH" firstAttribute="top" secondItem="RLh-bf-1c3" secondAttribute="top" id="7gH-DS-Crg"/>
@@ -187,8 +176,6 @@
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="leading" secondItem="9e0-zv-RiN" secondAttribute="trailing" constant="15" id="MwJ-LS-qaQ"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="NdC-Ig-ZW6"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="Nov-Ar-ZZv"/>
-                            <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="8E5-Yv-rA0" secondAttribute="bottom" constant="8.6666666666666288" id="NrS-hO-Zru"/>
-                            <constraint firstItem="8E5-Yv-rA0" firstAttribute="leading" secondItem="SPB-Sb-hjO" secondAttribute="trailing" constant="17" id="OTO-fW-JJ0"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="centerX" secondItem="E6c-py-dvH" secondAttribute="centerX" id="SHv-Jn-H5B"/>
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" id="UMK-or-VVf"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" constant="20" id="V7S-nn-Lcz"/>
@@ -196,10 +183,10 @@
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="fjf-Mj-ALG"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" constant="15" id="iIf-WZ-kZj"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="lHd-lf-g1u"/>
-                            <constraint firstItem="SPB-Sb-hjO" firstAttribute="leading" secondItem="4It-Iv-01H" secondAttribute="trailing" constant="17" id="nW7-gq-BEs"/>
+                            <constraint firstItem="SPB-Sb-hjO" firstAttribute="leading" secondItem="4It-Iv-01H" secondAttribute="trailing" constant="-63" id="nW7-gq-BEs"/>
                             <constraint firstItem="xcf-ic-uGo" firstAttribute="leading" secondItem="RLh-bf-1c3" secondAttribute="leadingMargin" id="tCP-Yd-GSD"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="uvV-bc-TtK"/>
-                            <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="xcf-ic-uGo" secondAttribute="centerY" constant="-2" id="vPU-9e-B4O"/>
+                            <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="xcf-ic-uGo" secondAttribute="centerY" id="vPU-9e-B4O"/>
                             <constraint firstItem="j8v-6q-UBb" firstAttribute="trailing" secondItem="BgI-fb-Vqi" secondAttribute="trailing" id="vW7-nn-nn3"/>
                         </constraints>
                     </view>
@@ -268,7 +255,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ec-aW-Ht7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="587" y="783"/>
+            <point key="canvasLocation" x="995" y="815"/>
         </scene>
         <!--settingsViewController-->
         <scene sceneID="i51-5j-JLv">
@@ -578,40 +565,6 @@
             </objects>
             <point key="canvasLocation" x="-623.20000000000005" y="98.50074962518741"/>
         </scene>
-        <!--Get File Controller-->
-        <scene sceneID="l6G-Oz-JVE">
-            <objects>
-                <viewController id="avb-hL-30m" customClass="GetFileController" customModule="ARKitProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="LfF-79-JN0">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWx-Cq-vBu">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                            </arscnView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="BBe-Gc-8cD"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="dWx-Cq-vBu" firstAttribute="leading" secondItem="BBe-Gc-8cD" secondAttribute="leading" id="AGY-Zf-Jwx"/>
-                            <constraint firstItem="dWx-Cq-vBu" firstAttribute="leading" secondItem="BBe-Gc-8cD" secondAttribute="leading" id="Pz5-3F-GwU"/>
-                            <constraint firstAttribute="bottom" secondItem="dWx-Cq-vBu" secondAttribute="bottom" id="RLW-Qs-l8x"/>
-                            <constraint firstItem="dWx-Cq-vBu" firstAttribute="top" secondItem="LfF-79-JN0" secondAttribute="topMargin" constant="-88" id="eip-ue-hag"/>
-                            <constraint firstItem="dWx-Cq-vBu" firstAttribute="centerY" secondItem="LfF-79-JN0" secondAttribute="centerY" id="hfe-p9-za6"/>
-                            <constraint firstItem="dWx-Cq-vBu" firstAttribute="trailing" secondItem="BBe-Gc-8cD" secondAttribute="trailing" id="hpR-36-l38"/>
-                            <constraint firstItem="dWx-Cq-vBu" firstAttribute="centerX" secondItem="LfF-79-JN0" secondAttribute="centerX" id="k1d-37-Afo"/>
-                            <constraint firstItem="dWx-Cq-vBu" firstAttribute="top" secondItem="LfF-79-JN0" secondAttribute="top" id="pxT-9C-kEk"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="U6R-wj-cI6"/>
-                    <connections>
-                        <outlet property="scnView" destination="dWx-Cq-vBu" id="S1U-iw-Zlt"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Zp-jV-Orw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1369.6261682242989" y="782.72138228941685"/>
-        </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
@@ -621,7 +574,6 @@
         <image name="restart" width="20" height="23"/>
         <image name="restartPressed" width="20" height="23"/>
         <image name="ruler" catalog="system" width="128" height="57"/>
-        <image name="ruler.fill" catalog="system" width="128" height="57"/>
         <image name="settings" width="41" height="48"/>
         <image name="settingsPressed" width="41" height="48"/>
         <systemColor name="groupTableViewBackgroundColor">
