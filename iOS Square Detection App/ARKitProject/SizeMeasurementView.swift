@@ -10,6 +10,7 @@ import Foundation
 import ARKit
 import UIKit
 
+// MARK: - Size Measurement
 
 class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
@@ -40,7 +41,8 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    
+    // MARK: - Touch Began
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if doteNodes.count >= 2 {
             for dot in doteNodes{
@@ -64,6 +66,9 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
     }
     
     
+    
+    // MARK: - Add dot
+
     func addDot(at hitResult: ARRaycastResult) {
         let sphereScene = SCNSphere(radius: 0.01)
         
@@ -87,11 +92,35 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
         doteNodes.append(node)
         
         if doteNodes.count >= 2{
+            sceneView.scene.rootNode.addChildNode(lineBetweenNodes(positionA: doteNodes[0].position, positionB: doteNodes[1].position, inScene: self.sceneView.scene))
             calculate()
         }
     }
     
     
+    // MARK: - Draw lines
+    
+    func lineBetweenNodes(positionA: SCNVector3, positionB: SCNVector3, inScene: SCNScene) -> SCNNode {
+        let vector = SCNVector3(positionA.x - positionB.x, positionA.y - positionB.y, positionA.z - positionB.z)
+        let distance = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
+        let midPosition = SCNVector3 (x:(positionA.x + positionB.x) / 2, y:(positionA.y + positionB.y) / 2, z:(positionA.z + positionB.z) / 2)
+
+        let lineGeometry = SCNCylinder()
+        lineGeometry.radius = 0.0025
+        lineGeometry.height = CGFloat(distance)
+        lineGeometry.radialSegmentCount = 5
+        lineGeometry.firstMaterial!.diffuse.contents = UIColor.white
+
+        let lineNode = SCNNode(geometry: lineGeometry)
+        lineNode.position = midPosition
+        lineNode.look (at: positionB, up: inScene.rootNode.worldUp, localFront: lineNode.worldUp)
+        return lineNode
+    }
+    
+    
+    
+    // MARK: - Calculate distance
+
     func calculate() {
         let start = doteNodes[0]
         let end = doteNodes[1]
@@ -104,22 +133,45 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
                                 pow(start.position.z-end.position.z, 2))
         
         
-        updateText(text: "\(abs(distance))", atPosition: start.position)
+        updateText(text: "\(round(abs(distance)*100)) cm", atPosition: start.position)
     }
     
     
+    
+    
+    // MARK: - update TextNode
+
     func updateText(text: String, atPosition position: SCNVector3){
         textNode.removeFromParentNode()
         
-        let textGeometry = SCNText(string: text, extrusionDepth: 1.0)
-        
+        let textGeometry = SCNText(string: text, extrusionDepth: 0)
         textGeometry.firstMaterial?.diffuse.contents = UIColor.white
+//        textGeometry.containerFrame = CGRect(x: Double(position.x), y: Double(position.y), width: 5, height: 5)
         
         textNode = SCNNode(geometry: textGeometry)
-        
         textNode.position = SCNVector3(position.x, position.y + 0.01, position.z)
         
-        textNode.scale = SCNVector3(0.005, 0.005, 0.005)
+        textNode.scale = SCNVector3(0.0025, 0.0025, 0.0025)
+        
+        
+        
+        let minVec = textNode.boundingBox.min
+        let maxVec = textNode.boundingBox.max
+        let bound = SCNVector3Make(maxVec.x - minVec.x,
+                                   maxVec.y - minVec.y,
+                                   maxVec.z - minVec.z);
+
+        let plane = SCNPlane(width: CGFloat(bound.x + 1),
+                            height: CGFloat(bound.y + 1))
+        plane.cornerRadius = 0.2
+        plane.firstMaterial?.diffuse.contents = UIColor.black.withAlphaComponent(0.9)
+
+        let planeNode = SCNNode(geometry: plane)
+        planeNode.position = SCNVector3(CGFloat( minVec.x) + CGFloat(bound.x) / 2 ,
+                                        CGFloat( minVec.y) + CGFloat(bound.y) / 2,CGFloat(minVec.z - 0.01))
+
+        textNode.addChildNode(planeNode)
+        planeNode.name = "text"
         
         sceneView.scene.rootNode.addChildNode(textNode)
     }
