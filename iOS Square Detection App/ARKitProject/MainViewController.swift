@@ -511,7 +511,7 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
             // light node
             let lightNode = SCNNode()
             lightNode.light = light
-            lightNode.position = SCNVector3(object.position.x + 10, object.position.y + 30, object.position.z + 30)
+//            lightNode.position = SCNVector3(object.position.x + 10, object.position.y + 30, object.position.z + 30)
             lightNode.eulerAngles = SCNVector3(45.0,0,0)
             lightNode.constraints = [constraint]
             self.sceneView.scene.rootNode.addChildNode(lightNode)
