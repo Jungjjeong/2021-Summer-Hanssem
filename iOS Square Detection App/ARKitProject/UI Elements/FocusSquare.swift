@@ -8,10 +8,10 @@ import ARKit
 class FocusSquare: SCNNode {
 
 	// Original size of the focus square in m.
-	private let focusSquareSize: Float = 0.17
+	private let focusSquareSize: Float = 0.16
 
 	// Thickness of the focus square lines in m.
-	private let focusSquareThickness: Float = 0.018
+	private let focusSquareThickness: Float = 0.04
 
 	// Scale factor for the focus square when it is closed, w.r.t. the original size.
 	private let scaleForClosedSquare: Float = 0.97
@@ -23,8 +23,8 @@ class FocusSquare: SCNNode {
 	private let animationDuration = 0.7
 
 	// Color of the focus square
-    private let focusSquareColor = #colorLiteral(red: 1, green: 0.79804043, blue: 0, alpha: 1) // base yellow
-	private let focusSquareColorLight = #colorLiteral(red: 1, green: 1, blue: 0.5800960514, alpha: 1) // light yellow
+    private let focusSquareColor = #colorLiteral(red: 1, green: 1, blue: 0.5, alpha: 1) // base yellow
+	private let focusSquareColorLight = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) // light yellow
 
     // For scale adapdation based on the camera distance, see the `scaleBasedOnDistance(camera:)` method.
 	/////////////////////////////////////////////////
@@ -251,7 +251,7 @@ class FocusSquare: SCNNode {
 			let elapsedTimePercentage = elapsedTime / CGFloat(duration)
 			let saturation = 2.8 * (elapsedTimePercentage - 0.5) * (elapsedTimePercentage - 0.5) + 0.3
 			if let material = node.geometry?.firstMaterial {
-				material.diffuse.contents = UIColor(hue: 0.1333, saturation: saturation, brightness: 1.0, alpha: 1.0)
+				material.diffuse.contents = UIColor(hue: 0.1333, saturation: 0, brightness: 1.0, alpha: 1.0)
 			}
 		}
 		return action
