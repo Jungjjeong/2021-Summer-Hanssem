@@ -132,8 +132,9 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
                                 pow(start.position.y-end.position.y, 2) +
                                 pow(start.position.z-end.position.z, 2))
         
-        
-        updateText(text: "\(round(abs(distance)*100)) cm", atPosition: start.position)
+        let midPosition = SCNVector3 (x:(start.position.x + end.position.x) / 2, y:(start.position.y + end.position.y) / 2, z:(start.position.z + end.position.z) / 2)
+
+        updateText(text: "\(round(abs(distance)*100)) cm", atPosition: midPosition)
     }
     
     
@@ -149,9 +150,9 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
 //        textGeometry.containerFrame = CGRect(x: Double(position.x), y: Double(position.y), width: 5, height: 5)
         
         textNode = SCNNode(geometry: textGeometry)
-        textNode.position = SCNVector3(position.x, position.y + 0.01, position.z)
+        textNode.position = SCNVector3(position.x - 0.01, position.y + 0.002, position.z)
         
-        textNode.scale = SCNVector3(0.0025, 0.0025, 0.0025)
+        textNode.scale = SCNVector3(0.002, 0.002, 0.002)
         
         
         
@@ -161,14 +162,15 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
                                    maxVec.y - minVec.y,
                                    maxVec.z - minVec.z);
 
-        let plane = SCNPlane(width: CGFloat(bound.x + 1),
-                            height: CGFloat(bound.y + 1))
-        plane.cornerRadius = 0.2
-        plane.firstMaterial?.diffuse.contents = UIColor.black.withAlphaComponent(0.9)
+        let plane = SCNPlane(width: CGFloat(bound.x + 2.5),
+                             height: CGFloat(bound.y + 2.5))
+        plane.cornerRadius = 3
+        plane.firstMaterial?.diffuse.contents = UIColor.black
 
         let planeNode = SCNNode(geometry: plane)
         planeNode.position = SCNVector3(CGFloat( minVec.x) + CGFloat(bound.x) / 2 ,
-                                        CGFloat( minVec.y) + CGFloat(bound.y) / 2,CGFloat(minVec.z - 0.01))
+                                        CGFloat( minVec.y) + CGFloat(bound.y) / 2 ,
+                                        CGFloat(minVec.z - 0.01))
 
         textNode.addChildNode(planeNode)
         planeNode.name = "text"
