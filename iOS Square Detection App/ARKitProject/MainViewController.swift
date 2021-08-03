@@ -67,25 +67,6 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
     // ARSCNView는 SCNView 하위 class
     // Scenekit의 가상 3D contents를 ar화면 위에 띄워주는 viewer
 
-    // MARK: - Ambient Light Estimation
-//	func toggleAmbientLightEstimation(_ enabled: Bool) { // 조명 추적 여부 -> bool
-//        if enabled { // enabled -> true
-//			if !sessionConfig.isLightEstimationEnabled {
-//                print("조명 추적")
-//				sessionConfig.isLightEstimationEnabled = true
-//                sceneView.autoenablesDefaultLighting = true
-//				session.run(sessionConfig)
-//			}
-//        } else { // false
-//			if sessionConfig.isLightEstimationEnabled {
-//                print("조명 비추적")
-//				sessionConfig.isLightEstimationEnabled = false
-//                sceneView.autoenablesDefaultLighting = false
-//				session.run(sessionConfig)
-//			}
-//        }
-//    }
-
     // MARK: - Virtual Object Loading
 	var isLoadingObject: Bool = false { // 초기화 진행
 		didSet { // 값 변경된 직후에 수행
@@ -479,8 +460,24 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 	func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, object: VirtualObject) {
 		loadVirtualObject(object: object)
 	}
+    
+    
+    // init
+    func initializeNode(view : ARSCNView) {
+        print("-----------------\(view.scene.rootNode.childNodes)")
+        
+        view.scene.rootNode.childNodes { (node, stop) in
+            node.removeFromParentNode()
+            return true
+        }
+    }
+    
 
+    // loading
 	func loadVirtualObject(object: VirtualObject) { // Virtual Object loading
+        // node init
+        initializeNode(view: self.sceneView)
+        
 		// Show progress indicator
 		let spinner = UIActivityIndicatorView()
 		spinner.center = addObjectButton.center // addObejctButton 안 중간에 spinner bar가 생성된다.
@@ -488,8 +485,6 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 		addObjectButton.setImage(#imageLiteral(resourceName: "buttonring"), for: [])
 		sceneView.addSubview(spinner)
 		spinner.startAnimating()
-        
-        
         
         
 		DispatchQueue.global().async {
@@ -513,7 +508,6 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
             let constraint = SCNLookAtConstraint(target: object)
             
             
-            
             // light node
             let lightNode = SCNNode()
             lightNode.light = light
@@ -522,17 +516,6 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
             lightNode.constraints = [constraint]
             self.sceneView.scene.rootNode.addChildNode(lightNode)
             
-            // floor shadow node
-//            let flourPlane = SCNFloor()
-//            let groundPlane = SCNNode()
-//            groundPlane.geometry = flourPlane
-//
-//            self.sceneView.scene.rootNode.addChildNode(groundPlane)
-            
-
-            
-            
-
 
 
 			DispatchQueue.main.async {
@@ -550,6 +533,7 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 				self.addObjectButton.setImage(buttonImage, for: [])
 				self.addObjectButton.setImage(pressedButtonImage, for: [.highlighted])
 				self.isLoadingObject = false
+                self.setupFocusSquare()
 			}
 		}
 	}
@@ -654,7 +638,6 @@ extension MainViewController {
 																		  planeAnchor: ARPlaneAnchor?,
 																		  hitAPlane: Bool) {
         // 세계의 위치에 대한 현재 위치를 구한다!
-        
         
 		// -------------------------------------------------------------------------------
 		// 1.

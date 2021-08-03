@@ -23,8 +23,8 @@ class FocusSquare: SCNNode {
 	private let animationDuration = 0.7
 
 	// Color of the focus square
-    private let focusSquareColor = #colorLiteral(red: 1, green: 0.006844763772, blue: 0.1525276861, alpha: 1) // base yellow
-	private let focusSquareColorLight = #colorLiteral(red: 1, green: 0.6867772042, blue: 0.6643104007, alpha: 1) // light yellow
+    private let focusSquareColor = #colorLiteral(red: 1, green: 0.79804043, blue: 0, alpha: 1) // base yellow
+	private let focusSquareColorLight = #colorLiteral(red: 1, green: 1, blue: 0.5800960514, alpha: 1) // light yellow
 
     // For scale adapdation based on the camera distance, see the `scaleBasedOnDistance(camera:)` method.
 	/////////////////////////////////////////////////

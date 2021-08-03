@@ -215,7 +215,7 @@ extension SCNMaterial {
 		material.diffuse.contents = diffuse
 		material.isDoubleSided = true
 		if respondsToLighting {
-			material.locksAmbientWithDiffuse = true
+			material.locksAmbientWithDiffuse = false
 		} else {
 			material.ambient.contents = UIColor.black
 			material.lightingModel = .physicallyBased
@@ -603,7 +603,7 @@ func createCrossNode(size: CGFloat = 0.01, color: UIColor = UIColor.green,
 	let planeNode = SCNNode(geometry: createSquarePlane(size: planeDimension, contents: image))
 	if let material = planeNode.geometry?.firstMaterial {
 		material.ambient.contents = UIColor.black
-		material.lightingModel = .constant
+//		material.lightingModel = .constant
 	}
 
 	if horizontal {
