@@ -12,9 +12,13 @@ import UIKit
 
 // MARK: - Size Measurement
 
-class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+class SizeMeasurementView : UIViewController, ARSessionDelegate {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var addBtn : UIButton!
+    var screenCenter: CGPoint?
+    let session = ARSession() // ar scene의 고유 런타임 인스턴스 관리
+
+
     
     var doteNodes = [SCNNode]()
     var textNode = SCNNode()
@@ -28,6 +32,7 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
         sceneView.session.delegate = self
         sceneView.autoenablesDefaultLighting = true
         print("SizeMeasurementView")
+        setupFocusSquare()
         setupARView()
 //        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     }
@@ -35,17 +40,26 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
 //        let configuration = ARWorldTrackingConfiguration()
 //        configuration.planeDetection = [.horizontal, .vertical]
 //        sceneView.session.run(configuration)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIApplication.shared.isIdleTimerDisabled = true 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         sceneView.session.pause()
+        session.pause() // session 멈춘다.
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.isLightEstimationEnabled = true
     }
+    
     
     func setupARView() {
         self.addCoaching()
@@ -54,35 +68,36 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
         configuration.planeDetection = [.horizontal, .vertical]
         configuration.environmentTexturing = .automatic
         sceneView.session.run(configuration)
+        
+        DispatchQueue.main.async {
+            self.screenCenter = self.sceneView.bounds.mid // center setting
+        }
     }
     
-//    // MARK: - Touch Began
-//
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if doteNodes.count >= 2 {
-//            for dot in doteNodes{
-//                dot.removeFromParentNode()
-//            }
-//            textNode.removeFromParentNode()
-//            lineNode.removeFromParentNode()
-//            textNode = SCNNode()
-//            lineNode = SCNNode()
-//            doteNodes = [SCNNode]()
-//        }
-//
-//        if let touch = touches.first {
-//            let touchLocation = touch.location(in: sceneView)
-//
-//            let results = sceneView.raycastQuery(from: touchLocation, allowing: ARRaycastQuery.Target.estimatedPlane, alignment: .any)
-//
-//            if let hitRes = results {
-//                let rayCast = sceneView.session.raycast(hitRes)
-//
-//                guard let ray = rayCast.first else { return }
-//                addDot(at : ray)
-//            }
-//        }
-//    }
+    // MARK: - Focus Square
+    var focusSquare: FocusSquare?
+
+    func setupFocusSquare() {
+        focusSquare?.isHidden = true // 레이어가 숨겨지는지 여부 -> hide
+        focusSquare?.removeFromParentNode()
+        focusSquare = FocusSquare()
+        print("setupFocusSquare")
+        sceneView.scene.rootNode.addChildNode(focusSquare!) // 장면 위 Node에 focusSquare 붙인다.
+    }
+
+    func updateFocusSquare() {
+        guard let screenCenter = screenCenter else { return } // nil이면 return, nil이 아닐 시 screenCenter 할당
+        focusSquare?.unhide()
+        let (worldPos, planeAnchor, _) = MainViewController().worldPositionFromScreenPosition(screenCenter, objectPos: focusSquare?.position)
+        // position: SCNVector3?,planeAnchor: ARPlaneAnchor?,hitAPlane: Bool 반환
+        
+        print(worldPos)
+        if let worldPos = worldPos {
+            focusSquare?.update(for: worldPos, planeAnchor: planeAnchor, camera: self.session.currentFrame?.camera) // 해당 값으로 focusSquare 업데이트
+        }
+    }
+
+
     
     
     // MARK: - addButton Click
@@ -114,6 +129,12 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
         }
     }
 
+    
+    // MARK: - Add focus image
+
+    
+    
+    
     
     
     // MARK: - Add dot
@@ -265,5 +286,16 @@ extension SizeMeasurementView : ARCoachingOverlayViewDelegate {
         
         coachingOverlay.activatesAutomatically = true
         coachingOverlay.goal = .horizontalPlane
+    }
+}
+
+extension SizeMeasurementView : ARSCNViewDelegate {
+    // MARK: - ARSCNViewDelegate
+
+    private func renderer(_ renderer: SCNRenderer, updateAtTime time: TimeInterval) {
+        DispatchQueue.main.async {
+            print("renderer")
+            self.updateFocusSquare()
+        }
     }
 }

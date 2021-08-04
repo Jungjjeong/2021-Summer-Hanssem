@@ -50,8 +50,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 	override func viewWillDisappear(_ animated: Bool) { // view 사라지기 전
 		super.viewWillDisappear(animated)
 		session.pause() // session 멈춘다.
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.isLightEstimationEnabled = true
+        sceneView.scene.rootNode.removeFromParentNode()
 	}
 
     // MARK: - ARKit / ARSCNView
