@@ -12,33 +12,47 @@ import UIKit
 
 // MARK: - Size Measurement
 
-class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
+class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet var sceneView: ARSCNView!
     
     var doteNodes = [SCNNode]()
     var textNode = SCNNode()
+    var lineNode = SCNNode()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        sceneView.delegate = self
+
+        sceneView.session.delegate = self
         sceneView.autoenablesDefaultLighting = true
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        print("SizeMeasurementView")
+        setupARView()
+//        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let configuration = ARWorldTrackingConfiguration()
-        
-        sceneView.session.run(configuration)
+//        let configuration = ARWorldTrackingConfiguration()
+//        configuration.planeDetection = [.horizontal, .vertical]
+//        sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         sceneView.session.pause()
+    }
+    
+    func setupARView() {
+        self.addCoaching()
+        let configuration = ARWorldTrackingConfiguration()
+        
+        configuration.planeDetection = [.horizontal, .vertical]
+        configuration.environmentTexturing = .automatic
+        sceneView.session.run(configuration)
     }
     
     // MARK: - Touch Began
@@ -49,7 +63,9 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
                 dot.removeFromParentNode()
             }
             textNode.removeFromParentNode()
+            lineNode.removeFromParentNode()
             textNode = SCNNode()
+            lineNode = SCNNode()
             doteNodes = [SCNNode]()
         }
         
@@ -113,7 +129,7 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
         lineGeometry.radialSegmentCount = 5
         lineGeometry.firstMaterial!.diffuse.contents = UIColor.white
 
-        let lineNode = SCNNode(geometry: lineGeometry)
+        lineNode = SCNNode(geometry: lineGeometry)
         lineNode.position = midPosition
         lineNode.look (at: positionB, up: inScene.rootNode.worldUp, localFront: lineNode.worldUp)
         return lineNode
@@ -178,5 +194,49 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate {
         planeNode.name = "text"
         
         sceneView.scene.rootNode.addChildNode(textNode)
+        print("text")
+    }
+    
+    
+    
+    // MARK: - initialize Button
+
+    @IBOutlet weak var trashBtn : UIButton!
+    
+    @IBAction func initialize (_ button: UIButton) {
+        for dot in doteNodes{
+            dot.removeFromParentNode()
+        }
+        textNode.removeFromParentNode()
+        lineNode.removeFromParentNode()
+        textNode = SCNNode()
+        lineNode = SCNNode()
+        doteNodes = [SCNNode]()
+    }
+    
+}
+
+
+    // MARK: - Coaching overlay view
+
+
+extension SizeMeasurementView : ARCoachingOverlayViewDelegate {
+    func addCoaching() {
+        let coachingOverlay = ARCoachingOverlayView()
+        coachingOverlay.delegate = self
+        coachingOverlay.session = sceneView.session
+        coachingOverlay.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
+        sceneView.addSubview(coachingOverlay)
+        
+        NSLayoutConstraint.activate([
+            coachingOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            coachingOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            coachingOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
+            coachingOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
+            ])
+        
+        coachingOverlay.activatesAutomatically = true
+        coachingOverlay.goal = .horizontalPlane
     }
 }

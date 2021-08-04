@@ -268,24 +268,40 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V5Q-z5-W8x">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhz-iA-DBk" userLabel="Add Object Button">
+                                <rect key="frame" x="365" y="103" width="48" height="46.666666666666671"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="1TX-0r-Qot"/>
+                                    <constraint firstAttribute="width" constant="48" id="qOq-OC-vgW"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="trash.circle.fill" catalog="system">
+                                    <color key="titleColor" red="0.85882352939999995" green="0.72941176470000002" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="initialize:" destination="P6F-vV-ggi" eventType="touchUpInside" id="M6h-0f-lPy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bxn-HQ-epV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bxn-HQ-epV" firstAttribute="trailing" secondItem="xhz-iA-DBk" secondAttribute="trailing" constant="15" id="Tus-Nk-OTI"/>
                             <constraint firstItem="V5Q-z5-W8x" firstAttribute="top" secondItem="kHB-NK-NzP" secondAttribute="topMargin" constant="-88" id="eTJ-lR-Aqq"/>
                             <constraint firstItem="V5Q-z5-W8x" firstAttribute="leading" secondItem="bxn-HQ-epV" secondAttribute="leading" id="hHM-Uf-5Ja"/>
                             <constraint firstItem="V5Q-z5-W8x" firstAttribute="centerY" secondItem="kHB-NK-NzP" secondAttribute="centerY" id="hLI-m0-DMi"/>
                             <constraint firstItem="V5Q-z5-W8x" firstAttribute="centerX" secondItem="kHB-NK-NzP" secondAttribute="centerX" id="jTe-zb-Q6K"/>
+                            <constraint firstItem="xhz-iA-DBk" firstAttribute="top" secondItem="bxn-HQ-epV" secondAttribute="top" constant="14" id="nCA-ak-NOM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="s7d-MY-oIV"/>
                     <connections>
                         <outlet property="sceneView" destination="V5Q-z5-W8x" id="Yl3-h0-FhY"/>
+                        <outlet property="trashBtn" destination="xhz-iA-DBk" id="DeM-e5-5vY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9EW-8g-TUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="995" y="796"/>
+            <point key="canvasLocation" x="993.92523364485976" y="795.68034557235421"/>
         </scene>
         <!--settingsViewController-->
         <scene sceneID="i51-5j-JLv">
@@ -629,6 +645,7 @@
         <image name="ruler" catalog="system" width="128" height="57"/>
         <image name="settings" width="41" height="48"/>
         <image name="settingsPressed" width="41" height="48"/>
+        <image name="trash.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
