@@ -14,6 +14,7 @@ import UIKit
 
 class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var addBtn : UIButton!
     
     var doteNodes = [SCNNode]()
     var textNode = SCNNode()
@@ -55,9 +56,39 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
         sceneView.session.run(configuration)
     }
     
-    // MARK: - Touch Began
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    // MARK: - Touch Began
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if doteNodes.count >= 2 {
+//            for dot in doteNodes{
+//                dot.removeFromParentNode()
+//            }
+//            textNode.removeFromParentNode()
+//            lineNode.removeFromParentNode()
+//            textNode = SCNNode()
+//            lineNode = SCNNode()
+//            doteNodes = [SCNNode]()
+//        }
+//
+//        if let touch = touches.first {
+//            let touchLocation = touch.location(in: sceneView)
+//
+//            let results = sceneView.raycastQuery(from: touchLocation, allowing: ARRaycastQuery.Target.estimatedPlane, alignment: .any)
+//
+//            if let hitRes = results {
+//                let rayCast = sceneView.session.raycast(hitRes)
+//
+//                guard let ray = rayCast.first else { return }
+//                addDot(at : ray)
+//            }
+//        }
+//    }
+    
+    
+    // MARK: - addButton Click
+    
+    @IBAction func addAnchor(_ button : UIButton) {
+        
         if doteNodes.count >= 2 {
             for dot in doteNodes{
                 dot.removeFromParentNode()
@@ -68,27 +99,27 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
             lineNode = SCNNode()
             doteNodes = [SCNNode]()
         }
-        
-        if let touch = touches.first {
-            let touchLocation = touch.location(in: sceneView)
-            
-            let results = sceneView.raycastQuery(from: touchLocation, allowing: ARRaycastQuery.Target.estimatedPlane, alignment: .any)
-            
-            if let hitRes = results {
-                let rayCast = sceneView.session.raycast(hitRes)
-                
-                guard let ray = rayCast.first else { return }
-                addDot(at : ray)
-            }
-        }
+        // 클릭하면 화면 중앙의 앵커가 저장 -> addDot로 연결
+        ExistPlanes()
     }
     
+    func ExistPlanes() {
+        let results = sceneView.raycastQuery(from: view.center, allowing: ARRaycastQuery.Target.estimatedPlane, alignment: .any)
+        
+        if let hisRes = results {
+            let rayCast = sceneView.session.raycast(hisRes)
+            
+            guard let ray = rayCast.first else { return }
+            addDot(at: ray)
+        }
+    }
+
     
     
     // MARK: - Add dot
 
     func addDot(at hitResult: ARRaycastResult) {
-        let sphereScene = SCNSphere(radius: 0.01)
+        let sphereScene = SCNSphere(radius: 0.007)
         
         let material = SCNMaterial()
         
@@ -152,7 +183,7 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
         
         let midPosition = SCNVector3 (x:(start.position.x + end.position.x) / 2, y:(start.position.y + end.position.y) / 2, z:(start.position.z + end.position.z) / 2)
 
-        updateText(text: "\(round(abs(distance)*100)) cm", atPosition: midPosition)
+        updateText(text: "\(round(abs(distance)*10000)/100) cm", atPosition: midPosition)
     }
     
     
@@ -161,17 +192,13 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
     // MARK: - update TextNode
 
     func updateText(text: String, atPosition position: SCNVector3){
-        textNode.removeFromParentNode()
-        
         let textGeometry = SCNText(string: text, extrusionDepth: 0)
-        textGeometry.firstMaterial?.diffuse.contents = UIColor.white
-//        textGeometry.containerFrame = CGRect(x: Double(position.x), y: Double(position.y), width: 5, height: 5)
+        textGeometry.firstMaterial?.diffuse.contents = UIColor.black
         
         textNode = SCNNode(geometry: textGeometry)
         textNode.position = SCNVector3(position.x - 0.01, position.y + 0.002, position.z)
         
-        textNode.scale = SCNVector3(0.002, 0.002, 0.002)
-        
+        textNode.scale = SCNVector3(0.0018, 0.0018, 0.0018)
         
         
         let minVec = textNode.boundingBox.min
@@ -180,15 +207,15 @@ class SizeMeasurementView : UIViewController, ARSCNViewDelegate, ARSessionDelega
                                    maxVec.y - minVec.y,
                                    maxVec.z - minVec.z);
 
-        let plane = SCNPlane(width: CGFloat(bound.x + 2.5),
-                             height: CGFloat(bound.y + 2.5))
-        plane.cornerRadius = 3
-        plane.firstMaterial?.diffuse.contents = UIColor.black
+        let plane = SCNPlane(width: CGFloat(bound.x + 3.5),
+                             height: CGFloat(bound.y + 3.5))
+        plane.cornerRadius = 3.5
+        plane.firstMaterial?.diffuse.contents = UIColor.white
 
         let planeNode = SCNNode(geometry: plane)
         planeNode.position = SCNVector3(CGFloat( minVec.x) + CGFloat(bound.x) / 2 ,
                                         CGFloat( minVec.y) + CGFloat(bound.y) / 2 ,
-                                        CGFloat(minVec.z - 0.01))
+                                        CGFloat( minVec.z - 0.01))
 
         textNode.addChildNode(planeNode)
         planeNode.name = "text"
@@ -234,7 +261,7 @@ extension SizeMeasurementView : ARCoachingOverlayViewDelegate {
             coachingOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             coachingOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
             coachingOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
-            ])
+        ])
         
         coachingOverlay.activatesAutomatically = true
         coachingOverlay.goal = .horizontalPlane
