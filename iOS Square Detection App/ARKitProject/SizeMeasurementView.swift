@@ -25,6 +25,8 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
     var textNode = SCNNode()
     var lineNode = SCNNode()
     
+//    let midPosition : SCNVector3
+    
     
     
     override func viewDidLoad() {
@@ -48,8 +50,6 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         //------------------------------------
         // Set the view's delegate
         sceneView.delegate = self
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
         // Set the scene to the view
         sceneView.scene = scene
     }
@@ -64,7 +64,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         material.isDoubleSided = false
         material.locksAmbientWithDiffuse = true
         material.diffuse.contents = UIImage(named: "Models.scnassets/focus.png")
-        material.specular.contents = UIColor(white: 0.6, alpha: 1.0) // 빛반사
+        material.specular.contents = UIColor(white: 0.8, alpha: 1.0) // 빛반사
         
         let boxNode = SCNNode(geometry: boxGeometry)
         boxNode.geometry?.materials = [material]
@@ -138,7 +138,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
     // MARK: - Add dot
 
     func addDot(at hitResult: ARRaycastResult) {
-        let sphereScene = SCNSphere(radius: 0.007)
+        let sphereScene = SCNSphere(radius: 0.005)
         
         let material = SCNMaterial()
         
@@ -161,8 +161,8 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         doteNodes.append(node)
         
         if doteNodes.count >= 2{
-            sceneView.scene.rootNode.addChildNode(lineBetweenNodes(positionA: doteNodes[0].position, positionB: doteNodes[1].position, inScene: self.sceneView.scene))
             calculate()
+            sceneView.scene.rootNode.addChildNode(lineBetweenNodes(positionA: doteNodes[0].position, positionB: doteNodes[1].position, inScene: self.sceneView.scene))
         }
     }
     
@@ -175,7 +175,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         let midPosition = SCNVector3 (x:(positionA.x + positionB.x) / 2, y:(positionA.y + positionB.y) / 2, z:(positionA.z + positionB.z) / 2)
 
         let lineGeometry = SCNCylinder()
-        lineGeometry.radius = 0.0025
+        lineGeometry.radius = 0.003
         lineGeometry.height = CGFloat(distance)
         lineGeometry.radialSegmentCount = 5
         lineGeometry.firstMaterial!.diffuse.contents = UIColor.white
@@ -203,7 +203,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         
         let midPosition = SCNVector3 (x:(start.position.x + end.position.x) / 2, y:(start.position.y + end.position.y) / 2, z:(start.position.z + end.position.z) / 2)
 
-        updateText(text: "\(round(abs(distance)*10000)/100) cm", atPosition: midPosition)
+        updateText(text: "\(round(abs(distance)*1000)/10) cm", atPosition: midPosition)
     }
     
     
@@ -215,10 +215,11 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         let textGeometry = SCNText(string: text, extrusionDepth: 0)
         textGeometry.firstMaterial?.diffuse.contents = UIColor.black
         
+        
         textNode = SCNNode(geometry: textGeometry)
         textNode.position = SCNVector3(position.x - 0.01, position.y + 0.002, position.z)
         
-        textNode.scale = SCNVector3(0.0018, 0.0018, 0.0018)
+        textNode.scale = SCNVector3(0.0017, 0.0017, 0.0017)
         
         
         let minVec = textNode.boundingBox.min
@@ -227,8 +228,8 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
                                    maxVec.y - minVec.y,
                                    maxVec.z - minVec.z);
 
-        let plane = SCNPlane(width: CGFloat(bound.x + 3.5),
-                             height: CGFloat(bound.y + 3.5))
+        let plane = SCNPlane(width: CGFloat(bound.x + 4),
+                             height: CGFloat(bound.y + 4))
         plane.cornerRadius = 3.5
         plane.firstMaterial?.diffuse.contents = UIColor.white
 
@@ -238,7 +239,6 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
                                         CGFloat( minVec.z - 0.01))
 
         textNode.addChildNode(planeNode)
-        planeNode.name = "text"
         
         sceneView.scene.rootNode.addChildNode(textNode)
         print("text")
@@ -278,8 +278,9 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         if let boxNode = self.boxNode{
             boxNode.position = currentPositionOfCamera
         }
-        
-//        self.updateScaleFromCameraForNodes(self.sceneView.scene.rootNode.childNodes, fromPointOfView: pointOfView, useScaling: true)
+//        self.updateScaleFromCameraForText(textNode, fromPointOfView: pointOfView, useScaling: true)
+        self.updateScaleFromCameraForNodes(doteNodes, fromPointOfView: pointOfView, useScaling: true)
+        self.updateScaleFromCameraForLine(lineNode, fromPointOfView: pointOfView, useScaling: true)
 //        SCNTransaction.commit()
     }
     
@@ -289,24 +290,58 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
     }
     
     
+    
+    // MARK: - Update Scale
+
     func updateScaleFromCameraForNodes(_ nodes: [SCNNode], fromPointOfView pointOfView: SCNNode, useScaling: Bool) {
         nodes.forEach { (node) in
             //1. Get The Current Position Of The Node
             let positionOfNode = SCNVector3ToGLKVector3(node.worldPosition)
-
             //2. Get The Current Position Of The Camera
             let positionOfCamera = SCNVector3ToGLKVector3(pointOfView.worldPosition)
-
             //3. Calculate The Distance From The Node To The Camera
             let distanceBetweenNodeAndCamera = GLKVector3Distance(positionOfNode, positionOfCamera)
 
-            let a = distanceBetweenNodeAndCamera*1.75
+            let a = distanceBetweenNodeAndCamera * 2
             if(useScaling) {
                 node.simdScale = simd_float3(a,a,a)
             }
         }
         SCNTransaction.flush()
     }
+    
+    
+    
+    func updateScaleFromCameraForLine(_ node: SCNNode, fromPointOfView pointOfView: SCNNode, useScaling: Bool) {
+        //1. Get The Current Position Of The Node
+        let positionOfNode = SCNVector3ToGLKVector3(node.worldPosition)
+        //2. Get The Current Position Of The Camera
+        let positionOfCamera = SCNVector3ToGLKVector3(pointOfView.worldPosition)
+        //3. Calculate The Distance From The Node To The Camera
+        let distanceBetweenNodeAndCamera = GLKVector3Distance(positionOfNode, positionOfCamera)
+
+        let a = distanceBetweenNodeAndCamera * 2
+        if(useScaling) {
+            node.simdScale = simd_float3(a,1,a)
+        }
+        SCNTransaction.flush()
+    }
+    
+    
+//    func updateScaleFromCameraForText(_ node: SCNNode, fromPointOfView pointOfView: SCNNode, useScaling: Bool) {
+//        //1. Get The Current Position Of The Node
+//        let positionOfNode = SCNVector3ToGLKVector3(node.worldPosition)
+//        //2. Get The Current Position Of The Camera
+//        let positionOfCamera = SCNVector3ToGLKVector3(pointOfView.worldPosition)
+//        //3. Calculate The Distance From The Node To The Camera
+//        let distanceBetweenNodeAndCamera = GLKVector3Distance(positionOfNode, positionOfCamera)
+//
+//        let a = distanceBetweenNodeAndCamera * 2
+//        if(useScaling) {
+//            node.simdScale = simd_float3(a,a,a)
+//        }
+//        SCNTransaction.flush()
+//    }
 }
 
 
