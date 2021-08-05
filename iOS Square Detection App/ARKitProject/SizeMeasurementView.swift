@@ -142,6 +142,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         
         let material = SCNMaterial()
         
+        material.locksAmbientWithDiffuse = false
         material.diffuse.contents = UIColor.white
         sphereScene.materials = [material]
         
@@ -273,14 +274,38 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         let location = SCNVector3(transform.m41, transform.m42, transform.m43) // 위치
         
         let currentPositionOfCamera = SizeMeasurementView.plus(left: orientation , right: location)
+//        SCNTransaction.begin()
         if let boxNode = self.boxNode{
             boxNode.position = currentPositionOfCamera
         }
+        
+//        self.updateScaleFromCameraForNodes(self.sceneView.scene.rootNode.childNodes, fromPointOfView: pointOfView, useScaling: true)
+//        SCNTransaction.commit()
     }
     
     
     static func plus (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
         return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
+    }
+    
+    
+    func updateScaleFromCameraForNodes(_ nodes: [SCNNode], fromPointOfView pointOfView: SCNNode, useScaling: Bool) {
+        nodes.forEach { (node) in
+            //1. Get The Current Position Of The Node
+            let positionOfNode = SCNVector3ToGLKVector3(node.worldPosition)
+
+            //2. Get The Current Position Of The Camera
+            let positionOfCamera = SCNVector3ToGLKVector3(pointOfView.worldPosition)
+
+            //3. Calculate The Distance From The Node To The Camera
+            let distanceBetweenNodeAndCamera = GLKVector3Distance(positionOfNode, positionOfCamera)
+
+            let a = distanceBetweenNodeAndCamera*1.75
+            if(useScaling) {
+                node.simdScale = simd_float3(a,a,a)
+            }
+        }
+        SCNTransaction.flush()
     }
 }
 
