@@ -54,6 +54,8 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         sceneView.scene = scene
     }
     
+    // MARK: - CreateBox
+    
     
     func createBox() -> SCNNode {
         let boxGeometry = SCNBox(width: 0.2, height: 0, length: 0.2, chamferRadius: 0)
@@ -99,35 +101,6 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         configuration.isLightEstimationEnabled = true
     }
     
-
-    
-    // MARK: - Focus Screen center
-    
-    
-    
-//    var focusSquare: FocusSquare?
-//
-//    func setupFocusSquare() {
-//        focusSquare?.isHidden = true // 레이어가 숨겨지는지 여부 -> hide
-//        focusSquare?.removeFromParentNode()
-//        focusSquare = FocusSquare()
-//        print(focusSquare)
-//        print("setupFocusSquare")
-//        sceneView.scene.rootNode.addChildNode(focusSquare!) // 장면 위 Node에 focusSquare 붙인다.
-//    }
-//
-//    func updateFocusSquare() {
-//        guard let screenCenter = self.screenCenter else { return } // nil이면 return, nil이 아닐 시 screenCenter 할당
-//        focusSquare?.unhide()
-//        let (worldPos, planeAnchor, _) = MainViewController().worldPositionFromScreenPosition(screenCenter, objectPos: focusSquare?.position)
-//        // position: SCNVector3?,planeAnchor: ARPlaneAnchor?,hitAPlane: Bool 반환
-//
-//        print(worldPos)
-//        if let worldPos = worldPos {
-//            focusSquare?.update(for: worldPos, planeAnchor: planeAnchor, camera: self.session.currentFrame?.camera) // 해당 값으로 focusSquare 업데이트
-//        }
-//    }
-//
 
     
     
@@ -294,9 +267,10 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
     
     func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
         guard let pointOfView = sceneView.pointOfView else {return}
-        let transform = pointOfView.transform
-        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        let transform = pointOfView.transform // 변화
+        
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33) // 방향
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43) // 위치
         
         let currentPositionOfCamera = SizeMeasurementView.plus(left: orientation , right: location)
         if let boxNode = self.boxNode{
@@ -336,14 +310,3 @@ extension SizeMeasurementView : ARCoachingOverlayViewDelegate {
     
     
 }
-
-//extension SizeMeasurementView : ARSCNViewDelegate {
-//    // MARK: - ARSCNViewDelegate
-//
-//    private func renderer(_ renderer: SCNRenderer, updateAtTime time: TimeInterval) {
-//        DispatchQueue.main.async {
-//            print("renderer")
-//            self.updateFocusSquare()
-//        }
-//    }
-//}
