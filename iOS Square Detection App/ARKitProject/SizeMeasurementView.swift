@@ -12,10 +12,11 @@ import UIKit
 
 // MARK: - Size Measurement
 
-class SizeMeasurementView : UIViewController, ARSessionDelegate {
+class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var addBtn : UIButton!
     var screenCenter: CGPoint?
+    var boxNode: SCNNode?
     let session = ARSession() // ar scene의 고유 런타임 인스턴스 관리
 
 
@@ -32,17 +33,55 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate {
         sceneView.session.delegate = self
         sceneView.autoenablesDefaultLighting = true
         print("SizeMeasurementView")
-        setupFocusSquare()
-        setupARView()
+//        setupFocusSquare()
 //        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        
+        
+        let scene = SCNScene()
+
+        let boxNode = createBox()
+        scene.rootNode.addChildNode(boxNode)
+        self.boxNode = boxNode
+
+        sceneView.scene = scene
+
+        //------------------------------------
+        // Set the view's delegate
+        sceneView.delegate = self
+        // Show statistics such as fps and timing information
+        sceneView.showsStatistics = true
+        // Set the scene to the view
+        sceneView.scene = scene
+    }
+    
+    
+    func createBox() -> SCNNode {
+        let boxGeometry = SCNBox(width: 0.2, height: 0, length: 0.2, chamferRadius: 0)
+        
+        let material = SCNMaterial()
+        material.isDoubleSided = false
+        material.locksAmbientWithDiffuse = true
+        material.diffuse.contents = UIImage(named: "Models.scnassets/focus.png")
+        material.specular.contents = UIColor(white: 0.6, alpha: 1.0) // 빛반사
+        
+        let boxNode = SCNNode(geometry: boxGeometry)
+        boxNode.geometry?.materials = [material]
+        
+        return boxNode
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.addCoaching()
 //        let configuration = ARWorldTrackingConfiguration()
 //        configuration.planeDetection = [.horizontal, .vertical]
 //        sceneView.session.run(configuration)
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = [.horizontal, .vertical]
+        
+        sceneView.session.run(configuration)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,43 +99,35 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate {
         configuration.isLightEstimationEnabled = true
     }
     
+
     
-    func setupARView() {
-        self.addCoaching()
-        let configuration = ARWorldTrackingConfiguration()
-        
-        configuration.planeDetection = [.horizontal, .vertical]
-        configuration.environmentTexturing = .automatic
-        sceneView.session.run(configuration)
-        
-        DispatchQueue.main.async {
-            self.screenCenter = self.sceneView.bounds.mid // center setting
-        }
-    }
+    // MARK: - Focus Screen center
     
-    // MARK: - Focus Square
-    var focusSquare: FocusSquare?
-
-    func setupFocusSquare() {
-        focusSquare?.isHidden = true // 레이어가 숨겨지는지 여부 -> hide
-        focusSquare?.removeFromParentNode()
-        focusSquare = FocusSquare()
-        print("setupFocusSquare")
-        sceneView.scene.rootNode.addChildNode(focusSquare!) // 장면 위 Node에 focusSquare 붙인다.
-    }
-
-    func updateFocusSquare() {
-        guard let screenCenter = screenCenter else { return } // nil이면 return, nil이 아닐 시 screenCenter 할당
-        focusSquare?.unhide()
-        let (worldPos, planeAnchor, _) = MainViewController().worldPositionFromScreenPosition(screenCenter, objectPos: focusSquare?.position)
-        // position: SCNVector3?,planeAnchor: ARPlaneAnchor?,hitAPlane: Bool 반환
-        
-        print(worldPos)
-        if let worldPos = worldPos {
-            focusSquare?.update(for: worldPos, planeAnchor: planeAnchor, camera: self.session.currentFrame?.camera) // 해당 값으로 focusSquare 업데이트
-        }
-    }
-
+    
+    
+//    var focusSquare: FocusSquare?
+//
+//    func setupFocusSquare() {
+//        focusSquare?.isHidden = true // 레이어가 숨겨지는지 여부 -> hide
+//        focusSquare?.removeFromParentNode()
+//        focusSquare = FocusSquare()
+//        print(focusSquare)
+//        print("setupFocusSquare")
+//        sceneView.scene.rootNode.addChildNode(focusSquare!) // 장면 위 Node에 focusSquare 붙인다.
+//    }
+//
+//    func updateFocusSquare() {
+//        guard let screenCenter = self.screenCenter else { return } // nil이면 return, nil이 아닐 시 screenCenter 할당
+//        focusSquare?.unhide()
+//        let (worldPos, planeAnchor, _) = MainViewController().worldPositionFromScreenPosition(screenCenter, objectPos: focusSquare?.position)
+//        // position: SCNVector3?,planeAnchor: ARPlaneAnchor?,hitAPlane: Bool 반환
+//
+//        print(worldPos)
+//        if let worldPos = worldPos {
+//            focusSquare?.update(for: worldPos, planeAnchor: planeAnchor, camera: self.session.currentFrame?.camera) // 해당 값으로 focusSquare 업데이트
+//        }
+//    }
+//
 
     
     
@@ -129,13 +160,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate {
         }
     }
 
-    
-    // MARK: - Add focus image
 
-    
-    
-    
-    
     
     // MARK: - Add dot
 
@@ -262,6 +287,27 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate {
         doteNodes = [SCNNode]()
     }
     
+    
+    
+    
+    // MARK: - Renderer
+    
+    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        guard let pointOfView = sceneView.pointOfView else {return}
+        let transform = pointOfView.transform
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        
+        let currentPositionOfCamera = SizeMeasurementView.plus(left: orientation , right: location)
+        if let boxNode = self.boxNode{
+            boxNode.position = currentPositionOfCamera
+        }
+    }
+    
+    
+    static func plus (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
+        return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
+    }
 }
 
 
@@ -287,15 +333,17 @@ extension SizeMeasurementView : ARCoachingOverlayViewDelegate {
         coachingOverlay.activatesAutomatically = true
         coachingOverlay.goal = .horizontalPlane
     }
+    
+    
 }
 
-extension SizeMeasurementView : ARSCNViewDelegate {
-    // MARK: - ARSCNViewDelegate
-
-    private func renderer(_ renderer: SCNRenderer, updateAtTime time: TimeInterval) {
-        DispatchQueue.main.async {
-            print("renderer")
-            self.updateFocusSquare()
-        }
-    }
-}
+//extension SizeMeasurementView : ARSCNViewDelegate {
+//    // MARK: - ARSCNViewDelegate
+//
+//    private func renderer(_ renderer: SCNRenderer, updateAtTime time: TimeInterval) {
+//        DispatchQueue.main.async {
+//            print("renderer")
+//            self.updateFocusSquare()
+//        }
+//    }
+//}

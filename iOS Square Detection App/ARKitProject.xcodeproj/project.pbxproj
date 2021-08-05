@@ -64,7 +64,6 @@
 		E778840526B90F2200864B34 /* SizeMeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeMeasurementView.swift; sourceTree = "<group>"; };
 		E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
 		E791A4DA26BA5ADE001A4D75 /* MeasurementPlaneNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementPlaneNode.swift; sourceTree = "<group>"; };
-		E791A4DC26BA6BB8001A4D75 /* focus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = focus.png; sourceTree = "<group>"; };
 		E7963A9326A8FDB600BDF22D /* Teapot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teapot.swift; sourceTree = "<group>"; };
 		E79813A626B3861300712D98 /* AirForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirForce.swift; sourceTree = "<group>"; };
 		E79813A826B3D9A600712D98 /* fender_stratocaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fender_stratocaster.swift; sourceTree = "<group>"; };
@@ -84,7 +83,6 @@
 		113B64D01ECA81CA0071CBD1 /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
-				E791A4DC26BA6BB8001A4D75 /* focus.png */,
 				E791A4DA26BA5ADE001A4D75 /* MeasurementPlaneNode.swift */,
 				C42A71BC1E9C0AF200944367 /* FocusSquare.swift */,
 				3987BEDB1E9E057F00167FAC /* Gesture.swift */,
