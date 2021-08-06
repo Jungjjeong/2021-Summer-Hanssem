@@ -52,9 +52,10 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         let object = asset.object(at: 0)
         
         let node = SCNNode.init(mdlObject: object)
-        if modelName == "Teapot" || modelName == "AirForce" || modelName == "fender_stratocaster" {
+        if modelName == "Teapot" || modelName == "AirForce" || modelName == "fender_stratocaster" || modelName == "hanssemchair01" {
             node.scale = SCNVector3(0.01, 0.01, 0.01)
         }
+
         self.addChildNode(node)
         
         downloadSceneTask(type: false)
