@@ -67,7 +67,10 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         let object = asset.object(at: 0)
         
         let node = SCNNode.init(mdlObject: object)
-        node.scale = SCNVector3(0.01, 0.01, 0.01)
+        if modelName == "Teapot" || modelName == "AirForce" || modelName == "fender_stratocaster" {
+            node.scale = SCNVector3(0.01, 0.01, 0.01)
+        }
+//        node.scale = SCNVector3(0.01, 0.01, 0.01)
         self.addChildNode(node)
         
         
@@ -113,6 +116,9 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
             case "fender_stratocaster":
                 print("fender_stratocaster")
                 url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/stratocaster/fender_stratocaster.usdz")!
+            case "moa_rose" :
+                print("moa_rose")
+                url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/raw/main/models/moa_rose.usdz")!
             default:
                 print("Default")
                 url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!

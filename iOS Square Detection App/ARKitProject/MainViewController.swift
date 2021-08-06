@@ -533,12 +533,12 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 				spinner.removeFromSuperview()
                 // spinner remove
 				// Update the icon of the add object button
-				let buttonImage = UIImage.composeButtonImage(from: object.thumbImage)
-				let pressedButtonImage = UIImage.composeButtonImage(from: object.thumbImage, alpha: 0.3)
-				self.addObjectButton.setImage(buttonImage, for: [])
-				self.addObjectButton.setImage(pressedButtonImage, for: [.highlighted])
 				self.isLoadingObject = false
                 self.setupFocusSquare()
+                let buttonImage = UIImage.composeButtonImage(from: object.thumbImage)
+                let pressedButtonImage = UIImage.composeButtonImage(from: object.thumbImage, alpha: 0.3)
+                self.addObjectButton.setImage(buttonImage, for: [])
+                self.addObjectButton.setImage(pressedButtonImage, for: [.highlighted])
 			}
 		}
 	}
