@@ -41,41 +41,41 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         print("---------------------Start loadModel function")
 //        print("VirtualObject - loadModel function")
 
-        if modelName != "Hanssem_chair03"{
-            downloadSceneTask(type: true)
-            
-            let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
-            
-            let asset = MDLAsset(url: downloadedScenePath)
-            asset.loadTextures()
-            
-            let object = asset.object(at: 0)
-            
-            let node = SCNNode.init(mdlObject: object)
-            if modelName == "Teapot" || modelName == "AirForce" || modelName == "fender_stratocaster" {
-                node.scale = SCNVector3(0.01, 0.01, 0.01)
-            }
-            self.addChildNode(node)
-            
-            downloadSceneTask(type: false)
-            print("finish \(modelName)downloadTask func")
+//        if modelName != "Hanssem_chair03"{
+        downloadSceneTask(type: true)
+        
+        let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
+        
+        let asset = MDLAsset(url: downloadedScenePath)
+        asset.loadTextures()
+        
+        let object = asset.object(at: 0)
+        
+        let node = SCNNode.init(mdlObject: object)
+        if modelName == "Teapot" || modelName == "AirForce" || modelName == "fender_stratocaster" {
+            node.scale = SCNVector3(0.01, 0.01, 0.01)
         }
-        else {
-            guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)", inDirectory: "Models.scnassets/") else {
-                print("모델을 찾지 못해 return.")
-                return
-            }
-            let wrapperNode = SCNNode()
-
-//            let scale = 0.01
-//            virtualObjectScene.rootNode.scale = SCNVector3(scale, scale, scale)
-
-            wrapperNode.addChildNode(virtualObjectScene.rootNode)
-            self.addChildNode(wrapperNode)
-            print("--------------------------\(self)") // Virtual object root node
-            modelLoaded = true
-            print(modelName)
-        }
+        self.addChildNode(node)
+        
+        downloadSceneTask(type: false)
+        print("finish \(modelName)downloadTask func")
+//        }
+//        else {
+//            guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)", inDirectory: "Models.scnassets/") else {
+//                print("모델을 찾지 못해 return.")
+//                return
+//            }
+//            let wrapperNode = SCNNode()
+//
+////            let scale = 0.01
+////            virtualObjectScene.rootNode.scale = SCNVector3(scale, scale, scale)
+//
+//            wrapperNode.addChildNode(virtualObjectScene.rootNode)
+//            self.addChildNode(wrapperNode)
+//            print("--------------------------\(self)") // Virtual object root node
+//            modelLoaded = true
+//            print(modelName)
+//        }
         
     }
     
@@ -116,9 +116,9 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
             case "moa_rose" :
                 print("moa_rose")
                 url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/raw/main/models/moa_rose.usdz")!
-            case "Hansssem_chair03" :
-                print("Hanssem_chair03")
-                url = URL(string: "https://docs.google.com/u/0/uc?export=download&confirm=l_vT&id=1e9BoirJiA7c6RIdnuW0j87g7iqua56uj")!
+            case "hanssemchair01" :
+                print("hanssemchair01")
+                url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/blob/main/models/hanssemchair01.usdz")!
             default:
                 print("Default")
                 url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!

@@ -9,10 +9,10 @@
 import Foundation
 
 
-class Hanssem_chair03: VirtualObject{
+class hanssemchair01: VirtualObject{
 
     override init() {
-        super.init(modelName: "Hanssem_chair03", fileExtension: "usdz", thumbImageFilename: "vase", title: "Hanssem_chair03")
+        super.init(modelName: "hanssemchair01", fileExtension: "usdz", thumbImageFilename: "vase", title: "hanssemchair01")
     }
 
     required init?(coder aDecoder: NSCoder) {
