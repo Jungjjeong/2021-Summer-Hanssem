@@ -24,6 +24,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
     var doteNodes = [SCNNode]()
     var textNode = SCNNode()
     var lineNode = SCNNode()
+    var progressDot = SCNNode()
     
 //    let midPosition : SCNVector3
     
@@ -44,8 +45,6 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         let boxNode = createBox()
         scene.rootNode.addChildNode(boxNode)
         self.boxNode = boxNode
-
-        sceneView.scene = scene
 
         //------------------------------------
         // Set the view's delegate
@@ -108,7 +107,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
     
     @IBAction func addAnchor(_ button : UIButton) {
         
-        if doteNodes.count >= 2 {
+        if doteNodes.count == 3 {
             for dot in doteNodes{
                 dot.removeFromParentNode()
             }
@@ -125,15 +124,16 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
     func ExistPlanes() {
         let results = sceneView.raycastQuery(from: view.center, allowing: ARRaycastQuery.Target.estimatedPlane, alignment: .any)
         
-        if let hisRes = results {
-            let rayCast = sceneView.session.raycast(hisRes)
+        if let hitRes = results {
+            let rayCast = sceneView.session.raycast(hitRes)
             
             guard let ray = rayCast.first else { return }
             addDot(at: ray)
         }
     }
+    
 
-
+    
     
     // MARK: - Add dot
 
@@ -159,10 +159,21 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         sceneView.scene.rootNode.addChildNode(node)
         
         doteNodes.append(node)
-        
-        if doteNodes.count >= 2{
+
+        print(doteNodes.count)
+        if doteNodes.count == 1 {
+            let buttonImage = UIImage(named: "go")
+            self.addBtn.setImage(buttonImage, for: [])
+            let node2 = SCNNode(geometry: sphereScene)
+            sceneView.scene.rootNode.addChildNode(node2)
+            doteNodes.append(node2)
+        }
+        else if doteNodes.count == 3{
             calculate()
-            sceneView.scene.rootNode.addChildNode(lineBetweenNodes(positionA: doteNodes[0].position, positionB: doteNodes[1].position, inScene: self.sceneView.scene))
+            doteNodes[1].removeFromParentNode()
+            sceneView.scene.rootNode.addChildNode(lineBetweenNodes(positionA: doteNodes[0].position, positionB: doteNodes[2].position, inScene: self.sceneView.scene))
+            let buttonImage = UIImage(named: "add")
+            self.addBtn.setImage(buttonImage, for: [])
         }
     }
     
@@ -192,7 +203,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
 
     func calculate() {
         let start = doteNodes[0]
-        let end = doteNodes[1]
+        let end = doteNodes[2]
         
         print(start.position)
         print(end.position)
@@ -274,14 +285,18 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         let location = SCNVector3(transform.m41, transform.m42, transform.m43) // 위치
         
         let currentPositionOfCamera = SizeMeasurementView.plus(left: orientation , right: location)
+        
 //        SCNTransaction.begin()
         if let boxNode = self.boxNode{
             boxNode.position = currentPositionOfCamera
         }
-//        self.updateScaleFromCameraForText(textNode, fromPointOfView: pointOfView, useScaling: true)
+        
+        if self.doteNodes.count == 2{
+            doteNodes[1].position = currentPositionOfCamera
+        }
+
         self.updateScaleFromCameraForNodes(doteNodes, fromPointOfView: pointOfView, useScaling: true)
         self.updateScaleFromCameraForLine(lineNode, fromPointOfView: pointOfView, useScaling: true)
-//        SCNTransaction.commit()
     }
     
     
