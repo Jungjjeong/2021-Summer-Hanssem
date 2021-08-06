@@ -29,7 +29,7 @@
 		C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */; };
 		E778840626B90F2200864B34 /* SizeMeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E778840526B90F2200864B34 /* SizeMeasurementView.swift */; };
 		E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */; };
-		E7904A5026BD209500FEFAB1 /* hanssemchair01.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7904A4F26BD209500FEFAB1 /* hanssemchair01.swift */; };
+		E78F79D926BD557F007FDDAF /* hanssemchair01.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78F79D826BD557F007FDDAF /* hanssemchair01.swift */; };
 		E7963A9426A8FDB600BDF22D /* Teapot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7963A9326A8FDB600BDF22D /* Teapot.swift */; };
 		E79813A726B3861300712D98 /* AirForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79813A626B3861300712D98 /* AirForce.swift */; };
 		E79813A926B3D9A600712D98 /* fender_stratocaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79813A826B3D9A600712D98 /* fender_stratocaster.swift */; };
@@ -62,7 +62,7 @@
 		C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARCameraTrackingState.swift; sourceTree = "<group>"; };
 		E778840526B90F2200864B34 /* SizeMeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeMeasurementView.swift; sourceTree = "<group>"; };
 		E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
-		E7904A4F26BD209500FEFAB1 /* hanssemchair01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hanssemchair01.swift; sourceTree = "<group>"; };
+		E78F79D826BD557F007FDDAF /* hanssemchair01.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hanssemchair01.swift; sourceTree = "<group>"; };
 		E7963A9326A8FDB600BDF22D /* Teapot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teapot.swift; sourceTree = "<group>"; };
 		E79813A626B3861300712D98 /* AirForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirForce.swift; sourceTree = "<group>"; };
 		E79813A826B3D9A600712D98 /* fender_stratocaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fender_stratocaster.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 				E79813A626B3861300712D98 /* AirForce.swift */,
 				E79813A826B3D9A600712D98 /* fender_stratocaster.swift */,
 				E7A0E57626BD05D800463FC5 /* moa_rose.swift */,
-				E7904A4F26BD209500FEFAB1 /* hanssemchair01.swift */,
+				E78F79D826BD557F007FDDAF /* hanssemchair01.swift */,
 			);
 			path = "Virtual Objects";
 			sourceTree = "<group>";
@@ -244,6 +244,7 @@
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
 				392BB82C1EA19A7C00FBBAC8 /* Plane.swift in Sources */,
 				3987BEDC1E9E057F00167FAC /* Gesture.swift in Sources */,
+				E78F79D926BD557F007FDDAF /* hanssemchair01.swift in Sources */,
 				C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */,
 				E79813A726B3861300712D98 /* AirForce.swift in Sources */,
 				39D4A8BE1EA1AF530006EC65 /* PlaneDebugVisualization.swift in Sources */,
@@ -254,7 +255,6 @@
 				C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */,
 				E7A0E57726BD05D800463FC5 /* moa_rose.swift in Sources */,
 				E79813A926B3D9A600712D98 /* fender_stratocaster.swift in Sources */,
-				E7904A5026BD209500FEFAB1 /* hanssemchair01.swift in Sources */,
 				58DE9FC71FDDA042008E25AF /* VirtualObjectsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
