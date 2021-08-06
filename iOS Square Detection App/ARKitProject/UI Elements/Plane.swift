@@ -9,8 +9,8 @@ class Plane: SCNNode {
 
 	var anchor: ARPlaneAnchor
 	var occlusionNode: SCNNode?
-	let occlusionPlaneVerticalOffset: Float = -0.01
-    // z-fighting을 피하기 위해 occlusion plane은 실제 plane의 1cm 밑에 배치
+	let occlusionPlaneVerticalOffset: Float = -0.02
+    // z-fighting을 피하기 위해 occlusion plane은 실제 plane의 2cm 밑에 배치
 
 	var debugVisualization: PlaneDebugVisualization?
 

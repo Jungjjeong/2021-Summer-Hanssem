@@ -160,7 +160,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="거리재기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYP-hY-LOh">
-                                <rect key="frame" x="185" y="870" width="59" height="21"/>
+                                <rect key="frame" x="185" y="870.66666666666663" width="59" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -398,10 +398,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="mE8-ZR-bn6" firstAttribute="top" secondItem="qQc-gl-4bZ" secondAttribute="topMargin" constant="4" id="hbI-eE-0bP"/>
-                                                <constraint firstItem="mE8-ZR-bn6" firstAttribute="leading" secondItem="qQc-gl-4bZ" secondAttribute="leadingMargin" constant="-4" id="oPa-Rg-ALN"/>
+                                                <constraint firstItem="mE8-ZR-bn6" firstAttribute="leading" secondItem="qQc-gl-4bZ" secondAttribute="leadingMargin" constant="-4" id="5r1-c9-5qR"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="8kS-ul-vKG" secondAttribute="trailing" id="pV7-3b-PL9"/>
                                                 <constraint firstItem="8kS-ul-vKG" firstAttribute="centerY" secondItem="qQc-gl-4bZ" secondAttribute="centerY" id="qXc-p2-bHh"/>
+                                                <constraint firstItem="mE8-ZR-bn6" firstAttribute="top" secondItem="qQc-gl-4bZ" secondAttribute="topMargin" constant="4" id="wst-6I-pFi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -427,9 +427,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="YAT-M7-yuY" firstAttribute="top" secondItem="VqN-0B-N4h" secondAttribute="topMargin" constant="-4.3333333333333321" id="HLU-i6-XwH"/>
+                                                <constraint firstItem="MdV-E3-8dc" firstAttribute="leading" secondItem="VqN-0B-N4h" secondAttribute="leadingMargin" constant="-4" id="Lht-Ru-b6i"/>
+                                                <constraint firstItem="MdV-E3-8dc" firstAttribute="top" secondItem="VqN-0B-N4h" secondAttribute="topMargin" constant="3" id="Zbp-sK-7WL"/>
                                                 <constraint firstItem="YAT-M7-yuY" firstAttribute="trailing" secondItem="VqN-0B-N4h" secondAttribute="trailingMargin" id="fQC-aY-fHU"/>
-                                                <constraint firstItem="MdV-E3-8dc" firstAttribute="leading" secondItem="VqN-0B-N4h" secondAttribute="leadingMargin" constant="-4" id="hfk-Bm-a69"/>
-                                                <constraint firstItem="MdV-E3-8dc" firstAttribute="top" secondItem="VqN-0B-N4h" secondAttribute="topMargin" constant="3" id="pvX-1w-lq7"/>
                                                 <constraint firstItem="YAT-M7-yuY" firstAttribute="centerY" secondItem="VqN-0B-N4h" secondAttribute="centerY" id="yUR-da-npu"/>
                                             </constraints>
                                         </tableViewCellContentView>

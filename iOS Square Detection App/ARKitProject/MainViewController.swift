@@ -107,7 +107,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
     func addPlane(node: SCNNode, anchor: ARPlaneAnchor) {
 
 		let pos = SCNVector3.positionFromTransform(anchor.transform)
-		textManager.showDebugMessage("NEW SURFACE DETECTED AT \(pos.friendlyString())")
+		textManager.showDebugMessage(" \(pos.friendlyString()) 에서 평면 Detect")
 
 		let plane = Plane(anchor, showDebugVisuals)
 
@@ -115,9 +115,9 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		node.addChildNode(plane)
 
 		textManager.cancelScheduledMessage(forType: .planeEstimation)
-		textManager.showMessage("SURFACE DETECTED")
+		textManager.showMessage("평면이 인식되었습니다.")
 		if !VirtualObjectsManager.shared.isAVirtualObjectPlaced() { // isAVirtualObjectPlaced -> nil이 아닌 배치 object 반환
-			textManager.scheduleMessage("TAP + TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .contentPlacement)
+			textManager.scheduleMessage("Object 배치를 위해 + 버튼을 누르세요.", inSeconds: 7.5, messageType: .contentPlacement)
 		}
 	}
 
@@ -134,7 +134,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 			trackingFallbackTimer = nil // timer 초기화해준다.
 		}
 
-		textManager.scheduleMessage("FIND A SURFACE TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .planeEstimation)
+		textManager.scheduleMessage("Object 배치를 위한 평면 찾기", inSeconds: 7.5, messageType: .planeEstimation)
 	}
 
     // MARK: - Focus Square
@@ -146,7 +146,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		focusSquare = FocusSquare()
 		sceneView.scene.rootNode.addChildNode(focusSquare!) // 장면 위 Node에 focusSquare 붙인다.
 
-		textManager.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
+		textManager.scheduleMessage("왼쪽 또는 오른쪽으로 움직여 주세요.", inSeconds: 5.0, messageType: .focusSquare)
     }
 
 	func updateFocusSquare() {
@@ -247,7 +247,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
             
 			self.textManager.cancelAllScheduledMessages()
 			self.textManager.dismissPresentedAlert()
-			self.textManager.showMessage("STARTING A NEW SESSION")
+			self.textManager.showMessage("새로운 Session을 시작합니다.")
 			self.use3DOFTracking = false // 3DOFTracking 끄기
 
 			self.setupFocusSquare() // focusSquare 초기화 및 사용하기 위해 세팅
@@ -292,7 +292,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
     @objc
     func dismissSettings() {
 		self.dismiss(animated: true, completion: nil) // click done
-        print("Click Done button")
+        print("Done 버튼 클릭.")
 		updateSettings() // update
 	}
 
