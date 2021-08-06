@@ -49,8 +49,7 @@ class VirtualObjectSelectionViewController: UIViewController, UITableViewDataSou
         case 4:
             return hanssemchair01()
 		default:
-            print("불러오기 실패")
-			return AirForce()
+			return Teapot()
 		}
 	}
 

@@ -58,7 +58,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         self.addChildNode(node)
         
         downloadSceneTask(type: false)
-        print("finish \(modelName)downloadTask func")
+        print("finish \(modelName) downloadTask func")
 //        }
 //        else {
 //            guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)", inDirectory: "Models.scnassets/") else {
@@ -118,7 +118,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
                 url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/raw/main/models/moa_rose.usdz")!
             case "hanssemchair01" :
                 print("hanssemchair01")
-                url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/blob/main/models/hanssemchair01.usdz")!
+                url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/raw/main/models/hanssemchair01.usdz")!
             default:
                 print("Default")
                 url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!
