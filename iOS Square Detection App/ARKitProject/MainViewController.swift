@@ -22,7 +22,15 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 
 	override func viewDidLoad() { // view initialized
         super.viewDidLoad()
-
+        
+        
+        let mainCustomAlertView = UIStoryboard.init(name: "Main", bundle: nil)
+        
+        let popUpView = mainCustomAlertView.instantiateViewController(identifier: "popUpView")
+        popUpView.modalPresentationStyle = .overCurrentContext
+        present(popUpView, animated: true, completion: nil)
+        
+        
         Setting.registerDefaults()
         setupScene()
         setupDebug()
@@ -49,18 +57,11 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		session.pause() // session 멈춘다.
         sceneView.scene.rootNode.removeFromParentNode()
 	}
+    
+    
 
     // MARK: - ARKit / ARSCNView
-//    var use3DOFTracking = false { // 값 먼저 초기화
-//		didSet { // 값이 변경된 직후에 호출된다. (willSet은 값이 변경되기 직전에 호출)
-//			if use3DOFTracking {
-//				sessionConfig = ARWorldTrackingConfiguration() // 장치의 움직임을 추적하고 앵커 고정하는 역할의 class
-//			} // 3DOF(3 degrees of freedom) : 회전 운동만 추적할 수 있는 디바이스
-//			sessionConfig.isLightEstimationEnabled = true
-//            // user의 현재 ambientLightEstimation 상태 여부를 sessionConfig의 조명 추정 여부에 입힌다.
-//			session.run(sessionConfig) // session run
-//		}
-//	}
+
 	@IBOutlet var sceneView: ARSCNView!
     // ARSCNView는 SCNView 하위 class
     // Scenekit의 가상 3D contents를 ar화면 위에 띄워주는 viewer
@@ -472,33 +473,52 @@ extension MainViewController: VirtualObjectSelectionViewControllerDelegate {
 			VirtualObjectsManager.shared.addVirtualObject(virtualObject: object)
 			VirtualObjectsManager.shared.setVirtualObjectSelected(virtualObject: object)
 
+            // light attribute
+//            let light = SCNLight()
+//            light.type = .directional
+//            light.castsShadow = true
+//            light.shadowRadius = 20
+//            light.shadowSampleCount = 64
+//
+//            light.shadowColor = UIColor(white: 0, alpha: 0.5)
+//            light.shadowMode = .forward
+//            let constraint = SCNLookAtConstraint(target: object)
+//
+//            guard let lightEstimate = self.sceneView.session.currentFrame?.lightEstimate else {
+//                return
+//            }
+//
+//            // light node
+//            let lightNode = SCNNode()
+//            lightNode.light = light
+//            lightNode.light?.intensity = lightEstimate.ambientIntensity
+//            lightNode.light?.temperature = lightEstimate.ambientColorTemperature
+////            lightNode.position = SCNVector3(object.position.x + 10, object.position.y + 30, object.position.z + 30)
+//            lightNode.eulerAngles = SCNVector3(45.0,0,0)
+//            lightNode.constraints = [constraint]
+//            self.sceneView.scene.rootNode.addChildNode(lightNode)
+            
+            
+            
+//            let shadowPlane = SCNPlane(width: 10000, height: 10000)
+//
+//            let material = SCNMaterial()
+//            material.isDoubleSided = false
+//            material.lightingModel = .shadowOnly // Requires SCNLight shadowMode = .forward and no .omni or .spot lights in the scene or material rendered black
+//
+//            shadowPlane.materials = [material]
+//
+//            let shadowPlaneNode = SCNNode(geometry: shadowPlane)
+//            shadowPlaneNode.name = object.modelName
+//            shadowPlaneNode.eulerAngles.x = -.pi / 2
+//            shadowPlaneNode.castsShadow = false
+//
+//            self.sceneView.scene.rootNode.addChildNode(shadowPlaneNode)
+            
             print("Main - loadModel function")
 			object.loadModel() // Virtual Object class
             
             
-            // light attribute
-            let light = SCNLight()
-            light.type = .directional
-            light.castsShadow = true
-            light.shadowRadius = 20
-            light.shadowSampleCount = 64
-            light.shadowColor = UIColor(white: 0, alpha: 0.5)
-            light.shadowMode = .deferred
-            let constraint = SCNLookAtConstraint(target: object)
-            
-            guard let lightEstimate = self.sceneView.session.currentFrame?.lightEstimate else {
-                return
-            }
-            
-            // light node
-            let lightNode = SCNNode()
-            lightNode.light = light
-            lightNode.light?.intensity = lightEstimate.ambientIntensity
-            lightNode.light?.temperature = lightEstimate.ambientColorTemperature
-//            lightNode.position = SCNVector3(object.position.x + 10, object.position.y + 30, object.position.z + 30)
-            lightNode.eulerAngles = SCNVector3(45.0,0,0)
-            lightNode.constraints = [constraint]
-            self.sceneView.scene.rootNode.addChildNode(lightNode)
             
 
 

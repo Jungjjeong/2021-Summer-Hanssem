@@ -59,7 +59,54 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         if modelName == "hanssemchair01" {
             node.scale = SCNVector3(0.001, 0.001, 0.001)
         }
-
+        
+        // MARK: - Light & Shadow Node
+        
+//        let shadowPlane = SCNPlane(width: 5000, height: 5000)
+//
+//        let material = SCNMaterial()
+//        material.isDoubleSided = false
+//        material.lightingModel = .shadowOnly // Requires SCNLight shadowMode = .forward and
+//        // light가 .omni거나 .spot이면 검은색으로 변하는 이슈 발생
+//
+//        shadowPlane.materials = [material]
+//
+//        let shadowPlaneNode = SCNNode(geometry: shadowPlane)
+//        shadowPlaneNode.name = modelName
+//        shadowPlaneNode.eulerAngles.x = -.pi / 2
+//        shadowPlaneNode.castsShadow = false
+//
+//        self.addChildNode(shadowPlaneNode)
+//
+//        let light = SCNLight()
+//        light.type = .directional
+//        light.castsShadow = true
+//        light.shadowRadius = 20
+//        light.shadowSampleCount = 64
+//
+//        light.shadowColor = UIColor(white: 0, alpha: 0.5)
+//        light.shadowMode = .forward
+//        light.maximumShadowDistance = 11000
+////        let constraint = SCNLookAtConstraint(target: self)
+////
+////        guard let lightEstimate = MainViewController.sceneView.session.currentFrame?.lightEstimate else {
+////            return
+////        }
+//
+//        // light node
+//        let lightNode = SCNNode()
+//        lightNode.light = light
+////        lightNode.light?.intensity = lightEstimate.ambientIntensity
+////        lightNode.light?.temperature = lightEstimate.ambientColorTemperature
+////            lightNode.position = SCNVector3(object.position.x + 10, object.position.y + 30, object.position.z + 30)
+//        lightNode.eulerAngles = SCNVector3(45.0,0,0)
+////        lightNode.constraints = [constraint]
+//        self.addChildNode(lightNode)
+        
+        
+        
+        
+        
         self.addChildNode(node)
         
         downloadSceneTask(type: false)
