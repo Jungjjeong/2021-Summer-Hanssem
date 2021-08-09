@@ -214,6 +214,52 @@
             </objects>
             <point key="canvasLocation" x="995.32710280373828" y="98.488120950323975"/>
         </scene>
+        <!--Realitykit Load-->
+        <scene sceneID="uOP-UF-Dfy">
+            <objects>
+                <viewController id="3Tp-5p-kis" customClass="RealitykitLoad" customModule="ARKitProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3b6-W9-fdD">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I30-dQ-qUn">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </arView>
+                            <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQ5-U4-hYn" userLabel="usdzButton">
+                                <rect key="frame" x="179" y="822" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="7GP-Fo-Eau"/>
+                                    <constraint firstAttribute="height" constant="70" id="vWT-Vt-ml5"/>
+                                </constraints>
+                                <state key="normal" image="add">
+                                    <color key="titleColor" red="0.85882352939999995" green="0.72941176470000002" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="usdzFileLoad:" destination="3Tp-5p-kis" eventType="touchUpInside" id="1Ej-GQ-fKG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1hj-RW-KBI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DQ5-U4-hYn" firstAttribute="centerX" secondItem="I30-dQ-qUn" secondAttribute="centerX" id="0dw-nZ-tIg"/>
+                            <constraint firstItem="I30-dQ-qUn" firstAttribute="centerX" secondItem="3b6-W9-fdD" secondAttribute="centerX" id="Qf4-tH-VxN"/>
+                            <constraint firstItem="I30-dQ-qUn" firstAttribute="leading" secondItem="1hj-RW-KBI" secondAttribute="leading" id="cUg-5I-ppa"/>
+                            <constraint firstItem="DQ5-U4-hYn" firstAttribute="bottom" secondItem="1hj-RW-KBI" secondAttribute="bottom" id="kaM-0k-Ix6"/>
+                            <constraint firstItem="I30-dQ-qUn" firstAttribute="top" secondItem="3b6-W9-fdD" secondAttribute="topMargin" constant="-88" id="kgP-mU-6tC"/>
+                            <constraint firstItem="I30-dQ-qUn" firstAttribute="centerY" secondItem="3b6-W9-fdD" secondAttribute="centerY" id="xcG-sY-7k9"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Wcw-nN-4ff"/>
+                    <connections>
+                        <outlet property="arview" destination="I30-dQ-qUn" id="Idi-J7-a3M"/>
+                        <outlet property="usdzButton" destination="DQ5-U4-hYn" id="0zr-FE-oOG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0NO-Te-YC1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="314.01869158878503" y="795.68034557235421"/>
+        </scene>
         <!--Size Measurement View-->
         <scene sceneID="7MM-Vg-ha9">
             <objects>
@@ -492,6 +538,17 @@
                                     <segue destination="BV1-FR-VrT" kind="push" id="PP4-w5-0Ec"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUq-JE-oDd" customClass="UIRoundPrimaryButton" customModule="ARKitProject" customModuleProvider="target">
+                                <rect key="frame" x="100" y="779" width="228" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3KE-lM-F8o"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Realitykit"/>
+                                <connections>
+                                    <segue destination="3Tp-5p-kis" kind="push" id="yDG-hQ-a0y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HcT-gl-CFB"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -504,8 +561,11 @@
                             <constraint firstItem="xc7-Nc-6u3" firstAttribute="top" secondItem="NdT-o0-hzR" secondAttribute="top" constant="-6" id="C9w-ZL-uju"/>
                             <constraint firstAttribute="bottom" secondItem="xc7-Nc-6u3" secondAttribute="bottom" constant="-176" id="DRr-L7-ce3"/>
                             <constraint firstItem="y5v-YG-G6k" firstAttribute="centerX" secondItem="DG0-Kd-tq2" secondAttribute="centerX" id="HKg-tG-MOn"/>
+                            <constraint firstItem="KUq-JE-oDd" firstAttribute="leading" secondItem="y5v-YG-G6k" secondAttribute="leading" id="Iag-Yp-pw2"/>
                             <constraint firstItem="DG0-Kd-tq2" firstAttribute="leading" secondItem="HcT-gl-CFB" secondAttribute="leading" constant="30" id="gia-Hm-Q2Y"/>
                             <constraint firstItem="y5v-YG-G6k" firstAttribute="centerX" secondItem="29u-8k-zk5" secondAttribute="centerX" id="l3j-8q-QwS"/>
+                            <constraint firstItem="KUq-JE-oDd" firstAttribute="top" secondItem="y5v-YG-G6k" secondAttribute="bottom" constant="30" id="rQZ-ZM-fl2"/>
+                            <constraint firstItem="KUq-JE-oDd" firstAttribute="trailing" secondItem="y5v-YG-G6k" secondAttribute="trailing" id="sny-HF-DwY"/>
                             <constraint firstItem="y5v-YG-G6k" firstAttribute="leading" secondItem="HcT-gl-CFB" secondAttribute="leading" constant="100" id="taX-O1-9C6"/>
                             <constraint firstItem="29u-8k-zk5" firstAttribute="top" secondItem="HcT-gl-CFB" secondAttribute="top" constant="50" id="wLi-Bf-Ihb"/>
                         </constraints>
