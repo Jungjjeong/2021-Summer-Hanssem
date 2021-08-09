@@ -52,31 +52,18 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         let object = asset.object(at: 0)
         
         let node = SCNNode.init(mdlObject: object)
-        if modelName == "Teapot" || modelName == "AirForce" || modelName == "fender_stratocaster" || modelName == "hanssemchair01" {
+        if modelName == "Teapot" || modelName == "AirForce" || modelName == "fender_stratocaster" {
             node.scale = SCNVector3(0.01, 0.01, 0.01)
+        }
+        
+        if modelName == "hanssemchair01" {
+            node.scale = SCNVector3(0.001, 0.001, 0.001)
         }
 
         self.addChildNode(node)
         
         downloadSceneTask(type: false)
         print("finish \(modelName) downloadTask func")
-//        }
-//        else {
-//            guard let virtualObjectScene = SCNScene(named: "\(modelName).\(fileExtension)", inDirectory: "Models.scnassets/") else {
-//                print("모델을 찾지 못해 return.")
-//                return
-//            }
-//            let wrapperNode = SCNNode()
-//
-////            let scale = 0.01
-////            virtualObjectScene.rootNode.scale = SCNVector3(scale, scale, scale)
-//
-//            wrapperNode.addChildNode(virtualObjectScene.rootNode)
-//            self.addChildNode(wrapperNode)
-//            print("--------------------------\(self)") // Virtual object root node
-//            modelLoaded = true
-//            print(modelName)
-//        }
         
     }
     

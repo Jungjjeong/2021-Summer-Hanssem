@@ -9,8 +9,6 @@ import Photos
 class MainViewController: UIViewController { // 가장 상위에 위치할 Controller
 	var dragOnInfinitePlanesEnabled = false // 평면이 있다는 가정 하에 계속 드래그할 수 있는 선택창
 	var currentGesture: Gesture?
-
-	var use3DOFTrackingFallback = false // 3DOFTracking,Fallback
 	var screenCenter: CGPoint?
 
 	let session = ARSession() // ar scene의 고유 런타임 인스턴스 관리
@@ -18,9 +16,8 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 
 	var trackingFallbackTimer: Timer?
 
-	// Use average of recent virtual object distances to avoid rapid changes in object scale.
-	var recentVirtualObjectDistances = [CGFloat]()
 
+	var recentVirtualObjectDistances = [CGFloat]()
 	let DEFAULT_DISTANCE_CAMERA_TO_OBJECTS = Float(10)
 
 	override func viewDidLoad() { // view initialized
@@ -54,16 +51,16 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 	}
 
     // MARK: - ARKit / ARSCNView
-    var use3DOFTracking = false { // 값 먼저 초기화
-		didSet { // 값이 변경된 직후에 호출된다. (willSet은 값이 변경되기 직전에 호출)
-			if use3DOFTracking {
-				sessionConfig = ARWorldTrackingConfiguration() // 장치의 움직임을 추적하고 앵커 고정하는 역할의 class
-			} // 3DOF(3 degrees of freedom) : 회전 운동만 추적할 수 있는 디바이스
-			sessionConfig.isLightEstimationEnabled = true
-            // user의 현재 ambientLightEstimation 상태 여부를 sessionConfig의 조명 추정 여부에 입힌다.
-			session.run(sessionConfig) // session run
-		}
-	}
+//    var use3DOFTracking = false { // 값 먼저 초기화
+//		didSet { // 값이 변경된 직후에 호출된다. (willSet은 값이 변경되기 직전에 호출)
+//			if use3DOFTracking {
+//				sessionConfig = ARWorldTrackingConfiguration() // 장치의 움직임을 추적하고 앵커 고정하는 역할의 class
+//			} // 3DOF(3 degrees of freedom) : 회전 운동만 추적할 수 있는 디바이스
+//			sessionConfig.isLightEstimationEnabled = true
+//            // user의 현재 ambientLightEstimation 상태 여부를 sessionConfig의 조명 추정 여부에 입힌다.
+//			session.run(sessionConfig) // session run
+//		}
+//	}
 	@IBOutlet var sceneView: ARSCNView!
     // ARSCNView는 SCNView 하위 class
     // Scenekit의 가상 3D contents를 ar화면 위에 띄워주는 viewer
@@ -248,11 +245,9 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 			self.textManager.cancelAllScheduledMessages()
 			self.textManager.dismissPresentedAlert()
 			self.textManager.showMessage("새로운 Session을 시작합니다.")
-			self.use3DOFTracking = false // 3DOFTracking 끄기
 
 			self.setupFocusSquare() // focusSquare 초기화 및 사용하기 위해 세팅
 			self.restartPlaneDetection() // planeDetection 다시 수행
-
 			self.restartExperienceButton.setImage(#imageLiteral(resourceName: "restart"), for: [])
 
 			// Disable Restart button for five seconds in order to give the session enough time to restart.
@@ -300,11 +295,9 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 		let defaults = UserDefaults.standard
 
 		showDebugVisuals = defaults.bool(for: .debugMode)
-//		toggleAmbientLightEstimation(defaults.bool(for: .ambientLightEstimation))
 		dragOnInfinitePlanesEnabled = defaults.bool(for: .dragOnInfinitePlanes)
 		showHitTestAPIVisualization = defaults.bool(for: .showHitTestAPI)
-		use3DOFTracking	= defaults.bool(for: .use3DOFTracking)
-		use3DOFTrackingFallback = defaults.bool(for: .use3DOFFallback)
+
 		for (_, plane) in planes {
 			plane.updateOcclusionSetting()
 		} // 현재 선택된 사항들로 setting을 업데이트함 
@@ -344,23 +337,9 @@ extension MainViewController {
 		case .notAvailable:
 			textManager.escalateFeedback(for: camera.trackingState, inSeconds: 5.0)
 		case .limited:
-			if use3DOFTrackingFallback {
-				// 10초의 limited quality 이후, 다시 3DOF 모드로 fall back.
-				trackingFallbackTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false, block: { _ in
-                    print("Fallback")
-					self.use3DOFTracking = true
-					self.trackingFallbackTimer?.invalidate()
-					self.trackingFallbackTimer = nil
-				})
-			} else {
 				textManager.escalateFeedback(for: camera.trackingState, inSeconds: 10.0)
-			}
 		case .normal:
 			textManager.cancelScheduledMessage(forType: .trackingStateEscalation)
-			if use3DOFTrackingFallback && trackingFallbackTimer != nil {
-				trackingFallbackTimer!.invalidate()
-				trackingFallbackTimer = nil
-			}
 		}
 	}
 

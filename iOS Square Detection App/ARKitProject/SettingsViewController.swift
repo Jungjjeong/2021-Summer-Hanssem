@@ -10,8 +10,8 @@ enum Setting: String {
     case scaleWithPinchGesture
     case dragOnInfinitePlanes
     case showHitTestAPI
-    case use3DOFTracking
-    case use3DOFFallback
+//    case use3DOFTracking
+//    case use3DOFFallback
 	case useOcclusionPlanes //  여러 케이스
 
     static func registerDefaults() {
@@ -61,10 +61,10 @@ class SettingsViewController: UITableViewController {
                 defaults.set(sender.isOn, for: .dragOnInfinitePlanes)
             case showHitTestAPISwitch:
                 defaults.set(sender.isOn, for: .showHitTestAPI)
-            case use3DOFTrackingSwitch:
-                defaults.set(sender.isOn, for: .use3DOFTracking)
-            case useAuto3DOFFallbackSwitch:
-                defaults.set(sender.isOn, for: .use3DOFFallback)
+//            case use3DOFTrackingSwitch:
+//                defaults.set(sender.isOn, for: .use3DOFTracking)
+//            case useAuto3DOFFallbackSwitch:
+//                defaults.set(sender.isOn, for: .use3DOFFallback)
             case useOcclusionPlanesSwitch:
                 defaults.set(sender.isOn, for: .useOcclusionPlanes)
             default: break
@@ -78,8 +78,8 @@ class SettingsViewController: UITableViewController {
 		scaleWithPinchGestureSwitch.isOn = defaults.bool(for: .scaleWithPinchGesture)
 		dragOnInfinitePlanesSwitch.isOn = defaults.bool(for: .dragOnInfinitePlanes)
 		showHitTestAPISwitch.isOn = defaults.bool(for: .showHitTestAPI)
-		use3DOFTrackingSwitch.isOn = defaults.bool(for: .use3DOFTracking)
-		useAuto3DOFFallbackSwitch.isOn = defaults.bool(for: .use3DOFFallback)
+//		use3DOFTrackingSwitch.isOn = defaults.bool(for: .use3DOFTracking)
+//		useAuto3DOFFallbackSwitch.isOn = defaults.bool(for: .use3DOFFallback)
 		useOcclusionPlanesSwitch.isOn = defaults.bool(for: .useOcclusionPlanes)
 	}
 }
