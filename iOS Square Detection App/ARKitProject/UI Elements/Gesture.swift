@@ -96,6 +96,10 @@ class Gesture {
 	}
 }
 
+
+
+// MARK: - SingleFingerGesture
+
 class SingleFingerGesture: Gesture {
 
 	var initialTouchLocation = CGPoint()
@@ -240,6 +244,11 @@ class SingleFingerGesture: Gesture {
 		return successFulHits / (Float)(xAxisSamples * yAxisSamples)
 	}
 }
+
+
+
+// MARK: - TwoFingerGesture
+
 
 class TwoFingerGesture: Gesture {
 

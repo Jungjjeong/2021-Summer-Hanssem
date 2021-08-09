@@ -19,7 +19,7 @@ final class MainCustomAlertView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        popUpView.layer.cornerRadius = 30
+        popUpView.layer.cornerRadius = 25
         popUpView.layer.masksToBounds = true
     }
     

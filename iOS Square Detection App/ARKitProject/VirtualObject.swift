@@ -14,6 +14,11 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
 	var modelName: String = ""
 	var modelLoaded: Bool = false
 	var id: Int!
+    
+    let fileManager = FileManager.default
+    let popUpView = UIStoryboard.init(name: "ProgressViewController", bundle: nil).instantiateViewController(identifier: "popUpView")
+
+
 
 	var viewController: MainViewController?
 
@@ -39,12 +44,15 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
     // MARK: - 3D model load function
 	func loadModel() {
         print("---------------------Start loadModel function")
-//        print("VirtualObject - loadModel function")
 
-//        if modelName != "Hanssem_chair03"{
-        downloadSceneTask(type: true)
-        
         let downloadedScenePath = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
+        
+        //1. Create The Filename
+        print("loadModel Bool ----------------\(fileManager.fileExists(atPath: downloadedScenePath.path))")
+        if !fileManager.fileExists(atPath: downloadedScenePath.path) {
+            showPopup()
+            downloadSceneTask()
+        }
         
         let asset = MDLAsset(url: downloadedScenePath)
         asset.loadTextures()
@@ -105,12 +113,9 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         
         
         
-        
-        
         self.addChildNode(node)
-        
-        downloadSceneTask(type: false)
-        print("finish \(modelName) downloadTask func")
+
+        print("---------------finish \(modelName) loadmodel func")
         
     }
     
@@ -131,50 +136,68 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
 		controller.moveVirtualObjectToPosition(result.position, instantly, !result.hitAPlane)
 	}
     
+    // MARK: - PopUp setting
     
-    // MARK: - download from URL
-    func downloadSceneTask(type : Bool) {
-        if type == true {
-            print("start downloadscenetask function")
-            let url : URL
-            switch modelName
-            {
-            case "Teapot":
-                print("Teapot")
-                url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!
-            case "AirForce":
-                print("AirForce")
-                url = URL(string: "https://devimages-cdn.apple.com/ar/photogrammetry/AirForce.usdz")!
-            case "fender_stratocaster":
-                print("fender_stratocaster")
-                url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/stratocaster/fender_stratocaster.usdz")!
-            case "moa_rose" :
-                print("moa_rose")
-                url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/raw/main/models/moa_rose.usdz")!
-            case "hanssemchair01" :
-                print("hanssemchair01")
-                url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/raw/main/models/hanssemchair01.usdz")!
-            default:
-                print("Default")
-                url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!
-            }
+    func showPopup() {
+        DispatchQueue.main.async{
+            self.popUpView.modalPresentationStyle = .overCurrentContext
             
+            print("Show PopUp")
             
-            //2. Create The Download Session
-            print("create the download session")
-            let downloadSession = URLSession(configuration: URLSession.shared.configuration, delegate: self, delegateQueue: nil)
-            
-            
-            //3. Create The Download Task & Run It
-            print("create the download task & run it")
-
-            let downloadTask = downloadSession.downloadTask(with: url)
-            downloadTask.resume()
-        }
-        else{
-            print("Cancel")
+            self.viewController!.present(self.popUpView, animated: true, completion: nil)
         }
     }
+    
+    
+    func closePopup() {
+        DispatchQueue.main.async {
+            self.popUpView.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    
+    // MARK: - download from URL
+    func downloadSceneTask() {
+        //1. Create The Filename
+        print("start downloadscenetask function")
+        let url : URL
+        switch modelName
+        {
+        case "Teapot":
+            print("Teapot")
+            url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!
+        case "AirForce":
+            print("AirForce")
+            url = URL(string: "https://devimages-cdn.apple.com/ar/photogrammetry/AirForce.usdz")!
+        case "fender_stratocaster":
+            print("fender_stratocaster")
+            url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/stratocaster/fender_stratocaster.usdz")!
+        case "moa_rose" :
+            print("moa_rose")
+            url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/raw/main/models/moa_rose.usdz")!
+        case "hanssemchair01" :
+            print("hanssemchair01")
+            url = URL(string: "https://github.com/Jungjjeong/2021-Summer-Hanssem/raw/main/models/hanssemchair01.usdz")!
+        default:
+            print("Default")
+            url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!
+        }
+        
+        
+        //2. Create The Download Session
+        print("create the download session")
+        let downloadSession = URLSession(configuration: URLSession.shared.configuration, delegate: self, delegateQueue: nil)
+        
+        
+        //3. Create The Download Task & Run It
+        print("create the download task & run it")
+
+        let downloadTask = downloadSession.downloadTask(with: url)
+        downloadTask.resume()
+    }
+    
+    
     
     
     
@@ -182,16 +205,19 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         
         //1. Create The Filename
         let fileURL = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
-        
-        //2. Copy It To The Documents Directory
-        do {
-            try FileManager.default.copyItem(at: location, to: fileURL)
-            
-            print("Successfuly Saved File \(fileURL)")
-            loadModel()
-        } catch {
-            
-            print("Error Saving: \(error)")
+        print("----------------\(fileManager.fileExists(atPath: fileURL.path))")
+        if !fileManager.fileExists(atPath: fileURL.path) {
+            //2. Copy It To The Documents Directory
+            do {
+                try fileManager.copyItem(at: location, to: fileURL)
+                
+                print("Successfuly Saved File \(fileURL)")
+                loadModel()
+                closePopup()
+            } catch {
+                
+                print("Error Saving: \(error)")
+            }
         }
     }
     
@@ -199,7 +225,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
     
     func getDocumentsDirectory() -> URL {
         
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         return documentsDirectory
     }
