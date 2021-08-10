@@ -19,6 +19,7 @@ class Gesture {
 	let virtualObject: VirtualObject
 
 	var refreshTimer: Timer?
+    var handle = false
 
 	init(_ touches: Set<UITouch>, _ sceneView: ARSCNView, _ virtualObject: VirtualObject) {
 		currentTouches = touches
@@ -33,9 +34,11 @@ class Gesture {
 
 	static func startGestureFromTouches(_ touches: Set<UITouch>, _ sceneView: ARSCNView,
 	                                    _ virtualObject: VirtualObject) -> Gesture? {
-		if touches.count == 1 {
+        if touches.count == 1{
+            return HandleTrueGesture(touches, sceneView, virtualObject)
+        } else if touches.count == 2{
 			return SingleFingerGesture(touches, sceneView, virtualObject)
-		} else if touches.count == 2 {
+		} else if touches.count == 3 {
 			return TwoFingerGesture(touches, sceneView, virtualObject)
 		} else {
 			return nil
@@ -43,7 +46,9 @@ class Gesture {
 	}
 
 	func refreshCurrentGesture() {
-		if let singleFingerGesture = self as? SingleFingerGesture {
+        if let handleTrueGesture = self as? HandleTrueGesture {
+            handleTrueGesture.updateGesture()
+        } else if let singleFingerGesture = self as? SingleFingerGesture {
 			singleFingerGesture.updateGesture()
 		} else if let twoFingerGesture = self as? TwoFingerGesture {
 			twoFingerGesture.updateGesture()
@@ -62,10 +67,25 @@ class Gesture {
 		} else if type == .touchEnded || type == .touchCancelled {
 			currentTouches.subtract(touches)
 		}
+        
+        if let handleTrueGesture = self as? HandleTrueGesture {
+            if currentTouches.count == 1 {
+                // 해당 제스처를 업데이트한다.
+                handleTrueGesture.updateGesture()
+                return handleTrueGesture
+            } else {
+                // 한 손가락 제스처 완료
+                // 두 손가락 제스처 또는 제스처 없음으로 전환
+                handleTrueGesture.finishGesture()
+                handleTrueGesture.refreshTimer?.invalidate()
+                handleTrueGesture.refreshTimer = nil
+                return Gesture.startGestureFromTouches(currentTouches, sceneView, virtualObject)
+            }
+        }
 
 		if let singleFingerGesture = self as? SingleFingerGesture {
 
-			if currentTouches.count == 1 {
+			if currentTouches.count == 2 {
 				// 해당 제스처를 업데이트한다.
 				singleFingerGesture.updateGesture()
 				return singleFingerGesture
@@ -79,7 +99,7 @@ class Gesture {
 			}
 		} else if let twoFingerGesture = self as? TwoFingerGesture {
 
-			if currentTouches.count == 2 {
+			if currentTouches.count == 3 {
 				// Update this gesture.
 				twoFingerGesture.updateGesture()
 				return twoFingerGesture
@@ -95,6 +115,142 @@ class Gesture {
 		}
 	}
 }
+
+class HandleTrueGesture: Gesture {
+
+    var initialTouchLocation = CGPoint()
+    var latestTouchLocation = CGPoint()
+
+    let translationThreshold: CGFloat = 30
+    var translationThresholdPassed = false
+    var hasMovedObject = false
+    var firstTouchWasOnObject = false
+    var dragOffset = CGPoint()
+
+    override init(_ touches: Set<UITouch>, _ sceneView: ARSCNView, _ virtualObject: VirtualObject) {
+        super.init(touches, sceneView, virtualObject)
+
+        let touch = currentTouches[currentTouches.index(currentTouches.startIndex, offsetBy: 0)]
+        initialTouchLocation = touch.location(in: sceneView)
+        latestTouchLocation = initialTouchLocation
+
+        // 첫번째 터치가 오브젝트 위에 있는지 체크 -> firstTouchWasOnObject
+
+        var hitTestOptions = [SCNHitTestOption: Any]()
+        hitTestOptions[SCNHitTestOption.boundingBoxOnly] = true
+        let results: [SCNHitTestResult] = sceneView.hitTest(initialTouchLocation, options: hitTestOptions)
+        for result in results {
+            if VirtualObject.isNodePartOfVirtualObject(result.node) {
+                firstTouchWasOnObject = true
+                break
+            }
+        }
+    }
+
+    func updateGesture() {
+
+        let touch = currentTouches[currentTouches.index(currentTouches.startIndex, offsetBy: 0)]
+        latestTouchLocation = touch.location(in: sceneView)
+
+//        if !translationThresholdPassed {
+//            let initialLocationToCurrentLocation = latestTouchLocation - initialTouchLocation
+//            let distanceFromStartLocation = initialLocationToCurrentLocation.length()
+//            if distanceFromStartLocation >= translationThreshold {
+//                translationThresholdPassed = true
+//                print("임계값 넘음")
+//
+//                let currentObjectLocation = CGPoint(sceneView.projectPoint(virtualObject.position))
+//                dragOffset = latestTouchLocation - currentObjectLocation
+//            }
+//        }
+
+        // 만약 터치한 부분에 오브젝트가 존재할 경우, handle이 가능하게 만들어준다.
+        if firstTouchWasOnObject {
+            let currentObjectLoaction = CGPoint(sceneView.projectPoint(virtualObject.position))
+            let offsetPos = currentObjectLoaction
+
+            virtualObject.translateHandleTrue(offsetPos, instantly:false, infinitePlane:true)
+            print("HandleTrueGesture Update func")
+            hasMovedObject = true
+        }
+    }
+
+    func finishGesture() {
+        if currentTouches.count > 1 {
+            return
+        }
+
+        if hasMovedObject {
+            return
+        }
+
+        // 해당 gesture로 물체가 이동되지 않은 경우, 해당 geometry에 대해 hittest -> 사용자가 object 자체를 탭했는지 알아본다.
+        print("이동되지 않았습니다. ")
+        var objectHit = false
+        var hitTestOptions = [SCNHitTestOption: Any]()
+        hitTestOptions[SCNHitTestOption.boundingBoxOnly] = true
+        let results: [SCNHitTestResult] = sceneView.hitTest(latestTouchLocation, options: hitTestOptions)
+
+        // 유저가 object 자체를 탭함
+        for result in results {
+            if VirtualObject.isNodePartOfVirtualObject(result.node) {
+                objectHit = true
+            }
+        }
+
+        // 일반적으로 개체 자체에 탭이 닿은 경우 개체의 위치를 바꾸지 않지만, 물체가 너무 커서 화면의 상당 부분을 덮고 있다면 해당 탭으로 위치를 바꿔준다.
+        if !objectHit || approxScreenSpaceCoveredByTheObject() > 0.5 {
+            // 화면상 손가락 끌기 임계값에 도달하지 않은 경우, 화면을 터치한 곳으로 물체 순간 이동
+            if !translationThresholdPassed {
+                virtualObject.translateBasedOnScreenPos(latestTouchLocation, instantly:true, infinitePlane:false)
+            }
+        }
+    }
+
+    func approxScreenSpaceCoveredByTheObject() -> Float {
+
+        //object의 바운딩 박스에 대한 전체 화면의 그리드에서 다수의 히트 테스트를 수행한다. -> object가 커버하는 스크린 공간의 양을 대략적으로 예측
+
+        let xAxisSamples = 6
+        let yAxisSamples = 6
+        let fieldOfViewWidth: CGFloat = 0.8
+        let fieldOfViewHeight: CGFloat = 0.8
+
+        let xAxisOffset: CGFloat = (1 - fieldOfViewWidth) / 2
+        let yAxisOffset: CGFloat = (1 - fieldOfViewHeight) / 2
+
+        let stepX = fieldOfViewWidth / CGFloat(xAxisSamples - 1)
+        let stepY = fieldOfViewHeight / CGFloat(yAxisSamples - 1)
+
+        var successFulHits: Float = 0
+
+        var screenSpaceX: CGFloat = xAxisOffset
+        var screenSpaceY: CGFloat = yAxisOffset
+
+        var hitTestOptions = [SCNHitTestOption: Any]()
+        hitTestOptions[SCNHitTestOption.boundingBoxOnly] = true
+
+        for x in 0 ..< xAxisSamples {
+            screenSpaceX = xAxisOffset + (CGFloat(x) * stepX)
+            for y in 0 ..< yAxisSamples {
+                screenSpaceY = yAxisOffset + (CGFloat(y) * stepY)
+
+                let point = CGPoint(x: screenSpaceX * sceneView.frame.width, y: screenSpaceY * sceneView.frame.height)
+
+                let results: [SCNHitTestResult] = sceneView.hitTest(point, options: hitTestOptions)
+                for result in results {
+                    if VirtualObject.isNodePartOfVirtualObject(result.node) {
+                        successFulHits += 1
+                        break
+                    }
+                }
+            }
+        }
+
+        return successFulHits / (Float)(xAxisSamples * yAxisSamples)
+    }
+}
+
 
 
 

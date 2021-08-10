@@ -16,6 +16,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
 	var id: Int!
     
     let fileManager = FileManager.default
+//    let progressViewController = ProgressViewController()
     let popUpView = UIStoryboard.init(name: "ProgressViewController", bundle: nil).instantiateViewController(identifier: "popUpView")
 
 
@@ -128,7 +129,10 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
 		modelLoaded = false
 	}
 
+    
+    // MARK: - Gesture
 	func translateBasedOnScreenPos(_ pos: CGPoint, instantly: Bool, infinitePlane: Bool) {
+        print("Translate BasedOn")
 		guard let controller = viewController else {
 			return
 		}
@@ -136,12 +140,24 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
 		controller.moveVirtualObjectToPosition(result.position, instantly, !result.hitAPlane)
 	}
     
+    func translateHandleTrue(_ pos: CGPoint, instantly: Bool, infinitePlane: Bool) {
+        print("Translate Handle True")
+        guard let controller = viewController else {
+            return
+        }
+        let result = controller.worldPositionFromScreenPosition(pos, objectPos: self.position, infinitePlane: infinitePlane)
+        let result2 = controller.worldPositionFromScreenPosition(pos, objectPos: self.position, infinitePlane: infinitePlane)
+        print(result)
+        print(result2)
+        controller.moveVirtualObjectToPosition(result.position, instantly, !result.hitAPlane)
+    }
+    
     // MARK: - PopUp setting
     
     func showPopup() {
         DispatchQueue.main.async{
             self.popUpView.modalPresentationStyle = .overCurrentContext
-            
+
             print("Show PopUp")
             
             self.viewController!.present(self.popUpView, animated: true, completion: nil)
@@ -151,6 +167,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
     
     func closePopup() {
         DispatchQueue.main.async {
+//            self.progressViewController.setProgress100()
             self.popUpView.dismiss(animated: true, completion: nil)
         }
     }
@@ -183,6 +200,14 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
             print("Default")
             url = URL(string: "https://developer.apple.com/augmented-reality/quick-look/models/teapot/teapot.usdz")!
         }
+         // getDownloadSize
+        getDownloadSize(url: url, completion: { (size, error) in
+            if error != nil {
+                print("An error occurred when retrieving the download size: \(error!.localizedDescription)")
+            } else {
+                print("The download size is \(size).")
+            }
+        })
         
         
         //2. Create The Download Session
@@ -206,10 +231,24 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         //1. Create The Filename
         let fileURL = getDocumentsDirectory().appendingPathComponent("\(modelName).usdz")
         print("----------------\(fileManager.fileExists(atPath: fileURL.path))")
+        
+//        var fileSize : UInt64
+        
+        
         if !fileManager.fileExists(atPath: fileURL.path) {
             //2. Copy It To The Documents Directory
             do {
                 try fileManager.copyItem(at: location, to: fileURL)
+                
+//                do{
+//                    let attr = try fileManager.attributesOfItem(atPath: fileURL.path)
+//                    fileSize = attr[FileAttributeKey.size] as! UInt64
+//
+//                    print("\(fileSize) byte")
+//
+//                } catch {
+//                    print("Error : \(error)")
+//                }
                 
                 print("Successfuly Saved File \(fileURL)")
                 loadModel()
@@ -228,6 +267,19 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
         let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         return documentsDirectory
+    }
+    
+    
+    func getDownloadSize(url: URL, completion: @escaping (Int64, Error?) -> Void ) {
+        let timeoutInterval = 5.0
+        var request = URLRequest(url: url,
+                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                                 timeoutInterval: timeoutInterval)
+        request.httpMethod = "HEAD"
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let contentLength = response?.expectedContentLength ?? NSURLSessionTransferSizeUnknown
+            completion(contentLength, error)
+        }.resume()
     }
 }
 

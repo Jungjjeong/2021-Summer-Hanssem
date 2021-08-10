@@ -45,20 +45,27 @@
                                     <constraint firstItem="UlA-uZ-a0N" firstAttribute="top" secondItem="jhc-7e-3vW" secondAttribute="top" constant="35" id="z32-Fo-PzS"/>
                                 </constraints>
                             </view>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" restorationIdentifier="progress" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="So1-Oh-jc7">
+                                <rect key="frame" x="98" y="446" width="218" height="4"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.089349877777647163" green="0.09041356679880963" blue="0.09041356679880963" alpha="0.59242300435799322" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jhc-7e-3vW" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="0ey-Pu-dWD"/>
+                            <constraint firstItem="So1-Oh-jc7" firstAttribute="centerX" secondItem="jhc-7e-3vW" secondAttribute="centerX" id="2G3-9h-9jf"/>
                             <constraint firstItem="jhc-7e-3vW" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="4hE-cb-kCM"/>
+                            <constraint firstItem="So1-Oh-jc7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="98" id="KmC-D4-14K"/>
                             <constraint firstItem="jhc-7e-3vW" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="295" id="Vra-Rn-2w4"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jhc-7e-3vW" secondAttribute="trailing" constant="60" id="Y2Q-Ur-tQL"/>
                             <constraint firstItem="jhc-7e-3vW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="60" id="j6S-uc-G6Y"/>
+                            <constraint firstItem="So1-Oh-jc7" firstAttribute="centerY" secondItem="jhc-7e-3vW" secondAttribute="centerY" id="rtP-pv-rqi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancleBtn" destination="dj3-0r-sPW" id="K2h-t3-16l"/>
                         <outlet property="popUpView" destination="jhc-7e-3vW" id="9kd-bx-lAw"/>
+                        <outlet property="progress" destination="So1-Oh-jc7" id="ag1-od-3dz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
