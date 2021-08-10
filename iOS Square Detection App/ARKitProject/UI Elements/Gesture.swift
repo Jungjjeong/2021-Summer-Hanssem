@@ -33,7 +33,8 @@ class Gesture {
 
 	static func startGestureFromTouches(_ touches: Set<UITouch>, _ sceneView: ARSCNView,
 	                                    _ virtualObject: VirtualObject) -> Gesture? {
-        if touches.count == 1 && virtualObject.handle {
+        if touches.count == 1 {
+            print("startGestureFromTouches count 1")
 			return SingleFingerGesture(touches, sceneView, virtualObject)
         } else if touches.count == 2 && virtualObject.handle {
 			return TwoFingerGesture(touches, sceneView, virtualObject)
@@ -125,7 +126,7 @@ class SingleFingerGesture: Gesture {
 			if VirtualObject.isNodePartOfVirtualObject(result.node) {
 				firstTouchWasOnObject = true
                 virtualObject.handle = true
-                print("설정")
+                print(virtualObject.handle)
 				break
 			}
 		}

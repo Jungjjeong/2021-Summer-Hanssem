@@ -42,6 +42,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
         sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
         session.run(sessionConfig)
+        HandlingButton.isHidden = true
     }
 
 	override func viewDidAppear(_ animated: Bool) { // view 보여진 후, animation appear
@@ -322,7 +323,67 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 			textManager.showAlert(title: title, message: message, actions: [])
 		}
 	}
+    
+    
+    // MARK: - Handling
+
+    @IBOutlet weak var HandlingButton : UIButton!
+    
+    func HandlingPossible(_ touches: Set<UITouch>, with event: UIEvent?) -> Bool {
+        
+        guard let object = VirtualObjectsManager.shared.getVirtualObjectSelected() else {
+            print("HandlingPossible - object nil false")
+            return false// object가 nil이어서 할당되지 않으면 return
+        }
+        
+        let touch = touches[touches.index(touches.startIndex, offsetBy: 0)]
+        let initialTouchLocation = touch.location(in: sceneView)
+
+        // 초기 터치가 virtualobject를 터치했는지
+
+        var hitTestOptions = [SCNHitTestOption: Any]()
+        hitTestOptions[SCNHitTestOption.boundingBoxOnly] = true
+        let results: [SCNHitTestResult] = sceneView.hitTest(initialTouchLocation, options: hitTestOptions)
+        for result in results {
+            if VirtualObject.isNodePartOfVirtualObject(result.node) {
+                object.handle = true
+                print(object.handle)
+                break
+            }
+        }
+        
+        if (object.handle == true) {
+            HandlingButton.isHidden = false
+            settingsButton.isHidden = true
+            addObjectButton.isHidden = true
+            restartExperienceButton.isHidden = true
+            print("HandlingPossible - true")
+            return true
+        }
+        else {
+            print("HandlingPossible - handle false")
+            return false
+        }
+    }
+    
+    @IBAction func HandlingComplete(_ sender: UIButton) {
+        guard let object = VirtualObjectsManager.shared.getVirtualObjectSelected() else {
+            print("HandlingComplete - object nil false")
+            return // object가 nil이어서 할당되지 않으면 return
+        }
+        HandlingButton.isHidden = true
+        settingsButton.isHidden = false
+        addObjectButton.isHidden = false
+        restartExperienceButton.isHidden = false
+        print("object handle 다시 false")
+        
+        object.handle = false
+        print(object.handle)
+    }
+    
 }
+
+
 
 // MARK: - ARKit / ARSCNView
 extension MainViewController {
@@ -389,22 +450,24 @@ extension MainViewController {
 		guard let object = VirtualObjectsManager.shared.getVirtualObjectSelected() else {
 			return // object가 nil이어서 할당되지 않으면 return
 		}
+        if HandlingPossible(touches, with: event) == true {
+            if currentGesture == nil { // gesture 비어있을 시 새로 시작 할당해주자.
+                currentGesture = Gesture.startGestureFromTouches(touches, self.sceneView, object)
+            } else {
+                currentGesture = currentGesture!.updateGestureFromTouches(touches, .touchBegan) // 이미 존재할 경우, update 할당해주자.
+            }
 
-		if currentGesture == nil { // gesture 비어있을 시 새로 시작 할당해주자.
-			currentGesture = Gesture.startGestureFromTouches(touches, self.sceneView, object)
-		} else {
-			currentGesture = currentGesture!.updateGestureFromTouches(touches, .touchBegan) // 이미 존재할 경우, update 할당해주자.
-		}
-
-		displayVirtualObjectTransform() // Display
+            displayVirtualObjectTransform() // Display
+        }
 	}
     
     //touch moved
 	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 		if !VirtualObjectsManager.shared.isAVirtualObjectPlaced() {
 			return
-		}
-		currentGesture = currentGesture?.updateGestureFromTouches(touches, .touchMoved)
+        }
+        currentGesture = currentGesture?.updateGestureFromTouches(touches, .touchMoved)
+
 		displayVirtualObjectTransform()
 	}
 

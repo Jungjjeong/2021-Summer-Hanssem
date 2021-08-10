@@ -38,16 +38,16 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPB-Sb-hjO" userLabel="Add Content Button Hit Area">
-                                <rect key="frame" x="155.66666666666666" y="748" width="64" height="64"/>
+                                <rect key="frame" x="155" y="748" width="65" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="KiC-ah-vls"/>
-                                    <constraint firstAttribute="width" constant="64" id="TNJ-vc-uNj"/>
+                                    <constraint firstAttribute="width" constant="65" id="TNJ-vc-uNj"/>
                                 </constraints>
                                 <connections>
                                     <action selector="chooseObject:" destination="BV1-FR-VrT" eventType="touchUpInside" id="r5u-3K-Kd4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8v-6q-UBb">
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8v-6q-UBb">
                                 <rect key="frame" x="319" y="725.33333333333337" width="41" height="47.666666666666629"/>
                                 <state key="normal" image="settings">
                                     <color key="titleColor" red="0.85882352939999995" green="0.72941176470000002" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -64,6 +64,19 @@
                                 </constraints>
                                 <connections>
                                     <action selector="restartExperience:" destination="BV1-FR-VrT" eventType="touchUpInside" id="PSf-ew-kiM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgI-fb-Vqi" userLabel="Restart Experience Button Icon">
+                                <rect key="frame" x="311" y="98" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="2gh-Pb-Wv3"/>
+                                    <constraint firstAttribute="height" constant="64" id="O3Q-DX-CLC"/>
+                                </constraints>
+                                <state key="normal" image="restart"/>
+                                <state key="selected" image="restartPressed"/>
+                                <state key="highlighted" image="restartPressed"/>
+                                <connections>
+                                    <action selector="restartExperience:" destination="BV1-FR-VrT" eventType="touchUpInside" id="0lM-js-lrR"/>
                                 </connections>
                             </button>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="9e0-zv-RiN" userLabel="Message Panel">
@@ -126,7 +139,7 @@
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcf-ic-uGo" userLabel="Add Object Button">
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcf-ic-uGo" userLabel="Add Object Button">
                                 <rect key="frame" x="16" y="725.33333333333337" width="48" height="47.666666666666629"/>
                                 <state key="normal" image="add">
                                     <color key="titleColor" red="0.85882352941176465" green="0.72941176470588232" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -136,7 +149,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4It-Iv-01H">
-                                <rect key="frame" x="157.66666666666666" y="723" width="61" height="31"/>
+                                <rect key="frame" x="157" y="723" width="61" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="61" id="3FJ-cZ-8Ls"/>
                                     <constraint firstAttribute="height" constant="40.333333333333371" id="z0z-7U-aHQ"/>
@@ -147,22 +160,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="거리재기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYP-hY-LOh">
-                                <rect key="frame" x="158.66666666666666" y="756.66666666666663" width="59" height="20.333333333333371"/>
+                                <rect key="frame" x="158" y="756.66666666666663" width="59" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgI-fb-Vqi" userLabel="Restart Experience Button Icon">
-                                <rect key="frame" x="311" y="98" width="64" height="64"/>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqU-ca-6Y2">
+                                <rect key="frame" x="154" y="645" width="66" height="65"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="2gh-Pb-Wv3"/>
-                                    <constraint firstAttribute="height" constant="64" id="O3Q-DX-CLC"/>
+                                    <constraint firstAttribute="height" constant="65" id="OgE-8T-Dlq"/>
                                 </constraints>
-                                <state key="normal" image="restart"/>
-                                <state key="selected" image="restartPressed"/>
-                                <state key="highlighted" image="restartPressed"/>
+                                <state key="normal" image="check"/>
                                 <connections>
-                                    <action selector="restartExperience:" destination="BV1-FR-VrT" eventType="touchUpInside" id="0lM-js-lrR"/>
+                                    <action selector="HandlingComplete:" destination="BV1-FR-VrT" eventType="touchUpInside" id="7Xq-u6-yGa"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -179,6 +189,7 @@
                             <constraint firstItem="xcf-ic-uGo" firstAttribute="top" secondItem="j8v-6q-UBb" secondAttribute="top" id="Baj-q8-q6W"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="xcf-ic-uGo" secondAttribute="bottom" constant="5" id="ByK-FY-Ajo"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" constant="113" id="FTS-AH-WBr"/>
+                            <constraint firstItem="4It-Iv-01H" firstAttribute="top" secondItem="iqU-ca-6Y2" secondAttribute="bottom" constant="8" symbolic="YES" id="FVR-e1-LRf"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="leading" secondItem="9e0-zv-RiN" secondAttribute="trailing" id="MwJ-LS-qaQ"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="NdC-Ig-ZW6"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="Nov-Ar-ZZv"/>
@@ -186,8 +197,11 @@
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" id="UMK-or-VVf"/>
                             <constraint firstItem="BgI-fb-Vqi" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" constant="10" id="V7S-nn-Lcz"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" id="YbV-6m-kVC"/>
+                            <constraint firstItem="iqU-ca-6Y2" firstAttribute="centerX" secondItem="SPB-Sb-hjO" secondAttribute="centerX" id="aDJ-H6-DMM"/>
+                            <constraint firstItem="iqU-ca-6Y2" firstAttribute="leading" secondItem="GBj-4O-Whc" secondAttribute="leading" constant="154" id="fRN-t8-KwI"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="fjf-Mj-ALG"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" constant="15" id="iIf-WZ-kZj"/>
+                            <constraint firstItem="iqU-ca-6Y2" firstAttribute="centerX" secondItem="4It-Iv-01H" secondAttribute="centerX" id="iLX-MC-qWL"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="lHd-lf-g1u"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="leading" secondItem="4It-Iv-01H" secondAttribute="trailing" constant="-63" id="nW7-gq-BEs"/>
                             <constraint firstItem="HYP-hY-LOh" firstAttribute="centerX" secondItem="4It-Iv-01H" secondAttribute="centerX" id="ovg-qY-RFQ"/>
@@ -200,6 +214,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="aK3-cd-QRt"/>
                     <connections>
+                        <outlet property="HandlingButton" destination="iqU-ca-6Y2" id="PaF-gb-Wbg"/>
                         <outlet property="addObjectButton" destination="xcf-ic-uGo" id="uFa-W2-4Iu"/>
                         <outlet property="debugMessageLabel" destination="Cxm-GD-h1F" id="0BW-FJ-xmR"/>
                         <outlet property="featurePointCountLabel" destination="2ZI-fK-iax" id="wpJ-fJ-Kn2"/>
@@ -678,6 +693,7 @@
         <image name="Backgroud" width="1200" height="1800"/>
         <image name="Symbol" width="4961" height="1961"/>
         <image name="add" width="48" height="48"/>
+        <image name="check" width="85.333335876464844" height="85.333335876464844"/>
         <image name="restart" width="20" height="23"/>
         <image name="restartPressed" width="20" height="23"/>
         <image name="ruler" catalog="system" width="128" height="57"/>
