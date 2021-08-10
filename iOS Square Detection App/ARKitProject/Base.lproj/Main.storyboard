@@ -66,50 +66,37 @@
                                     <action selector="restartExperience:" destination="BV1-FR-VrT" eventType="touchUpInside" id="PSf-ew-kiM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgI-fb-Vqi" userLabel="Restart Experience Button Icon">
-                                <rect key="frame" x="340" y="108" width="20" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="2gh-Pb-Wv3"/>
-                                    <constraint firstAttribute="height" constant="23" id="O3Q-DX-CLC"/>
-                                </constraints>
-                                <state key="normal" image="restart"/>
-                                <state key="selected" image="restartPressed"/>
-                                <state key="highlighted" image="restartPressed"/>
-                                <connections>
-                                    <action selector="restartExperience:" destination="BV1-FR-VrT" eventType="touchUpInside" id="0lM-js-lrR"/>
-                                </connections>
-                            </button>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="9e0-zv-RiN" userLabel="Message Panel">
-                                <rect key="frame" x="15" y="113" width="310" height="83"/>
+                                <rect key="frame" x="15" y="113" width="296" height="83"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AVp-TR-4Nw">
-                                    <rect key="frame" x="0.0" y="0.0" width="310" height="83"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="296" height="83"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4B-nn-Jhq">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="83"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="295" height="83"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CFm-yP-zdd">
-                                                <rect key="frame" x="0.0" y="0.0" width="310" height="83"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="295" height="83"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GT6-ZJ-can">
-                                                        <rect key="frame" x="10" y="10" width="290" height="63"/>
+                                                        <rect key="frame" x="10" y="10" width="275" height="63"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Point cloud size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ZI-fK-iax" userLabel="VIO cloud size">
-                                                                <rect key="frame" x="0.0" y="0.0" width="290" height="14.333333333333334"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="275" height="14.333333333333334"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                 <nil key="textColor"/>
                                                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <size key="shadowOffset" width="1" height="1"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Tracking status" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqz-65-rAs" userLabel="Messages label">
-                                                                <rect key="frame" x="0.0" y="24.333333333333343" width="290" height="14.333333333333336"/>
+                                                                <rect key="frame" x="0.0" y="24.333333333333343" width="275" height="14.333333333333336"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                 <nil key="textColor"/>
                                                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <size key="shadowOffset" width="1" height="1"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Messages" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxm-GD-h1F" userLabel="Debug messages label">
-                                                                <rect key="frame" x="0.0" y="48.666666666666657" width="290" height="14.333333333333336"/>
+                                                                <rect key="frame" x="0.0" y="48.666666666666657" width="275" height="14.333333333333336"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                 <nil key="textColor"/>
                                                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,10 +119,10 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="R4B-nn-Jhq" firstAttribute="centerX" secondItem="9e0-zv-RiN" secondAttribute="centerX" id="5Wx-OF-P5D"/>
+                                    <constraint firstItem="R4B-nn-Jhq" firstAttribute="centerX" secondItem="9e0-zv-RiN" secondAttribute="centerX" constant="-0.5" id="5Wx-OF-P5D"/>
                                     <constraint firstItem="R4B-nn-Jhq" firstAttribute="height" secondItem="9e0-zv-RiN" secondAttribute="height" id="ErG-uz-abl"/>
                                     <constraint firstItem="R4B-nn-Jhq" firstAttribute="centerY" secondItem="9e0-zv-RiN" secondAttribute="centerY" id="FL2-sB-IOv"/>
-                                    <constraint firstItem="R4B-nn-Jhq" firstAttribute="width" secondItem="9e0-zv-RiN" secondAttribute="width" id="fUJ-eD-ZUb"/>
+                                    <constraint firstItem="R4B-nn-Jhq" firstAttribute="width" secondItem="9e0-zv-RiN" secondAttribute="width" constant="-1" id="fUJ-eD-ZUb"/>
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
@@ -165,6 +152,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgI-fb-Vqi" userLabel="Restart Experience Button Icon">
+                                <rect key="frame" x="311" y="98" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="2gh-Pb-Wv3"/>
+                                    <constraint firstAttribute="height" constant="64" id="O3Q-DX-CLC"/>
+                                </constraints>
+                                <state key="normal" image="restart"/>
+                                <state key="selected" image="restartPressed"/>
+                                <state key="highlighted" image="restartPressed"/>
+                                <connections>
+                                    <action selector="restartExperience:" destination="BV1-FR-VrT" eventType="touchUpInside" id="0lM-js-lrR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GBj-4O-Whc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,19 +172,19 @@
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="4It-Iv-01H" secondAttribute="bottom" constant="19.666666666666629" id="2tq-lx-YrQ"/>
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="35g-18-nn3"/>
                             <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="j8v-6q-UBb" secondAttribute="centerY" constant="-11" id="5XO-r9-Hyj"/>
-                            <constraint firstItem="BgI-fb-Vqi" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" constant="-15" id="6c1-k7-y99"/>
+                            <constraint firstItem="BgI-fb-Vqi" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="6c1-k7-y99"/>
                             <constraint firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="6h6-BI-mhL"/>
                             <constraint firstItem="E6c-py-dvH" firstAttribute="top" secondItem="RLh-bf-1c3" secondAttribute="top" id="7gH-DS-Crg"/>
                             <constraint firstItem="E6c-py-dvH" firstAttribute="leading" secondItem="GBj-4O-Whc" secondAttribute="leading" id="8nh-ZQ-AuM"/>
                             <constraint firstItem="xcf-ic-uGo" firstAttribute="top" secondItem="j8v-6q-UBb" secondAttribute="top" id="Baj-q8-q6W"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="xcf-ic-uGo" secondAttribute="bottom" constant="5" id="ByK-FY-Ajo"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" constant="113" id="FTS-AH-WBr"/>
-                            <constraint firstItem="BgI-fb-Vqi" firstAttribute="leading" secondItem="9e0-zv-RiN" secondAttribute="trailing" constant="15" id="MwJ-LS-qaQ"/>
+                            <constraint firstItem="BgI-fb-Vqi" firstAttribute="leading" secondItem="9e0-zv-RiN" secondAttribute="trailing" id="MwJ-LS-qaQ"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="NdC-Ig-ZW6"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="Nov-Ar-ZZv"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="centerX" secondItem="E6c-py-dvH" secondAttribute="centerX" id="SHv-Jn-H5B"/>
                             <constraint firstItem="SuF-Os-zmb" firstAttribute="top" secondItem="E6c-py-dvH" secondAttribute="top" id="UMK-or-VVf"/>
-                            <constraint firstItem="BgI-fb-Vqi" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" constant="20" id="V7S-nn-Lcz"/>
+                            <constraint firstItem="BgI-fb-Vqi" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" constant="10" id="V7S-nn-Lcz"/>
                             <constraint firstItem="mHW-JQ-uOv" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" id="YbV-6m-kVC"/>
                             <constraint firstItem="SPB-Sb-hjO" firstAttribute="bottom" secondItem="E6c-py-dvH" secondAttribute="bottom" id="fjf-Mj-ALG"/>
                             <constraint firstItem="9e0-zv-RiN" firstAttribute="leading" secondItem="E6c-py-dvH" secondAttribute="leading" constant="15" id="iIf-WZ-kZj"/>
@@ -194,7 +194,7 @@
                             <constraint firstItem="xcf-ic-uGo" firstAttribute="leading" secondItem="RLh-bf-1c3" secondAttribute="leadingMargin" id="tCP-Yd-GSD"/>
                             <constraint firstItem="q5A-xD-w2H" firstAttribute="trailing" secondItem="E6c-py-dvH" secondAttribute="trailing" id="uvV-bc-TtK"/>
                             <constraint firstItem="4It-Iv-01H" firstAttribute="centerY" secondItem="xcf-ic-uGo" secondAttribute="centerY" constant="-11" id="vPU-9e-B4O"/>
-                            <constraint firstItem="j8v-6q-UBb" firstAttribute="trailing" secondItem="BgI-fb-Vqi" secondAttribute="trailing" id="vW7-nn-nn3"/>
+                            <constraint firstItem="j8v-6q-UBb" firstAttribute="trailing" secondItem="BgI-fb-Vqi" secondAttribute="trailing" constant="-15" id="vW7-nn-nn3"/>
                             <constraint firstItem="GBj-4O-Whc" firstAttribute="bottom" secondItem="HYP-hY-LOh" secondAttribute="bottom" constant="1" id="xvh-A1-t9R"/>
                         </constraints>
                     </view>
@@ -212,7 +212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="995.32710280373828" y="98.488120950323975"/>
+            <point key="canvasLocation" x="994.39999999999998" y="98.275862068965523"/>
         </scene>
         <!--Realitykit Load-->
         <scene sceneID="uOP-UF-Dfy">

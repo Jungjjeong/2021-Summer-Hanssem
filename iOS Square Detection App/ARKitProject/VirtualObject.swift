@@ -14,6 +14,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
 	var modelName: String = ""
 	var modelLoaded: Bool = false
 	var id: Int!
+    var handle: Bool = false
     
     let fileManager = FileManager.default
 //    let progressViewController = ProgressViewController()
@@ -28,7 +29,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
 		self.name = VirtualObject.ROOT_NAME
 	}
     
-    init(modelName: String, fileExtension : String, thumbImageFilename: String, title: String) {
+    init(modelName: String, fileExtension : String, thumbImageFilename: String, title: String, handle : Bool) {
 		super.init()
 		self.id = VirtualObjectsManager.shared.generateUid()
 		self.name = VirtualObject.ROOT_NAME
@@ -36,6 +37,7 @@ class VirtualObject: SCNNode, URLSessionDownloadDelegate{
 		self.fileExtension = fileExtension
 		self.thumbImage = UIImage(named: thumbImageFilename)
 		self.title = title
+        self.handle = handle
 	}
 
 	required init?(coder aDecoder: NSCoder) {

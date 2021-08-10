@@ -13,7 +13,7 @@ import SceneKit
 class Teapot: VirtualObject{
 
     override init() {
-        super.init(modelName: "Teapot", fileExtension : "usdz", thumbImageFilename: "vase", title: "Teapot")
+        super.init(modelName: "Teapot", fileExtension : "usdz", thumbImageFilename: "vase", title: "Teapot", handle: false)
     }
 
     required init?(coder aDecoder: NSCoder) {

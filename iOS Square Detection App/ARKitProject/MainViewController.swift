@@ -242,10 +242,13 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
 
 		DispatchQueue.main.async {
 			self.restartExperienceButtonIsEnabled = false // 버튼 다시 false
-            
+            print("restart")
 			self.textManager.cancelAllScheduledMessages()
 			self.textManager.dismissPresentedAlert()
 			self.textManager.showMessage("새로운 Session을 시작합니다.")
+            
+            self.initializeNode(view: self.sceneView)
+
 
 			self.setupFocusSquare() // focusSquare 초기화 및 사용하기 위해 세팅
 			self.restartPlaneDetection() // planeDetection 다시 수행

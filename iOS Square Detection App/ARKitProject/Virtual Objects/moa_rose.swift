@@ -12,7 +12,7 @@ import Foundation
 class moa_rose: VirtualObject{
 
     override init() {
-        super.init(modelName: "moa_rose", fileExtension: "usdz", thumbImageFilename: "vase", title: "moa_rose")
+        super.init(modelName: "moa_rose", fileExtension: "usdz", thumbImageFilename: "vase", title: "moa_rose", handle : false)
     }
 
     required init?(coder aDecoder: NSCoder) {

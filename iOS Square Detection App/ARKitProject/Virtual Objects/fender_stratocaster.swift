@@ -10,7 +10,7 @@ import Foundation
 class fender_stratocaster: VirtualObject{
 
     override init() {
-        super.init(modelName: "fender_stratocaster", fileExtension: "usdz", thumbImageFilename: "vase", title: "fender_stratocaster")
+        super.init(modelName: "fender_stratocaster", fileExtension: "usdz", thumbImageFilename: "vase", title: "fender_stratocaster", handle : false)
     }
 
     required init?(coder aDecoder: NSCoder) {
