@@ -15,13 +15,13 @@ extension ARCamera.TrackingState {
         case .limited(let reason):
             switch reason {
             case .excessiveMotion:
-                return "TRACKING LIMITED\nToo much camera movement"
+                return "TRACKING LIMITED\n카메라의 흔들림이 큽니다."
             case .insufficientFeatures:
-                return "TRACKING LIMITED\nNot enough surface detail"
+                return "TRACKING LIMITED\n표면 정보가 부족합니다."
             case .initializing:
-                return "INITIALIZING"
+                return "초기화"
             case .relocalizing:
-                return "INITIALIZING"
+                return "초기화"
             }
         }
 	}

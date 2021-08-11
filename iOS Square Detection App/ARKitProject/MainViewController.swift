@@ -43,6 +43,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
         sceneView.autoenablesDefaultLighting = true
         session.run(sessionConfig)
         HandlingButton.isHidden = true
+
     }
 
 	override func viewDidAppear(_ animated: Bool) { // view 보여진 후, animation appear
@@ -358,6 +359,7 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
             addObjectButton.isHidden = true
             restartExperienceButton.isHidden = true
             print("HandlingPossible - true")
+            
             return true
         }
         else {
@@ -375,10 +377,32 @@ class MainViewController: UIViewController { // 가장 상위에 위치할 Contr
         settingsButton.isHidden = false
         addObjectButton.isHidden = false
         restartExperienceButton.isHidden = false
-        print("object handle 다시 false")
+        print("HandlingComplete - object handle 다시 false")
+        
+        print(object.childNodes)
+        object.childNodes[1].removeFromParentNode()
+        
+//        for obj in object.childNodes {
+//            obj.removeFromParentNode()
+//        }
+        
         
         object.handle = false
         print(object.handle)
+    }
+    
+    
+    func createBox() -> SCNNode {
+        let boxGeometry = SCNBox(width: 0.5, height: 0, length: 0.5, chamferRadius: 0)
+        
+        let material = SCNMaterial()
+        material.isDoubleSided = false
+        material.diffuse.contents = UIImage(named: "Models.scnassets/circle.png")
+        
+        let boxNode = SCNNode(geometry: boxGeometry)
+        boxNode.geometry?.materials = [material]
+        
+        return boxNode
     }
     
 }
@@ -453,6 +477,11 @@ extension MainViewController {
         if HandlingPossible(touches, with: event) == true {
             if currentGesture == nil { // gesture 비어있을 시 새로 시작 할당해주자.
                 currentGesture = Gesture.startGestureFromTouches(touches, self.sceneView, object)
+                if object.childNodes.count == 1 {
+                    let box = self.createBox()
+                    object.addChildNode(box)
+                    print(object.childNodes)
+                }
             } else {
                 currentGesture = currentGesture!.updateGestureFromTouches(touches, .touchBegan) // 이미 존재할 경우, update 할당해주자.
             }
