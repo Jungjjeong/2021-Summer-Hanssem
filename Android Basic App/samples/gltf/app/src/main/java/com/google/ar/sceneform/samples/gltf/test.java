@@ -172,10 +172,10 @@ public class test extends AppCompatActivity implements com.google.ar.sceneform.S
 
 
     private void initModel() {
-        MaterialFactory.makeTransparentWithColor(this, new Color(android.graphics.Color.RED))
+        MaterialFactory.makeTransparentWithColor(this, new Color(android.graphics.Color.WHITE))
                 .thenAccept(
                         material -> {
-                            cubeRenderable = ShapeFactory.makeSphere(0.02f, Vector3.zero(), material);
+                            cubeRenderable = ShapeFactory.makeSphere(0.015f, Vector3.zero(), material);
                             cubeRenderable.setShadowCaster(false);
                             cubeRenderable.setShadowReceiver(false);
                         });
@@ -232,7 +232,7 @@ public class test extends AppCompatActivity implements com.google.ar.sceneform.S
                     break;
             }
             String distanceMeters = df.format(distanceMeasured);
-            tvDistance.setText("Distance measured: " + distanceMeters + selectedMode);
+            tvDistance.setText("측정된 길이: " + distanceMeters + selectedMode);
 
         }
     }
@@ -258,13 +258,15 @@ public class test extends AppCompatActivity implements com.google.ar.sceneform.S
             final Vector3 directionFromTopToBottom = difference.normalized();
             final Quaternion rotationFromAToB =
                     Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
-            MaterialFactory.makeOpaqueWithColor(getApplicationContext(), new Color(0, 255, 244))
+            MaterialFactory.makeOpaqueWithColor(getApplicationContext(), new Color(android.graphics.Color.WHITE))
                     .thenAccept(
                             material -> {
                                 ModelRenderable model = ShapeFactory.makeCube(
                                         new Vector3(.01f, .01f, difference.length()),
                                         Vector3.zero(), material);
 
+                                model.setShadowCaster(false);
+                                model.setShadowReceiver(false);
 
                                 Node node = new Node();
                                 node.setParent(anchorNode);
