@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DistanceActivity" >
+
+    <fragment
+        android:id="@+id/ux_fragment"
+        android:name="com.google.ar.sceneform.ux.ArFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tvDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#94000000"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="측정된 길이"
+        android:fontFamily="@font/app_main_font"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <!--    <Button-->
+    <!--        android:id="@+id/clearButton"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_weight="0.5"-->
+    <!--        android:background="#18489B"-->
+    <!--        android:fontFamily="sans-serif-thin"-->
+    <!--        android:onClick="clearButton"-->
+    <!--        android:text="clear"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textColor="@android:color/white"-->
+    <!--        android:textSize="14sp" />-->
+
+</FrameLayout>

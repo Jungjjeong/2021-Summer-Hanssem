@@ -1,0 +1,109 @@
+
+<!--
+   Copyright 2018 Google LLC.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".GltfActivity">
+
+  <ImageView
+      android:id="@+id/squareImage"
+      android:layout_width="150dp"
+      android:layout_height="150dp"
+      android:layout_gravity="center_horizontal|center_vertical"
+      android:layout_weight="1"
+      app:srcCompat="@drawable/square" />
+
+  <Button
+      android:id="@+id/button_add"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_gravity="bottom|center"
+      android:layout_marginBottom="60sp"
+      android:background="@drawable/add"
+      />
+
+  <Button
+      android:id="@+id/button_list"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_gravity="top|left"
+      android:layout_marginStart="60sp"
+      android:layout_marginTop="60sp"
+      android:background="@drawable/list" />
+
+  <Button
+      android:id="@+id/button_refresh"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_gravity="top|right"
+      android:layout_marginTop="60sp"
+      android:layout_marginRight="60sp"
+      android:background="@drawable/refresh" />
+
+  <Button
+      android:id="@+id/button_distance"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_gravity="bottom|right"
+      android:layout_marginBottom="60sp"
+      android:layout_marginEnd="60sp"
+      android:background="@drawable/ruler" />
+
+  <android.support.v4.widget.DrawerLayout
+      android:id="@+id/drawerLayout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+      <fragment
+          android:id="@+id/ux_fragment"
+          android:name="com.google.ar.sceneform.ux.ArFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+      android:id="@+id/nav"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      app:headerLayout="@layout/drawer_header"
+      app:menu="@menu/drawer_menu"
+      android:background="#8D000000"
+      app:itemTextColor="#FFFFFF"
+      android:layout_marginTop="15dp"
+    />
+
+  </android.support.v4.widget.DrawerLayout>
+
+  <ProgressBar
+      android:id="@+id/progress"
+      style="@android:style/Widget.ProgressBar.Large"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center" />
+
+</FrameLayout>
