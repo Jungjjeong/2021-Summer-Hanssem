@@ -1,44 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<FrameLayout-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".DistanceActivity" >-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/ux_fragment"-->
-<!--        android:name="com.google.ar.sceneform.ux.ArFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/tvDistance"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        android:background="#94000000"-->
-<!--        android:gravity="center"-->
-<!--        android:padding="8dp"-->
-<!--        android:text="측정된 길이"-->
-<!--        android:fontFamily="@font/app_main_font"-->
-<!--        android:textColor="@android:color/white"-->
-<!--        android:textSize="18sp" />-->
-
-<!--    &lt;!&ndash;    <Button&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:id="@+id/clearButton"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:layout_weight="0.5"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:background="#18489B"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:fontFamily="sans-serif-thin"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:onClick="clearButton"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:text="clear"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:textAlignment="center"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:textColor="@android:color/white"&ndash;&gt;-->
-<!--    &lt;!&ndash;        android:textSize="14sp" />&ndash;&gt;-->
-
-<!--</FrameLayout>-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -59,14 +19,14 @@
         <TextView
             android:id="@+id/tvDistance"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="0.7"
             android:background="@android:color/black"
-            android:fontFamily="@font/app_main_font"
             android:gravity="center"
             android:padding="8dp"
-            android:text="측정된 길이"
+            android:fontFamily="@font/app_main_font"
+            android:text="측정 길이"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
