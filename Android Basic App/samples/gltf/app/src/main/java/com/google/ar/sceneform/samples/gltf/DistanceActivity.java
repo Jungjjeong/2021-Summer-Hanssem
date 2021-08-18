@@ -146,7 +146,6 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                     default:
                         selectedMode="meters";
                         break;
-
                 }
             }
 
