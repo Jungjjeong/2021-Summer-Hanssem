@@ -51,6 +51,7 @@ import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Trackable;
 import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.Material;
 import com.google.ar.sceneform.rendering.ModelRenderable;
@@ -263,10 +264,6 @@ public class GltfActivity extends AppCompatActivity {
             return true;
         });
 
-        Button button_refresh = findViewById(R.id.button_refresh);
-        // anchor 초기화
-        button_refresh.setOnClickListener(v -> animators.clear());
-
         // -----
 
 //        String newUri = "http://image.hanssem.com/hsimg/gds3d/dk/" + key + ".glb";
@@ -276,6 +273,22 @@ public class GltfActivity extends AppCompatActivity {
         buildModel(weakActivity, this, fileUri, progress);
 
 
+
+        Button button_refresh = findViewById(R.id.button_refresh);
+        // anchor 초기화
+
+
+        button_refresh.setOnClickListener(v -> {
+                    weakActivity.get().renderable = null;
+                    if (arFragment.getArSceneView().getScene().getChildren() != null) {
+                        System.out.println("refresh");
+                        for (Node i : arFragment.getArSceneView().getScene().getChildren()){
+                            i = null;
+                        }
+                    } else
+                        return;
+                }
+        );
 
 
 //        arFragment.setOnTapArPlaneListener( // Plane의 white dot tap하면 function 실행 -> hitresult(x,y), plane, motionEvent -> Anchor 생성 가능
