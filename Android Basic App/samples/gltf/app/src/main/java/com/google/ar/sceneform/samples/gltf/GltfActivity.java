@@ -26,13 +26,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -110,13 +114,22 @@ public class GltfActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!checkIsSupportedDeviceOrFinish(this)) {
-            return;
-        } // 지원하는 OpenGL 버전(3.0)이 적합한지, android sdk 버전이 맞는지 확인
 
         setContentView(R.layout.activity_ux);
         ProgressBar progress = findViewById(R.id.progress);
         progress.setVisibility(View.GONE);
+
+        // toolbar 사용 설정
+
+
+
+
+
+
+
+        if (!checkIsSupportedDeviceOrFinish(this)) {
+            return;
+        } // 지원하는 OpenGL 버전(3.0)이 적합한지, android sdk 버전이 맞는지 확인
 
         final String[] Glburi = new String[22];
         Glburi[0] = "https://raw.githubusercontent.com/justbeaver97/2021-Summer-ValueUpProject/master/test_asset/668317.glb";
@@ -317,54 +330,58 @@ public class GltfActivity extends AppCompatActivity {
 
         Button addButton = findViewById(R.id.button_add);
         addButton.setOnClickListener(v -> {
-            if (renderable == null) {
-                return;
-            }
-            HitResult hitResult = null;
-            Point pt = new Point(arFragment.getArSceneView().getWidth() / 2, arFragment.getArSceneView().getHeight() /2);
-            List<HitResult> hits;
-            Frame frame = arFragment.getArSceneView().getArFrame();
-            if (frame != null) {
-                hits = frame.hitTest(pt.x, pt.y);
-                for (HitResult hit : hits) {
-                    Trackable trackable = hit.getTrackable();
-                    if (trackable instanceof Plane && ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
-                        hitResult = hit;
-                        break;
+            try{
+                if (renderable == null) {
+                    return;
+                }
+                HitResult hitResult = null;
+                Point pt = new Point(arFragment.getArSceneView().getWidth() / 2, arFragment.getArSceneView().getHeight() /2);
+                List<HitResult> hits;
+                Frame frame = arFragment.getArSceneView().getArFrame();
+                if (frame != null) {
+                    hits = frame.hitTest(pt.x, pt.y);
+                    for (HitResult hit : hits) {
+                        Trackable trackable = hit.getTrackable();
+                        if (trackable instanceof Plane && ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
+                            hitResult = hit;
+                            break;
+                        }
                     }
                 }
-            }
-            // Create the Anchor.
-            assert hitResult != null;
-            Anchor anchor = hitResult.createAnchor(); // create anchor
-            AnchorNode anchorNode = new AnchorNode(anchor); // Object가 배치되는 영역인 Node를 Anchor 할당 생성 -> AnchorNode
-            anchorNode.setParent(arFragment.getArSceneView().getScene()); // (getScene : 장면 반환 / getArSceneView : 장면 랜더링(arsceneview) 반환) -> parentNode로 set
+                // Create the Anchor.
+                assert hitResult != null;
+                Anchor anchor = hitResult.createAnchor(); // create anchor
+                AnchorNode anchorNode = new AnchorNode(anchor); // Object가 배치되는 영역인 Node를 Anchor 할당 생성 -> AnchorNode
+                anchorNode.setParent(arFragment.getArSceneView().getScene()); // (getScene : 장면 반환 / getArSceneView : 장면 랜더링(arsceneview) 반환) -> parentNode로 set
 
-            // Create the transformable model and add it to the anchor.
-            TransformableNode model = new TransformableNode(arFragment.getTransformationSystem()); // TransformableNode -> 선택, 변환, 회전, 크기 조정 가능한 Node
-            model.setRenderable(renderable); // set rendering model
-            model.getScaleController().setMaxScale(0.015f);
-            model.getScaleController().setMinScale(0.005f); // set Scale
-            model.setParent(anchorNode); // Anchor node 위에 model set -> 부모 설정
+                // Create the transformable model and add it to the anchor.
+                TransformableNode model = new TransformableNode(arFragment.getTransformationSystem()); // TransformableNode -> 선택, 변환, 회전, 크기 조정 가능한 Node
+                model.setRenderable(renderable); // set rendering model
+                model.getScaleController().setMaxScale(0.015f);
+                model.getScaleController().setMinScale(0.005f); // set Scale
+                model.setParent(anchorNode); // Anchor node 위에 model set -> 부모 설정
 
-            model.select();
+                model.select();
 
-            // Filament -> android, iOS 등 WebGL을 위한 실시간 Rendering engine
-            assert model.getRenderableInstance() != null;
-            FilamentAsset filamentAsset = model.getRenderableInstance().getFilamentAsset(); // filamentAsset = filament에서 사용할 3D 모델(.glb file) 정의
-            assert filamentAsset != null;
-            if (filamentAsset.getAnimator().getAnimationCount() > 0) {
-                animators.add(new AnimationInstance(filamentAsset.getAnimator(), 0, System.nanoTime())); // Array set animators -> add Instance
-            }
+                // Filament -> android, iOS 등 WebGL을 위한 실시간 Rendering engine
+                assert model.getRenderableInstance() != null;
+                FilamentAsset filamentAsset = model.getRenderableInstance().getFilamentAsset(); // filamentAsset = filament에서 사용할 3D 모델(.glb file) 정의
+                assert filamentAsset != null;
+                if (filamentAsset.getAnimator().getAnimationCount() > 0) {
+                    animators.add(new AnimationInstance(filamentAsset.getAnimator(), 0, System.nanoTime())); // Array set animators -> add Instance
+                }
 
-            Color color = colors.get(nextColor); // basic color setting
-            nextColor++;
-            for (int i = 0; i < renderable.getSubmeshCount(); ++i) {
-                Material material = renderable.getMaterial(i);
-                material.setFloat4("baseColorFactor", color);
+                Color color = colors.get(nextColor); // basic color setting
+                nextColor++;
+                for (int i = 0; i < renderable.getSubmeshCount(); ++i) {
+                    Material material = renderable.getMaterial(i);
+                    material.setFloat4("baseColorFactor", color);
+                }
+            }catch (Exception e){
+                Toast myToast = Toast.makeText(this.getApplicationContext(), "평면이 인식된 곳에서 버튼을 눌러주세요.", Toast.LENGTH_SHORT);
+                myToast.show();
             }
         });
-
     }
 
 
