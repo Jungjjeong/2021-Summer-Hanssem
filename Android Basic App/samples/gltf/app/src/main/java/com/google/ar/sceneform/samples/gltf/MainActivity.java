@@ -30,9 +30,5 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.hanssem.store/"));
         startActivity(intent);
     }
-    public void onClickTestButton(View v) {
-        Intent intent = new Intent(getApplicationContext(),test.class); // 3D LIST
-        startActivity(intent);
-    }
 }
 

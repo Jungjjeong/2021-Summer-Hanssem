@@ -41,22 +41,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/test"
-        style="@android:style/Widget.Button"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
-        android:background="@drawable/round_button"
-        android:fontFamily="@font/app_main_font"
-        android:onClick="onClickTestButton"
-        android:text="Test"
-        android:textColor="#505050"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_list"

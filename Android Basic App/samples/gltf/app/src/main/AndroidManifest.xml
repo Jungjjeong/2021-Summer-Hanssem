@@ -31,7 +31,6 @@
         <activity android:name=".List3dActivity"/>
         <activity android:name=".ListARActivity" />
         <activity android:name=".PlaceActivity" />
-        <activity android:name=".test" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
