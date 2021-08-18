@@ -59,13 +59,13 @@
         <TextView
             android:id="@+id/tvDistance"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_gravity="bottom"
             android:layout_weight="0.7"
             android:background="@android:color/black"
+            android:fontFamily="@font/app_main_font"
             android:gravity="center"
             android:padding="8dp"
-            android:fontFamily="@font/app_main_font"
             android:text="측정된 길이"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
