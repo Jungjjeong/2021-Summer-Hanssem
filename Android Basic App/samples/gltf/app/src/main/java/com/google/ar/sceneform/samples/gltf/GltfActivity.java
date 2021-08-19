@@ -270,11 +270,11 @@ public class GltfActivity extends AppCompatActivity {
 
 
         Button button_refresh = findViewById(R.id.button_refresh);
+        ImageView imageView = findViewById(R.id.squareImage);
         // anchor 초기화
 
 
         button_refresh.setOnClickListener(v -> {
-                    weakActivity.get().renderable = null;
                     if (arFragment.getArSceneView().getScene().getChildren() != null) {
                         System.out.println("refresh");
 
@@ -285,25 +285,11 @@ public class GltfActivity extends AppCompatActivity {
                             currentAnchorNode.getAnchor().detach();
                             currentAnchorNode.setParent(null);
                             currentAnchorNode = null;
-
-//                            arFragment.getArSceneView().getScene().removeChild(currentAnchorNode_1);
-//                            assert currentAnchorNode_1.getAnchor() != null;
-//                            currentAnchorNode_1.getAnchor().detach();
-//                            currentAnchorNode_1.setParent(null);
-//                            currentAnchorNode_1 = null;
-//
-//                            arFragment.getArSceneView().getScene().removeChild(anchorNode);
-//                            assert anchorNode.getAnchor() != null;
-//                            anchorNode.getAnchor().detach();
-//                            anchorNode.setParent(null);
-//                            anchorNode = null;
                         }
-
-
-
 
                         arFragment.onStart();
                     }
+                   imageView.setVisibility(View.VISIBLE);
                 }
         );
 
@@ -343,8 +329,6 @@ public class GltfActivity extends AppCompatActivity {
 //                });
 //
 
-
-        ImageView imageView = findViewById(R.id.squareImage);
 
 
         arFragment
