@@ -70,6 +70,7 @@ public class GltfActivity extends AppCompatActivity {
 
     private ArFragment arFragment; // ARCORE 기본 구성 사용
     private Renderable renderable; // sceneform rendering basic class -> rendering 가능한 3D model 생성
+    private AnchorNode currentAnchorNode;
 //    // + gltf file road, rendering -> Modelrenderable의 개체 생성을 처리
 //    private ViewRenderable viewRenderable;
 //    public boolean bool = false;
@@ -276,8 +277,32 @@ public class GltfActivity extends AppCompatActivity {
                     weakActivity.get().renderable = null;
                     if (arFragment.getArSceneView().getScene().getChildren() != null) {
                         System.out.println("refresh");
-                        for (Node i : arFragment.getArSceneView().getScene().getChildren()){
+
+                        if (currentAnchorNode != null)
+                        {
+                            arFragment.getArSceneView().getScene().removeChild(currentAnchorNode);
+                            assert currentAnchorNode.getAnchor() != null;
+                            currentAnchorNode.getAnchor().detach();
+                            currentAnchorNode.setParent(null);
+                            currentAnchorNode = null;
+
+//                            arFragment.getArSceneView().getScene().removeChild(currentAnchorNode_1);
+//                            assert currentAnchorNode_1.getAnchor() != null;
+//                            currentAnchorNode_1.getAnchor().detach();
+//                            currentAnchorNode_1.setParent(null);
+//                            currentAnchorNode_1 = null;
+//
+//                            arFragment.getArSceneView().getScene().removeChild(anchorNode);
+//                            assert anchorNode.getAnchor() != null;
+//                            anchorNode.getAnchor().detach();
+//                            anchorNode.setParent(null);
+//                            anchorNode = null;
                         }
+
+
+
+
+                        arFragment.onStart();
                     }
                 }
         );
@@ -373,6 +398,8 @@ public class GltfActivity extends AppCompatActivity {
                 Anchor anchor = hitResult.createAnchor(); // create anchor
                 AnchorNode anchorNode = new AnchorNode(anchor); // Object가 배치되는 영역인 Node를 Anchor 할당 생성 -> AnchorNode
                 anchorNode.setParent(arFragment.getArSceneView().getScene()); // (getScene : 장면 반환 / getArSceneView : 장면 랜더링(arsceneview) 반환) -> parentNode로 set
+
+                currentAnchorNode = anchorNode;
 
                 // Create the transformable model and add it to the anchor.
                 TransformableNode model = new TransformableNode(arFragment.getTransformationSystem()); // TransformableNode -> 선택, 변환, 회전, 크기 조정 가능한 Node
