@@ -120,13 +120,6 @@ public class GltfActivity extends AppCompatActivity {
         ProgressBar progress = findViewById(R.id.progress);
         progress.setVisibility(View.GONE);
 
-        // toolbar 사용 설정
-
-
-
-
-
-
 
         if (!checkIsSupportedDeviceOrFinish(this)) {
             return;
