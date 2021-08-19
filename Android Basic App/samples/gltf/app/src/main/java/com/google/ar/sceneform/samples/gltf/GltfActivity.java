@@ -164,7 +164,6 @@ public class GltfActivity extends AppCompatActivity {
         int length = (int) intent.getSerializableExtra("size"); // get items -> key, size(length)
 
         Button button_distance = findViewById(R.id.button_distance);
-        // button Click -> setOnClickListener
         button_distance.setOnClickListener(v -> {
             Toast.makeText(getApplicationContext(), "거리 측정페이지입니다.", Toast.LENGTH_LONG).show();
             Intent pageIntent = new Intent(GltfActivity.this, DistanceActivity.class); // 거리측정페이지 : DistanceActivity
@@ -417,68 +416,6 @@ public class GltfActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-//    public void createViewRenderable(WeakReference<GltfActivity> weakActivity) {
-//
-//        ViewRenderable.builder()
-//                .setView(this, R.drawable.square)
-//                .build()
-//                .thenAccept(viewRenderable -> {
-//                    GltfActivity activity = weakActivity.get();
-//                    if (activity != null) {
-//                        activity.viewRenderable = viewRenderable;
-//                        System.out.println("왜 안돼");
-//                    }
-//                })
-//                .exceptionally(
-//                        throwable -> null);
-//    }
-//
-//    private void addToScene() {
-//        if (viewRenderable == null || bool) {
-//            System.out.println("tlqkf");
-//            return;
-//        }
-//        try {
-//            HitResult hitResult = null;
-//            Point pt = new Point(arFragment.getArSceneView().getWidth() / 2, arFragment.getArSceneView().getHeight() / 2);
-//            List<HitResult> hits;
-//            Frame frame = arFragment.getArSceneView().getArFrame();
-//            if (frame != null) {
-//                hits = frame.hitTest(pt.x, pt.y);
-//                for (HitResult hit : hits) {
-//                    Trackable trackable = hit.getTrackable();
-//                    if (trackable instanceof Plane && ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
-//                        hitResult = hit;
-//                        break;
-//                    }
-//                }
-//            }
-//            // Create the Anchor.
-//            assert hitResult != null;
-//            Anchor anchor = hitResult.createAnchor(); // create anchor
-//            AnchorNode anchorNode = new AnchorNode(anchor);
-//            anchorNode.setParent(arFragment.getArSceneView().getScene());
-//
-//            Node node = new Node();
-//            node.setRenderable(viewRenderable);
-//
-//            TransformableNode transformableNode = new TransformableNode(arFragment.getTransformationSystem());
-//            node.setLocalRotation(Quaternion.axisAngle(new Vector3(-1f, 0, 0), -90f));
-//            node.setLookDirection(new Vector3(0, 10f, 0));
-//            transformableNode.setParent(anchorNode);
-//            node.setParent(transformableNode);
-//            transformableNode.select();
-//            bool = true;
-//            System.out.println("제발");
-//        } catch (Exception e) {
-//            System.out.println(e + "왜 안돼");
-//        }
-//    }
-
 
 
 
