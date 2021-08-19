@@ -108,8 +108,8 @@
 
     <ImageView
         android:id="@+id/squareImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal|center_vertical"
         android:contentDescription="Focus"
         app:srcCompat="@drawable/square" />

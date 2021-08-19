@@ -26,20 +26,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -276,10 +272,8 @@ public class GltfActivity extends AppCompatActivity {
                     if (arFragment.getArSceneView().getScene().getChildren() != null) {
                         System.out.println("refresh");
                         for (Node i : arFragment.getArSceneView().getScene().getChildren()){
-                            i = null;
                         }
-                    } else
-                        return;
+                    }
                 }
         );
 
@@ -334,6 +328,7 @@ public class GltfActivity extends AppCompatActivity {
 //                        }
 //        );
 
+        ImageView imageView = findViewById(R.id.squareImage);
         Button addButton = findViewById(R.id.button_add);
         addButton.setOnClickListener(v -> {
             try{
@@ -383,6 +378,9 @@ public class GltfActivity extends AppCompatActivity {
                     Material material = renderable.getMaterial(i);
                     material.setFloat4("baseColorFactor", color);
                 }
+                Toast myToast = Toast.makeText(this.getApplicationContext(), "가구가 배치되었습니다.", Toast.LENGTH_SHORT);
+                myToast.show();
+                imageView.setVisibility(View.INVISIBLE);
             }catch (Exception e){
                 Toast myToast = Toast.makeText(this.getApplicationContext(), "평면이 인식된 곳에서 버튼을 눌러주세요.", Toast.LENGTH_SHORT);
                 myToast.show();
@@ -417,12 +415,6 @@ public class GltfActivity extends AppCompatActivity {
     }
 
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) { // version check function
-        if (Build.VERSION.SDK_INT < VERSION_CODES.N) {
-            Log.e(TAG, "Sceneform requires Android N or later");
-            Toast.makeText(activity, "Sceneform requires Android N or later", Toast.LENGTH_LONG).show();
-            activity.finish();
-            return false;
-        }
         String openGlVersionString =
                 ((ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE))
                         .getDeviceConfigurationInfo()
