@@ -180,7 +180,8 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
 
 
     private void initModel() {
-        MaterialFactory.makeTransparentWithColor(this, new Color(android.graphics.Color.WHITE))
+        MaterialFactory
+                .makeTransparentWithColor(this, new Color(android.graphics.Color.WHITE))
                 .thenAccept(
                         material -> {
                             cubeRenderable = ShapeFactory.makeSphere(0.015f, Vector3.zero(), material);
@@ -240,7 +241,7 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                     break;
             }
             String distanceMeters = df.format(distanceMeasured);
-            tvDistance.setText("측정된 길이: " + distanceMeters + selectedMode);
+            tvDistance.setText("측정 길이: " + distanceMeters + " " + selectedMode);
 
         }
     }
