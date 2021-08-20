@@ -19,9 +19,11 @@ package com.google.ar.sceneform.samples.gltf;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -110,6 +112,8 @@ public class GltfActivity extends AppCompatActivity {
 
     private String fileUri;
 
+    ProgressDialog progressDialog;
+
     @Override
     @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
     // CompletableFuture requires api level 24
@@ -123,11 +127,12 @@ public class GltfActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_ux);
-        ProgressBar progress = findViewById(R.id.progress);
+//        ProgressBar progress = findViewById(R.id.progress);
+//
+//        progress.setVisibility(View.INVISIBLE);
 
-        progress.setVisibility(View.VISIBLE);
-
-
+        progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         if (!checkIsSupportedDeviceOrFinish(this)) {
             return;
@@ -184,75 +189,77 @@ public class GltfActivity extends AppCompatActivity {
             menuItem.setChecked(true);
             drawerLayout.closeDrawers();
 
+            progressDialog.show();
+
             int id = menuItem.getItemId();
             String title = menuItem.getTitle().toString();
 
             if(id==R.id.menu_668317){
                 fileUri = Glburi[0];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri);
             }else if(id == R.id.menu_668318){
                 fileUri = Glburi[1];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri);
             }else if(id == R.id.menu_681946){
                 fileUri = Glburi[2];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri);
             }else if(id == R.id.menu_681947){
                 fileUri = Glburi[3];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri);
             }else if(id == R.id.menu_737686){
                 fileUri = Glburi[4];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_737687){
                 fileUri = Glburi[5];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_746525){
                 fileUri = Glburi[6];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_746526){
                 fileUri = Glburi[7];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_746540){
                 fileUri = Glburi[8];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_746541){
                 fileUri = Glburi[9];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_772973){
                 fileUri = Glburi[10];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_777039){
                 fileUri = Glburi[11];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_777040){
                 fileUri = Glburi[12];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_786840){
                 fileUri = Glburi[13];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_786841){
                 fileUri = Glburi[14];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_786842){
                 fileUri = Glburi[15];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_787819){
                 fileUri = Glburi[16];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_787823){
                 fileUri = Glburi[17];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_796379){
                 fileUri = Glburi[18];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_796416){
                 fileUri = Glburi[19];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_799215){
                 fileUri = Glburi[20];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_799220){
                 fileUri = Glburi[21];
-                buildModel(weakActivity,getBaseContext(), fileUri, progress);
+                buildModel(weakActivity,getBaseContext(), fileUri );
             }
 
             Toast.makeText(getApplicationContext(), "현재 상품 : " + title, Toast.LENGTH_LONG).show();
@@ -266,7 +273,7 @@ public class GltfActivity extends AppCompatActivity {
 
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment); // ux_fragment -> fragment manager 불러옴 -> ARFragment
 
-        buildModel(weakActivity, this, fileUri, progress);
+        buildModel(weakActivity, this, fileUri );
 
         Button button_refresh = findViewById(R.id.button_refresh);
         ImageView imageView = findViewById(R.id.squareImage);
@@ -420,11 +427,7 @@ public class GltfActivity extends AppCompatActivity {
 
 
 
-    public void buildModel(WeakReference<GltfActivity> weakActivity,Context context, String uri, ProgressBar progress) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-                progress.setVisibility(View.VISIBLE);
+    public void buildModel(WeakReference<GltfActivity> weakActivity,Context context, String uri) {
 
                 ModelRenderable.builder() // Sceneform rendering engine -> gltf 파일 로드 및 개체 생성
                         .setSource(context, Uri.parse(uri)) // our .glb model
@@ -445,9 +448,6 @@ public class GltfActivity extends AppCompatActivity {
                                     toast.show();
                                     return null;
                                 });
-                progress.setVisibility(View.INVISIBLE);
-//            }
-//        }).start();
     }
 
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) { // version check function

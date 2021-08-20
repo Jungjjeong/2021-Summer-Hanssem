@@ -109,13 +109,13 @@
         android:contentDescription="Focus"
         app:srcCompat="@drawable/square" />
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:indeterminateDrawable="@drawable/circular_progress"
-        android:indeterminate="true"
-        android:indeterminateBehavior="repeat"/>
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_gravity="center"/>-->
+<!--        android:indeterminateDrawable="@layout/circular_progress"-->
+<!--        android:indeterminate="true"-->
+<!--        android:indeterminateBehavior="repeat"/>-->
 
 </FrameLayout>
