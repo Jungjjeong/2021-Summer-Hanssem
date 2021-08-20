@@ -124,7 +124,9 @@ public class GltfActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_ux);
         ProgressBar progress = findViewById(R.id.progress);
-        progress.setVisibility(View.GONE);
+
+        progress.setVisibility(View.VISIBLE);
+
 
 
         if (!checkIsSupportedDeviceOrFinish(this)) {
@@ -265,8 +267,6 @@ public class GltfActivity extends AppCompatActivity {
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment); // ux_fragment -> fragment manager 불러옴 -> ARFragment
 
         buildModel(weakActivity, this, fileUri, progress);
-
-
 
         Button button_refresh = findViewById(R.id.button_refresh);
         ImageView imageView = findViewById(R.id.squareImage);
@@ -420,29 +420,34 @@ public class GltfActivity extends AppCompatActivity {
 
 
 
-    public void buildModel(WeakReference<GltfActivity> weakActivity,Context context, String uri, ProgressBar progress){
-        progress.setVisibility(View.VISIBLE);
-        ModelRenderable.builder() // Sceneform rendering engine -> gltf 파일 로드 및 개체 생성
-                .setSource(context, Uri.parse(uri)) // our .glb model
-                .setIsFilamentGltf(true) // gltf load
-                .build()
-                .thenAccept(
-                        modelRenderable -> {
-                            GltfActivity activity = weakActivity.get(); // 참조
-                            if (activity != null) {
-                                activity.renderable = modelRenderable; // modelRenderable(our .glb file) -> renderable
-                            }
-                        })
-                .exceptionally( // exception
-                        throwable -> {
-                            Toast toast =
-                                    Toast.makeText(this, "인테리어 파일을 불러올 수 없습니다.", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            return null;
-                        });
-        progress.setVisibility(View.GONE);
+    public void buildModel(WeakReference<GltfActivity> weakActivity,Context context, String uri, ProgressBar progress) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+                progress.setVisibility(View.VISIBLE);
 
+                ModelRenderable.builder() // Sceneform rendering engine -> gltf 파일 로드 및 개체 생성
+                        .setSource(context, Uri.parse(uri)) // our .glb model
+                        .setIsFilamentGltf(true) // gltf load
+                        .build()
+                        .thenAccept(
+                                modelRenderable -> {
+                                    GltfActivity activity = weakActivity.get(); // 참조
+                                    if (activity != null) {
+                                        activity.renderable = modelRenderable; // modelRenderable(our .glb file) -> renderable
+                                    }
+                                })
+                        .exceptionally( // exception
+                                throwable -> {
+                                    Toast toast =
+                                            Toast.makeText(this, "인테리어 파일을 불러올 수 없습니다.", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                    return null;
+                                });
+                progress.setVisibility(View.INVISIBLE);
+//            }
+//        }).start();
     }
 
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) { // version check function

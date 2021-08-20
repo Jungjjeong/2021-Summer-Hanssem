@@ -16,9 +16,7 @@
 package com.google.ar.sceneform.ux;
 
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 /**
  * This view manages showing the plane discovery instructions view. You can assign into the
@@ -50,6 +48,7 @@ public class PlaneDiscoveryController {
     if (planeDiscoveryView == null) {
       return;
     }
+
     planeDiscoveryView.setVisibility(View.GONE);
   }
 }

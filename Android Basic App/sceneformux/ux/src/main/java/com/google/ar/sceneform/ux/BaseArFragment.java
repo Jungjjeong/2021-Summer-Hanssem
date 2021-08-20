@@ -30,7 +30,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -61,13 +60,9 @@ import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.HitTestResult;
 import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.google.ar.sceneform.rendering.ViewRenderable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 /** The AR fragment brings in the required view layout and controllers for common AR features. */
 public abstract class BaseArFragment extends Fragment
@@ -80,6 +75,7 @@ public abstract class BaseArFragment extends Fragment
      * The callback will only be invoked once after a Session is initialized and before it is
      * resumed for the first time.
      *
+     * @see #setOnSessionInitializationListener(OnTapArPlaneListener)
      * @param session The ARCore Session.
      */
     void onSessionInitialization(Session session);
@@ -111,7 +107,6 @@ public abstract class BaseArFragment extends Fragment
   private boolean canRequestDangerousPermissions = true;
   @Nullable private OnSessionInitializationListener onSessionInitializationListener;
   @Nullable private OnTapArPlaneListener onTapArPlaneListener;
-
 
   @SuppressWarnings({"initialization"})
   private final OnWindowFocusChangeListener onFocusListener =
@@ -173,27 +168,6 @@ public abstract class BaseArFragment extends Fragment
       frameLayout.addView(instructionsView);
     }
     planeDiscoveryController = new PlaneDiscoveryController(instructionsView);
-
-//    CompletableFuture<ViewRenderable> imgView = ViewRenderable.builder().setView(arSceneView.getContext(),arSceneView).build();
-//    CompletableFuture.allOf(imgView).handle((notUsed, throwable) -> {
-//      // When you build a Renderable, Sceneform loads its resources in the background while
-//      // returning a CompletableFuture. Call handle(), thenAccept(), or check isDone()
-//      // before calling get().
-//
-//      if (throwable != null) {
-//        Log.d("MainActivity", "onCreate: " + "Unable to load renderable");
-//        return null;
-//      }
-//      try {
-//        ViewRenderable imageViewRenderable = imgView.get();
-//      } catch (InterruptedException | ExecutionException ex) {
-//        Log.d("MainActivity", "onCreate: Unable to load renderable");
-//      }
-//      return null;
-//    });
-
-    Toast myToast = Toast.makeText(arSceneView.getContext(), "평면 인식을 위해 천천히 움직여 주세요", Toast.LENGTH_LONG);
-    myToast.show();
 
     if (Build.VERSION.SDK_INT < VERSION_CODES.N) {
       // Enforce API level 24
@@ -552,7 +526,6 @@ public abstract class BaseArFragment extends Fragment
     for (Plane plane : frame.getUpdatedTrackables(Plane.class)) {
       if (plane.getTrackingState() == TrackingState.TRACKING) {
         planeDiscoveryController.hide();
-
       }
     }
   }
@@ -571,8 +544,6 @@ public abstract class BaseArFragment extends Fragment
       }
       if (!sessionInitializationFailed) {
         planeDiscoveryController.show();
-        Toast myToast = Toast.makeText(arSceneView.getContext(), "평면 인식을 위해 천천히 움직여 주세요", Toast.LENGTH_LONG);
-        myToast.show();
       }
     }
   }
