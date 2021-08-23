@@ -345,13 +345,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" restorationIdentifier="popUpView" translatesAutoresizingMaskIntoConstraints="NO" id="Eyo-Fc-fH5">
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" restorationIdentifier="popUpView" translatesAutoresizingMaskIntoConstraints="NO" id="Eyo-Fc-fH5">
                                 <rect key="frame" x="46" y="295" width="283" height="222"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shake" translatesAutoresizingMaskIntoConstraints="NO" id="cSk-Nn-uXL">
-                                        <rect key="frame" x="0.0" y="20" width="283" height="102"/>
+                                        <rect key="frame" x="0.0" y="41" width="283" height="70"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="102" id="oxF-jr-Y6I"/>
+                                            <constraint firstAttribute="height" constant="70" id="oxF-jr-Y6I"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="바닥 인식을 위해" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXu-Ek-tGx">
@@ -385,14 +385,14 @@
                                     <constraint firstItem="CiA-r1-Hbe" firstAttribute="leading" secondItem="cku-vq-5i5" secondAttribute="leading" id="9po-Ba-I5e"/>
                                     <constraint firstItem="CiA-r1-Hbe" firstAttribute="top" secondItem="cku-vq-5i5" secondAttribute="bottom" constant="9" id="GyU-Si-cCr"/>
                                     <constraint firstAttribute="trailing" secondItem="cSk-Nn-uXL" secondAttribute="trailing" id="XPB-OP-uwB"/>
-                                    <constraint firstItem="WXu-Ek-tGx" firstAttribute="top" secondItem="cSk-Nn-uXL" secondAttribute="bottom" constant="8" id="abG-hr-c3k"/>
+                                    <constraint firstItem="WXu-Ek-tGx" firstAttribute="top" secondItem="cSk-Nn-uXL" secondAttribute="bottom" constant="19" id="abG-hr-c3k"/>
                                     <constraint firstItem="CiA-r1-Hbe" firstAttribute="trailing" secondItem="cku-vq-5i5" secondAttribute="trailing" id="fQN-Fi-Eb0"/>
                                     <constraint firstItem="cku-vq-5i5" firstAttribute="trailing" secondItem="WXu-Ek-tGx" secondAttribute="trailing" id="igz-Kl-V5Q"/>
                                     <constraint firstItem="cSk-Nn-uXL" firstAttribute="leading" secondItem="Eyo-Fc-fH5" secondAttribute="leading" id="lVN-I6-KkK"/>
                                     <constraint firstItem="cku-vq-5i5" firstAttribute="leading" secondItem="WXu-Ek-tGx" secondAttribute="leading" id="luB-Jj-1Yu"/>
                                     <constraint firstItem="WXu-Ek-tGx" firstAttribute="trailing" secondItem="cSk-Nn-uXL" secondAttribute="trailing" id="nxh-yz-pyJ"/>
                                     <constraint firstItem="WXu-Ek-tGx" firstAttribute="leading" secondItem="cSk-Nn-uXL" secondAttribute="leading" id="rMh-O7-ir0"/>
-                                    <constraint firstItem="cSk-Nn-uXL" firstAttribute="top" secondItem="Eyo-Fc-fH5" secondAttribute="top" constant="20" id="wf1-RI-619"/>
+                                    <constraint firstItem="cSk-Nn-uXL" firstAttribute="top" secondItem="Eyo-Fc-fH5" secondAttribute="top" constant="41" id="wf1-RI-619"/>
                                     <constraint firstAttribute="bottom" secondItem="CiA-r1-Hbe" secondAttribute="bottom" id="xkS-kI-NLT"/>
                                 </constraints>
                             </view>

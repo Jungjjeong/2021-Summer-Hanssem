@@ -61,9 +61,10 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         
         let material = SCNMaterial()
         material.isDoubleSided = false
-        material.locksAmbientWithDiffuse = true
+//        material.locksAmbientWithDiffuse = false
+        material.fresnelExponent = 0.0
         material.diffuse.contents = UIImage(named: "Models.scnassets/focus.png")
-        material.specular.contents = UIColor(white: 0.8, alpha: 1.0) // 빛반사
+//        material.specular.contents = UIColor(white: 0.8, alpha: 1.0) // 빛반사
         
         let boxNode = SCNNode(geometry: boxGeometry)
         boxNode.geometry?.materials = [material]
@@ -138,11 +139,11 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
     // MARK: - Add dot
 
     func addDot(at hitResult: ARRaycastResult) {
-        let sphereScene = SCNSphere(radius: 0.005)
+        let sphereScene = SCNSphere(radius: 0.006)
         
         let material = SCNMaterial()
         
-        material.locksAmbientWithDiffuse = false
+//        material.locksAmbientWithDiffuse = false
         material.diffuse.contents = UIColor.white
         sphereScene.materials = [material]
         
@@ -186,7 +187,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         let midPosition = SCNVector3 (x:(positionA.x + positionB.x) / 2, y:(positionA.y + positionB.y) / 2, z:(positionA.z + positionB.z) / 2)
 
         let lineGeometry = SCNCylinder()
-        lineGeometry.radius = 0.003
+        lineGeometry.radius = 0.0025
         lineGeometry.height = CGFloat(distance)
         lineGeometry.radialSegmentCount = 5
         lineGeometry.firstMaterial!.diffuse.contents = UIColor.white
@@ -238,8 +239,8 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
                                    maxVec.y - minVec.y,
                                    maxVec.z - minVec.z);
 
-        let plane = SCNPlane(width: CGFloat(bound.x + 4),
-                             height: CGFloat(bound.y + 4))
+        let plane = SCNPlane(width: CGFloat(bound.x + 4.5),
+                             height: CGFloat(bound.y + 4.5))
         plane.cornerRadius = 4
         plane.firstMaterial?.diffuse.contents = UIColor.white
 
@@ -305,8 +306,8 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         self.updateScaleFromCameraForLine(lineNode, fromPointOfView: pointOfView, useScaling: true)
         self.updateScaleFromCameraForText(textNode, fromPointOfView: pointOfView, useScaling: true)
 //        textNode.simdScale = SIMD3(repeating: 0.0005)
-        textNode.eulerAngles.y = (sceneView.pointOfView?.eulerAngles.y)!
         textNode.eulerAngles.x = (sceneView.pointOfView?.eulerAngles.x)!
+        textNode.eulerAngles.y = (sceneView.pointOfView?.eulerAngles.y)!
 //        textNode.eulerAngles.z = (sceneView.pointOfView?.eulerAngles.z)!
 
 
@@ -370,7 +371,7 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         if(useScaling) {
 //            node.simdScale = simd_float3(a,1,a)
             print(node)
-            node.scale = SCNVector3(a * 0.0035, a * 0.0035, a * 0.0035)
+            node.scale = SCNVector3(a * 0.003, a * 0.003, a * 0.003)
 //            for i in node.childNodes {
 //                i.scale = SCNVector3(a, a, a)
 //            }
