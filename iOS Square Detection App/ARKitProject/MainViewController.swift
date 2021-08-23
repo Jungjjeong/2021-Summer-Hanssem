@@ -476,11 +476,13 @@ extension MainViewController {
 		}
         if HandlingPossible(touches, with: event) == true {
             if currentGesture == nil { // gesture 비어있을 시 새로 시작 할당해주자.
-                currentGesture = Gesture.startGestureFromTouches(touches, self.sceneView, object)
                 if object.childNodes.count == 1 {
                     let box = self.createBox()
                     object.addChildNode(box)
                     print(object.childNodes)
+                }
+                else if object.childNodes.count == 2 {
+                    currentGesture = Gesture.startGestureFromTouches(touches, self.sceneView, object)
                 }
             } else {
                 currentGesture = currentGesture!.updateGestureFromTouches(touches, .touchBegan) // 이미 존재할 경우, update 할당해주자.

@@ -228,7 +228,6 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
         
         
         textNode = SCNNode(geometry: textGeometry)
-        textNode.position = SCNVector3(position.x - 0.01, position.y + 0.002, position.z)
         
         textNode.scale = SCNVector3(0.0017, 0.0017, 0.0017)
         
@@ -249,8 +248,12 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
                                         CGFloat( minVec.y) + CGFloat(bound.y) / 2 ,
                                         CGFloat( minVec.z - 0.01))
 
+        
+        textNode.position = SCNVector3(position.x, position.y , position.z)
+
         textNode.addChildNode(planeNode)
         
+            
         sceneView.scene.rootNode.addChildNode(textNode)
         print("text")
     }
@@ -297,6 +300,12 @@ class SizeMeasurementView : UIViewController, ARSessionDelegate, ARSCNViewDelega
 
         self.updateScaleFromCameraForNodes(doteNodes, fromPointOfView: pointOfView, useScaling: true)
         self.updateScaleFromCameraForLine(lineNode, fromPointOfView: pointOfView, useScaling: true)
+        textNode.eulerAngles.y = (sceneView.pointOfView?.eulerAngles.y)!
+        textNode.eulerAngles.x = (sceneView.pointOfView?.eulerAngles.x)!
+//        textNode.eulerAngles.z = (sceneView.pointOfView?.eulerAngles.z)!
+
+
+        
     }
     
     
