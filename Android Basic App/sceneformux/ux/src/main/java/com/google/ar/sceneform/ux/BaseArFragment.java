@@ -75,7 +75,6 @@ public abstract class BaseArFragment extends Fragment
      * The callback will only be invoked once after a Session is initialized and before it is
      * resumed for the first time.
      *
-     * @see #setOnSessionInitializationListener(OnTapArPlaneListener)
      * @param session The ARCore Session.
      */
     void onSessionInitialization(Session session);
@@ -107,7 +106,7 @@ public abstract class BaseArFragment extends Fragment
   private boolean canRequestDangerousPermissions = true;
   @Nullable private OnSessionInitializationListener onSessionInitializationListener;
   @Nullable private OnTapArPlaneListener onTapArPlaneListener;
-
+  private boolean detected = false;
   @SuppressWarnings({"initialization"})
   private final OnWindowFocusChangeListener onFocusListener =
       (hasFocus -> onWindowFocusChanged(hasFocus));
@@ -525,7 +524,12 @@ public abstract class BaseArFragment extends Fragment
 
     for (Plane plane : frame.getUpdatedTrackables(Plane.class)) {
       if (plane.getTrackingState() == TrackingState.TRACKING) {
+        if (!detected) {
+          Toast myToast = Toast.makeText(this.getContext(), "평면이 인식되었습니다.", Toast.LENGTH_SHORT);
+          myToast.show();
+        }
         planeDiscoveryController.hide();
+        detected = true;
       }
     }
   }
@@ -534,6 +538,7 @@ public abstract class BaseArFragment extends Fragment
     if (isStarted) {
       return;
     }
+    detected = false;
 
     if (getActivity() != null) {
       isStarted = true;
@@ -543,6 +548,8 @@ public abstract class BaseArFragment extends Fragment
         sessionInitializationFailed = true;
       }
       if (!sessionInitializationFailed) {
+        Toast myToast = Toast.makeText(this.getContext(), "평면 인식을 위해 좌 우로 움직여 주세요.", Toast.LENGTH_SHORT);
+        myToast.show();
         planeDiscoveryController.show();
       }
     }
@@ -554,6 +561,7 @@ public abstract class BaseArFragment extends Fragment
     }
 
     isStarted = false;
+    detected = false;
     planeDiscoveryController.hide();
     arSceneView.pause();
   }
