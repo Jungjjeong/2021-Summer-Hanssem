@@ -19,8 +19,8 @@ package com.google.ar.sceneform.samples.gltf;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -60,6 +60,7 @@ import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import android.os.Handler;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -112,7 +113,7 @@ public class GltfActivity extends AppCompatActivity {
 
     private String fileUri;
 
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -191,6 +192,17 @@ public class GltfActivity extends AppCompatActivity {
 
             progressDialog.show();
 
+            final Handler handler = new Handler();
+            final Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            };
+
+
             int id = menuItem.getItemId();
             String title = menuItem.getTitle().toString();
 
@@ -263,6 +275,16 @@ public class GltfActivity extends AppCompatActivity {
             }
 
             Toast.makeText(getApplicationContext(), "현재 상품 : " + title, Toast.LENGTH_LONG).show();
+
+
+            progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    handler.removeCallbacks(runnable);
+                }
+            });
+
+            handler.postDelayed(runnable, 7000);
 
             return true;
         });
