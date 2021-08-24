@@ -63,7 +63,10 @@ import android.os.Handler;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-//import android.widget.ImageView;
+
+
+
+// 가구 AR 배치 페이지
 
 public class GltfActivity extends AppCompatActivity {
     private static final String TAG = GltfActivity.class.getSimpleName(); // log 띄우기 위해
@@ -167,6 +170,9 @@ public class GltfActivity extends AppCompatActivity {
 
         int size = (int) intent.getSerializableExtra("size"); // get items -> key, size(length)
 
+
+
+        // 거리 측정 페이지 -> DistanceActivity 로 이동
         Button button_distance = findViewById(R.id.button_distance);
         button_distance.setOnClickListener(v -> {
             Toast.makeText(getApplicationContext(), "거리 측정페이지입니다.", Toast.LENGTH_LONG).show();
@@ -181,16 +187,15 @@ public class GltfActivity extends AppCompatActivity {
         Button button_list = findViewById(R.id.button_list);
         button_list.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
 
+
+        // ProgressDialog
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setCancelable(false);
 
         final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                if(progressDialog.isShowing()){
-                    progressDialog.dismiss();
-                }
+        final Runnable runnable = () -> {
+            if(progressDialog.isShowing()){
+                progressDialog.dismiss();
             }
         };
 
@@ -281,7 +286,7 @@ public class GltfActivity extends AppCompatActivity {
             return true;
         });
 
-        // -----
+
 
 //        String newUri = "http://image.hanssem.com/hsimg/gds3d/dk/" + key + ".glb";
 
@@ -290,20 +295,16 @@ public class GltfActivity extends AppCompatActivity {
         progressDialog.show();
         buildModel(weakActivity, this, fileUri );
 
-        progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                handler.removeCallbacks(runnable);
-            }
-        });
+        progressDialog.setOnDismissListener(dialogInterface -> handler.removeCallbacks(runnable));
 
-        handler.postDelayed(runnable, 3000);
+        handler.postDelayed(runnable, 3000); // 임의의 시간동안 ProgressDialog
 
         Button button_refresh = findViewById(R.id.button_refresh);
         ImageView imageView = findViewById(R.id.squareImage);
-        // anchor 초기화
 
 
+
+        // Anchor 초기화 func
         button_refresh.setOnClickListener(v -> {
                     if (arFragment.getArSceneView().getScene().getChildren() != null) {
                         System.out.println("refresh");
@@ -387,6 +388,8 @@ public class GltfActivity extends AppCompatActivity {
                         }
         );
 
+
+        // 하단 중앙 버튼 누르면, 화면 중앙에서 hitTest 수행 -> 가구 배치 func
         Button addButton = findViewById(R.id.button_add);
         addButton.setOnClickListener(v -> {
             try{
@@ -442,6 +445,7 @@ public class GltfActivity extends AppCompatActivity {
                 myToast.show();
                 imageView.setVisibility(View.INVISIBLE);
             }catch (Exception e){
+                // 화면 중앙에 평면이 인식되어 있지 않으면 예외처리
                 Toast myToast = Toast.makeText(this.getApplicationContext(), "평면이 인식된 곳에서 버튼을 눌러주세요.", Toast.LENGTH_SHORT);
                 myToast.show();
             }
@@ -451,6 +455,7 @@ public class GltfActivity extends AppCompatActivity {
 
 
 
+    // 가구 Loading
     public void buildModel(WeakReference<GltfActivity> weakActivity,Context context, String uri) {
 
                 ModelRenderable.builder() // Sceneform rendering engine -> gltf 파일 로드 및 개체 생성
@@ -474,6 +479,9 @@ public class GltfActivity extends AppCompatActivity {
                                 });
     }
 
+
+
+    // Version Check
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) { // version check function
         String openGlVersionString =
                 ((ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE))
