@@ -264,7 +264,7 @@ public class GltfActivity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "현재 상품 : " + title, Toast.LENGTH_LONG).show();
 
-            handler.postDelayed(runnable, 3000);
+            handler.postDelayed(runnable, 5000);
 
             return true;
         });
