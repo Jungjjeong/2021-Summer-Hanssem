@@ -11,6 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#A3000000"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="start|top"
+        android:layout_marginStart="18sp"
+        android:layout_marginTop="18sp"
+        android:background="@drawable/button_back" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"

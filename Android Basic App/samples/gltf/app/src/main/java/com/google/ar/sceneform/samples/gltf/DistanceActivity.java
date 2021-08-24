@@ -6,6 +6,7 @@ package com.google.ar.sceneform.samples.gltf;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,12 +37,6 @@ import com.google.ar.sceneform.ux.TransformableNode;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-
-
-
-
-
-// 거리측정 페이지
 public class DistanceActivity extends AppCompatActivity implements com.google.ar.sceneform.Scene.OnUpdateListener {
 
 
@@ -51,7 +47,7 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
     private AnchorNode currentAnchorNode,currentAnchorNode_1;
     private TextView tvDistance;
     ModelRenderable cubeRenderable;
-    private Anchor currentAnchor = null, currentAnchor_1 = null;
+    private Anchor currentAnchor = null,currentAnchor_1=null;
     private static int countForAnchorsProduced=0;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -74,10 +70,21 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
         tvDistance = findViewById(R.id.tvDistance);
 
-
         initModel();
 
-        // 평면 터치 리스너
+        Intent intent = getIntent();
+        int key = (int) intent.getSerializableExtra("key");
+        int size = (int) intent.getSerializableExtra("size");
+
+        Button button_back = findViewById(R.id.button_back);
+        button_back.setOnClickListener(v -> {
+            Intent pageIntent = new Intent(DistanceActivity.this, GltfActivity.class);
+            pageIntent.putExtra("key", key);
+            pageIntent.putExtra("size", size);
+            startActivity(pageIntent);
+            finish();
+        });
+
         arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
             if (cubeRenderable == null)
                 return;
@@ -122,18 +129,20 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
             }
             if(countForAnchorsProduced>2)
             {
-                // 초기화 후 재시작
+                //set to default text
                 tvDistance.setText("터치해서 시작");
                 countForAnchorsProduced=0;
                 clearAnchor();
             }
         });
 
-        // 단위 선택 가능 DropDown list
+        //Add a dropdown to let user select units in meters, cms or inches
         Spinner dropdown = findViewById(R.id.dropdown_list);
-        // list 아이템
+        //create a list of items for the spinner.
         String[] items = new String[]{"meters","cms","inches"};
+        //fill the dropdown with arrayAdapter.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -155,8 +164,6 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                 }
             }
 
-
-            // 기본값 = meters
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // TODO Auto-generated method stub
@@ -167,8 +174,24 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
 
     }
 
+    public boolean checkIsSupportedDeviceOrFinish(final Activity activity) {
 
-    // CubeRenderable init
+        String openGlVersionString;
+        openGlVersionString = ((ActivityManager) Objects.requireNonNull(activity.getSystemService(Context.ACTIVITY_SERVICE)))
+                .getDeviceConfigurationInfo()
+                .getGlEsVersion();
+        if (Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION)
+        {
+            Log.e(TAG, "Sceneform requires OpenGL ES 3.0 later");
+            Toast.makeText(activity, "Sceneform requires OpenGL ES 3.0 or later", Toast.LENGTH_LONG)
+                    .show();
+            activity.finish();
+            return false;
+        }
+        return true;
+    }
+
+
     private void initModel() {
         MaterialFactory
                 .makeTransparentWithColor(this, new Color(android.graphics.Color.WHITE))
@@ -180,7 +203,6 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                         });
     }
 
-    // Anchor Clear func
     private void clearAnchor() {
         currentAnchor = null;
         currentAnchor_1=null;
@@ -208,8 +230,6 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
 
     }
 
-
-    // frameTime마다 업데이트 func
     @Override
     public void onUpdate(FrameTime frameTime) {
         Log.d("API123", "onUpdateframe... current anchor node " + (currentAnchorNode == null));
@@ -218,8 +238,6 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
             Pose objectPose = currentAnchor.getPose();
             Pose objectPose_1= currentAnchor_1.getPose();
 
-
-            // 측정된 거리
             float dx_1 = objectPose.tx() - objectPose_1.tx();
             float dy_1 = objectPose.ty() - objectPose_1.ty();
             float dz_1 = objectPose.tz() - objectPose_1.tz();
@@ -228,23 +246,20 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                 case "meters":
                     break;
                 case "cms":
-                    distanceMeasured = distanceMeasured * 100; // 단위 변환
+                    distanceMeasured = distanceMeasured * 100;
                     break;
                 case "inches":
-                    // 단위 변환
+                    //standard conversion from meters to inches
                     distanceMeasured = distanceMeasured * 39.3701f;
                     break;
             }
             String distanceMeters = df.format(distanceMeasured);
-
-            // Textview에 거리 Rendering
             tvDistance.setText("측정 길이: " + distanceMeters + " " + selectedMode);
 
         }
     }
 
 
-    // 두번의 터치 Node 사이 선 그어주기
     private void addLineBetweenHits(HitResult hitResult, MotionEvent motionEvent) {
 
         int val = motionEvent.getActionMasked();
@@ -261,7 +276,7 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
             point1 = currentAnchorNode.getWorldPosition();
             point2 = anchorNode.getWorldPosition();
 
-            final Vector3 difference = Vector3.subtract(point1, point2); // 선 길이 (두 포인트 사이 거리)
+            final Vector3 difference = Vector3.subtract(point1, point2);
             final Vector3 directionFromTopToBottom = difference.normalized();
             final Quaternion rotationFromAToB =
                     Quaternion.lookRotation(directionFromTopToBottom, Vector3.up());
@@ -283,25 +298,5 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                             }
                     );
         }
-    }
-
-
-
-    // 버전 체크
-    public boolean checkIsSupportedDeviceOrFinish(final Activity activity) {
-
-        String openGlVersionString;
-        openGlVersionString = ((ActivityManager) Objects.requireNonNull(activity.getSystemService(Context.ACTIVITY_SERVICE)))
-                .getDeviceConfigurationInfo()
-                .getGlEsVersion();
-        if (Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION)
-        {
-            Log.e(TAG, "Sceneform requires OpenGL ES 3.0 later");
-            Toast.makeText(activity, "Sceneform requires OpenGL ES 3.0 or later", Toast.LENGTH_LONG)
-                    .show();
-            activity.finish();
-            return false;
-        }
-        return true;
     }
 }

@@ -36,7 +36,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.filament.gltfio.Animator;
@@ -64,10 +63,7 @@ import android.os.Handler;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-
-
-
-// 가구 AR 배치 페이지
+//import android.widget.ImageView;
 
 public class GltfActivity extends AppCompatActivity {
     private static final String TAG = GltfActivity.class.getSimpleName(); // log 띄우기 위해
@@ -117,6 +113,7 @@ public class GltfActivity extends AppCompatActivity {
     private String fileUri;
 
     private ProgressDialog progressDialog;
+    final String[] Glburi = new String[22];
 
     @Override
     @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -131,9 +128,6 @@ public class GltfActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_ux);
-//        ProgressBar progress = findViewById(R.id.progress);
-//
-//        progress.setVisibility(View.INVISIBLE);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -142,7 +136,6 @@ public class GltfActivity extends AppCompatActivity {
             return;
         } // 지원하는 OpenGL 버전(3.0)이 적합한지, android sdk 버전이 맞는지 확인
 
-        final String[] Glburi = new String[22];
         Glburi[0] = "https://raw.githubusercontent.com/justbeaver97/2021-Summer-ValueUpProject/master/test_asset/668317.glb";
         Glburi[1] = "https://raw.githubusercontent.com/justbeaver97/2021-Summer-ValueUpProject/master/test_asset/668318.glb";
         Glburi[2] = "https://raw.githubusercontent.com/justbeaver97/2021-Summer-ValueUpProject/master/test_asset/681946.glb";
@@ -172,21 +165,34 @@ public class GltfActivity extends AppCompatActivity {
         int key = (int) intent.getSerializableExtra("key");
         fileUri = Glburi[key];
 
-        int length = (int) intent.getSerializableExtra("size"); // get items -> key, size(length)
+        int size = (int) intent.getSerializableExtra("size"); // get items -> key, size(length)
 
-
-        // 거리 측정 페이지로 이동 -> DistanceActivity.java
         Button button_distance = findViewById(R.id.button_distance);
         button_distance.setOnClickListener(v -> {
             Toast.makeText(getApplicationContext(), "거리 측정페이지입니다.", Toast.LENGTH_LONG).show();
             Intent pageIntent = new Intent(GltfActivity.this, DistanceActivity.class); // 거리측정페이지 : DistanceActivity
-            pageIntent.putExtra("length", length); // length 전달
+            pageIntent.putExtra("size", size); // length 전달
+            pageIntent.putExtra("key", key);
             startActivity(pageIntent);
+            finish();
         });
+
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         Button button_list = findViewById(R.id.button_list);
         button_list.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
 
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(false);
+
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
+            }
+        };
 
         NavigationView navigationView = findViewById(R.id.nav);
         // List에서 상품 선택시
@@ -196,17 +202,6 @@ public class GltfActivity extends AppCompatActivity {
             drawerLayout.closeDrawers();
 
             progressDialog.show();
-
-            final Handler handler = new Handler();
-            final Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
-                }
-            };
-
 
             int id = menuItem.getItemId();
             String title = menuItem.getTitle().toString();
@@ -281,15 +276,7 @@ public class GltfActivity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "현재 상품 : " + title, Toast.LENGTH_LONG).show();
 
-
-            progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-                    handler.removeCallbacks(runnable);
-                }
-            });
-
-            handler.postDelayed(runnable, 7000);
+            handler.postDelayed(runnable, 3000);
 
             return true;
         });
@@ -300,14 +287,23 @@ public class GltfActivity extends AppCompatActivity {
 
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment); // ux_fragment -> fragment manager 불러옴 -> ARFragment
 
+        progressDialog.show();
         buildModel(weakActivity, this, fileUri );
+
+        progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        handler.postDelayed(runnable, 3000);
 
         Button button_refresh = findViewById(R.id.button_refresh);
         ImageView imageView = findViewById(R.id.squareImage);
         // anchor 초기화
 
 
-        // Anchor 초기화 func
         button_refresh.setOnClickListener(v -> {
                     if (arFragment.getArSceneView().getScene().getChildren() != null) {
                         System.out.println("refresh");
@@ -391,8 +387,6 @@ public class GltfActivity extends AppCompatActivity {
                         }
         );
 
-
-        // 버튼을 클릭하면 화면 중앙에 가구 배치
         Button addButton = findViewById(R.id.button_add);
         addButton.setOnClickListener(v -> {
             try{
@@ -448,7 +442,6 @@ public class GltfActivity extends AppCompatActivity {
                 myToast.show();
                 imageView.setVisibility(View.INVISIBLE);
             }catch (Exception e){
-                // 화면 중앙에 평면이 인식되지 않음 -> 예외처리
                 Toast myToast = Toast.makeText(this.getApplicationContext(), "평면이 인식된 곳에서 버튼을 눌러주세요.", Toast.LENGTH_SHORT);
                 myToast.show();
             }
@@ -457,7 +450,7 @@ public class GltfActivity extends AppCompatActivity {
 
 
 
-    // gltf file load, build model func
+
     public void buildModel(WeakReference<GltfActivity> weakActivity,Context context, String uri) {
 
                 ModelRenderable.builder() // Sceneform rendering engine -> gltf 파일 로드 및 개체 생성
@@ -471,7 +464,7 @@ public class GltfActivity extends AppCompatActivity {
                                         activity.renderable = modelRenderable; // modelRenderable(our .glb file) -> renderable
                                     }
                                 })
-                        .exceptionally( // exception -> fail loading
+                        .exceptionally( // exception
                                 throwable -> {
                                     Toast toast =
                                             Toast.makeText(this, "인테리어 파일을 불러올 수 없습니다.", Toast.LENGTH_LONG);
@@ -481,10 +474,6 @@ public class GltfActivity extends AppCompatActivity {
                                 });
     }
 
-    
-    
-    
-    // 버전 체크
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) { // version check function
         String openGlVersionString =
                 ((ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE))
