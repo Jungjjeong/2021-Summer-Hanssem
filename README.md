@@ -5,12 +5,12 @@ Android application Stabilization / iOS application build&Stabilization
 
 
 ## Android Application Operation Screen
-<img src = "image/a1.PNG" width ="250" /><img src = "image/a2.PNG" width ="250" /><img src = "image/a3.PNG" width ="250" /><img src = "image/a4.PNG" width ="250" /><br>
-<img src = "image/a5.PNG" width ="250" /><img src = "image/a6.PNG" width ="250" /><img src = "image/a7.PNG" width ="250" /><img src = "image/a8.PNG" width ="250" /> 
+<img src = "image/a1.png" width ="250" /><img src = "image/a2.png" width ="250" /><img src = "image/a3.png" width ="250" /><img src = "image/a4.png" width ="250" /><br>
+<img src = "image/a5.png" width ="250" /><img src = "image/a6.png" width ="250" /><img src = "image/a7.png" width ="250" /><img src = "image/a8.png" width ="250" /> 
 
 ## iOS Application Operation Screen
-<img src = "image/i1.PNG" width ="250" /><img src = "image/i2.PNG" width ="250" /><img src = "image/i3.PNG" width ="250" /><img src = "image/i4.PNG" width ="250" /><br>
-<img src = "image/i5.PNG" width ="250" /><img src = "image/i6.PNG" width ="250" /><img src = "image/i7.PNG" width ="250" /><img src = "image/i8.PNG" width ="250" /> 
+<img src = "image/i1.png" width ="250" /><img src = "image/i2.png" width ="250" /><img src = "image/i3.png" width ="250" /><img src = "image/i4.png" width ="250" /><br>
+<img src = "image/i5.png" width ="250" /><img src = "image/i6.png" width ="250" /><img src = "image/i7.png" width ="250" /><img src = "image/i8.png" width ="250" /> 
 
 
 
