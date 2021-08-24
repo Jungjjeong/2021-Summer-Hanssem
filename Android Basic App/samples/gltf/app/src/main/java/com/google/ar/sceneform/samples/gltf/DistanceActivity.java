@@ -1,5 +1,3 @@
-// 거리측정 페이지
-
 package com.google.ar.sceneform.samples.gltf;
 
 
@@ -37,6 +35,9 @@ import com.google.ar.sceneform.ux.TransformableNode;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
+
+// 거리 측정 페이지
+
 public class DistanceActivity extends AppCompatActivity implements com.google.ar.sceneform.Scene.OnUpdateListener {
 
 
@@ -54,7 +55,7 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
 
     Anchor anchor ;
     AnchorNode anchorNode ;
-    private String selectedMode="meters";
+    private String selectedMode="meters"; // 초기 선택된 단위는 meters
 
 
     @Override
@@ -70,12 +71,16 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
         tvDistance = findViewById(R.id.tvDistance);
 
+
+        // model init
         initModel();
 
         Intent intent = getIntent();
         int key = (int) intent.getSerializableExtra("key");
         int size = (int) intent.getSerializableExtra("size");
 
+
+        // Gltf Activity로 이동
         Button button_back = findViewById(R.id.button_back);
         button_back.setOnClickListener(v -> {
             Intent pageIntent = new Intent(DistanceActivity.this, GltfActivity.class);
@@ -89,6 +94,7 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
             if (cubeRenderable == null)
                 return;
 
+            // Anchor Count
             countForAnchorsProduced++;
             if(countForAnchorsProduced==1)
             {
@@ -124,9 +130,9 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                 arFragment.getArSceneView().getScene().addOnUpdateListener(this);
                 arFragment.getArSceneView().getScene().addChild(anchorNode_1);
                 node_1.select();
-                //lineBetweenPoints(currentAnchorNode.getWorldPosition(),currentAnchorNode_1.getWorldPosition());
                 addLineBetweenHits(hitResult, motionEvent);
             }
+            // Anchor 2개 초과일 시 초기화 후 재시작
             if(countForAnchorsProduced>2)
             {
                 //set to default text
@@ -136,13 +142,12 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
             }
         });
 
-        //Add a dropdown to let user select units in meters, cms or inches
+        // 단위 선택 가능한 DropDown list 생성
         Spinner dropdown = findViewById(R.id.dropdown_list);
-        //create a list of items for the spinner.
+        // 단위 할당 ( meters, cms, inches )
         String[] items = new String[]{"meters","cms","inches"};
-        //fill the dropdown with arrayAdapter.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        //set the spinners adapter to the previously created one.
+
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -163,7 +168,7 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                         break;
                 }
             }
-
+            // default -> meters
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // TODO Auto-generated method stub
@@ -174,24 +179,8 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
 
     }
 
-    public boolean checkIsSupportedDeviceOrFinish(final Activity activity) {
 
-        String openGlVersionString;
-        openGlVersionString = ((ActivityManager) Objects.requireNonNull(activity.getSystemService(Context.ACTIVITY_SERVICE)))
-                .getDeviceConfigurationInfo()
-                .getGlEsVersion();
-        if (Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION)
-        {
-            Log.e(TAG, "Sceneform requires OpenGL ES 3.0 later");
-            Toast.makeText(activity, "Sceneform requires OpenGL ES 3.0 or later", Toast.LENGTH_LONG)
-                    .show();
-            activity.finish();
-            return false;
-        }
-        return true;
-    }
-
-
+    // Model (cubeRenderable) init
     private void initModel() {
         MaterialFactory
                 .makeTransparentWithColor(this, new Color(android.graphics.Color.WHITE))
@@ -203,6 +192,8 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                         });
     }
 
+
+    // Clear Anchor
     private void clearAnchor() {
         currentAnchor = null;
         currentAnchor_1=null;
@@ -230,6 +221,8 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
 
     }
 
+
+    // Frametime마다 호출되는 콜백 func
     @Override
     public void onUpdate(FrameTime frameTime) {
         Log.d("API123", "onUpdateframe... current anchor node " + (currentAnchorNode == null));
@@ -238,6 +231,8 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
             Pose objectPose = currentAnchor.getPose();
             Pose objectPose_1= currentAnchor_1.getPose();
 
+
+            // 거리 측정 -> 지속적으로 업데이트
             float dx_1 = objectPose.tx() - objectPose_1.tx();
             float dy_1 = objectPose.ty() - objectPose_1.ty();
             float dz_1 = objectPose.tz() - objectPose_1.tz();
@@ -254,12 +249,17 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                     break;
             }
             String distanceMeters = df.format(distanceMeasured);
+
+            // 측정된 거리 textView Rendering
             tvDistance.setText("측정 길이: " + distanceMeters + " " + selectedMode);
 
         }
     }
 
 
+
+    // Two Hits -> 거리 측정되어 Rendering + 두 cubeRenderable 사이 Line 생성
+    // Line 생성 func
     private void addLineBetweenHits(HitResult hitResult, MotionEvent motionEvent) {
 
         int val = motionEvent.getActionMasked();
@@ -298,5 +298,26 @@ public class DistanceActivity extends AppCompatActivity implements com.google.ar
                             }
                     );
         }
+    }
+
+
+
+
+    // Version Check
+    public boolean checkIsSupportedDeviceOrFinish(final Activity activity) {
+
+        String openGlVersionString;
+        openGlVersionString = ((ActivityManager) Objects.requireNonNull(activity.getSystemService(Context.ACTIVITY_SERVICE)))
+                .getDeviceConfigurationInfo()
+                .getGlEsVersion();
+        if (Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION)
+        {
+            Log.e(TAG, "Sceneform requires OpenGL ES 3.0 later");
+            Toast.makeText(activity, "Sceneform requires OpenGL ES 3.0 or later", Toast.LENGTH_LONG)
+                    .show();
+            activity.finish();
+            return false;
+        }
+        return true;
     }
 }
