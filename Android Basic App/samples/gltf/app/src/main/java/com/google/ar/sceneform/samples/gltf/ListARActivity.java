@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+
+// AR Viewer list
+
 public class ListARActivity extends AppCompatActivity {
 
     ArrayList<SampleData> dataList; // 실제로 list 내 데이터를 저장하게 될 type이 SampleData인 ArrayList 객체 생성

@@ -1,5 +1,10 @@
 package com.google.ar.sceneform.samples.gltf;
 
+
+
+
+// Data 형식
+
 public class SampleData{
     private int image;
     private int key;

@@ -64,7 +64,10 @@ import android.os.Handler;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-//import android.widget.ImageView;
+
+
+
+// 가구 AR 배치 페이지
 
 public class GltfActivity extends AppCompatActivity {
     private static final String TAG = GltfActivity.class.getSimpleName(); // log 띄우기 위해
@@ -171,6 +174,8 @@ public class GltfActivity extends AppCompatActivity {
 
         int length = (int) intent.getSerializableExtra("size"); // get items -> key, size(length)
 
+
+        // 거리 측정 페이지로 이동 -> DistanceActivity.java
         Button button_distance = findViewById(R.id.button_distance);
         button_distance.setOnClickListener(v -> {
             Toast.makeText(getApplicationContext(), "거리 측정페이지입니다.", Toast.LENGTH_LONG).show();
@@ -302,6 +307,7 @@ public class GltfActivity extends AppCompatActivity {
         // anchor 초기화
 
 
+        // Anchor 초기화 func
         button_refresh.setOnClickListener(v -> {
                     if (arFragment.getArSceneView().getScene().getChildren() != null) {
                         System.out.println("refresh");
@@ -385,6 +391,8 @@ public class GltfActivity extends AppCompatActivity {
                         }
         );
 
+
+        // 버튼을 클릭하면 화면 중앙에 가구 배치
         Button addButton = findViewById(R.id.button_add);
         addButton.setOnClickListener(v -> {
             try{
@@ -440,6 +448,7 @@ public class GltfActivity extends AppCompatActivity {
                 myToast.show();
                 imageView.setVisibility(View.INVISIBLE);
             }catch (Exception e){
+                // 화면 중앙에 평면이 인식되지 않음 -> 예외처리
                 Toast myToast = Toast.makeText(this.getApplicationContext(), "평면이 인식된 곳에서 버튼을 눌러주세요.", Toast.LENGTH_SHORT);
                 myToast.show();
             }
@@ -448,7 +457,7 @@ public class GltfActivity extends AppCompatActivity {
 
 
 
-
+    // gltf file load, build model func
     public void buildModel(WeakReference<GltfActivity> weakActivity,Context context, String uri) {
 
                 ModelRenderable.builder() // Sceneform rendering engine -> gltf 파일 로드 및 개체 생성
@@ -462,7 +471,7 @@ public class GltfActivity extends AppCompatActivity {
                                         activity.renderable = modelRenderable; // modelRenderable(our .glb file) -> renderable
                                     }
                                 })
-                        .exceptionally( // exception
+                        .exceptionally( // exception -> fail loading
                                 throwable -> {
                                     Toast toast =
                                             Toast.makeText(this, "인테리어 파일을 불러올 수 없습니다.", Toast.LENGTH_LONG);
@@ -472,6 +481,10 @@ public class GltfActivity extends AppCompatActivity {
                                 });
     }
 
+    
+    
+    
+    // 버전 체크
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) { // version check function
         String openGlVersionString =
                 ((ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE))

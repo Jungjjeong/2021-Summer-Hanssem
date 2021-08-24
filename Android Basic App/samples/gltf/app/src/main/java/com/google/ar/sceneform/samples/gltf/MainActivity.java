@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+// Main Page
+
 public class MainActivity extends AppCompatActivity {
     Button button_list;
     @Override
@@ -21,10 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
         button_list = findViewById(R.id.button_list);
     }
+    // AR Viewer
     public void onClickARButton(View v) {
         Intent intent = new Intent(getApplicationContext(),ListARActivity.class); // AR LIST
         startActivity(intent);
     }
+
+    // 3D Viewer
     public void onClickViewerButton(View v) {
         Intent intent = new Intent(getApplicationContext(),List3dActivity.class); // 3D LIST
 //        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.hanssem.store/"));
