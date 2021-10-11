@@ -13,8 +13,8 @@ import UIKit
 class UIRoundPrimaryButton: UIButton{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        self.layer.cornerRadius = 20.0;
-        self.backgroundColor = UIColor(displayP3Red: 0/255, green: 0/255, blue: 0/255, alpha: 0.5)
+        self.layer.cornerRadius = 10.0;
+        self.backgroundColor = UIColor(red: 0.5529, green: 0, blue: 0.6392, alpha: 1.0)
         self.tintColor = UIColor.white
     }
 }
