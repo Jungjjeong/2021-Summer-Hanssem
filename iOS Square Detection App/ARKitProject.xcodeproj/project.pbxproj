@@ -31,10 +31,6 @@
 		DC58C1F927169183000C7887 /* Placement01.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1F727169182000C7887 /* Placement01.jpeg */; };
 		DC58C1FB27169510000C7887 /* FirstViewController.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1FA2716950F000C7887 /* FirstViewController.png */; };
 		DC58C1FD27169520000C7887 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1FC27169520000C7887 /* logo.png */; };
-		DC58C2022716A357000C7887 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1FE2716A355000C7887 /* menu.png */; };
-		DC58C2032716A357000C7887 /* Add.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1FF2716A355000C7887 /* Add.png */; };
-		DC58C2042716A357000C7887 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C2002716A356000C7887 /* refresh.png */; };
-		DC58C2052716A357000C7887 /* ruler.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C2012716A356000C7887 /* ruler.png */; };
 		E778840626B90F2200864B34 /* SizeMeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E778840526B90F2200864B34 /* SizeMeasurementView.swift */; };
 		E78C211826C0ED5600A58265 /* MainCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C211726C0ED5600A58265 /* MainCustomAlertView.swift */; };
 		E78C211B26C10BC300A58265 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C211A26C10BC300A58265 /* ProgressViewController.swift */; };
@@ -74,10 +70,6 @@
 		DC58C1F727169182000C7887 /* Placement01.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Placement01.jpeg; sourceTree = "<group>"; };
 		DC58C1FA2716950F000C7887 /* FirstViewController.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FirstViewController.png; sourceTree = "<group>"; };
 		DC58C1FC27169520000C7887 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		DC58C1FE2716A355000C7887 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
-		DC58C1FF2716A355000C7887 /* Add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Add.png; sourceTree = "<group>"; };
-		DC58C2002716A356000C7887 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
-		DC58C2012716A356000C7887 /* ruler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ruler.png; sourceTree = "<group>"; };
 		E778840526B90F2200864B34 /* SizeMeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeMeasurementView.swift; sourceTree = "<group>"; };
 		E78C211726C0ED5600A58265 /* MainCustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCustomAlertView.swift; sourceTree = "<group>"; };
 		E78C211A26C10BC300A58265 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
@@ -146,10 +138,6 @@
 				DC58C1F427156824000C7887 /* Launch Screen.storyboard */,
 				3929C48F1E89EC2C00E00B60 /* Main.storyboard */,
 				E78C211D26C10C7600A58265 /* ProgressViewController.storyboard */,
-				DC58C1FF2716A355000C7887 /* Add.png */,
-				DC58C1FE2716A355000C7887 /* menu.png */,
-				DC58C2002716A356000C7887 /* refresh.png */,
-				DC58C2012716A356000C7887 /* ruler.png */,
 				582FB0711F43EAC600AD8041 /* .swiftlint.yml */,
 			);
 			path = ARKitProject;
@@ -241,18 +229,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				582FB0721F43EAC600AD8041 /* .swiftlint.yml in Resources */,
-				DC58C2042716A357000C7887 /* refresh.png in Resources */,
 				3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
 				E78C211E26C10C7600A58265 /* ProgressViewController.storyboard in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,
-				DC58C2032716A357000C7887 /* Add.png in Resources */,
 				DC58C1FD27169520000C7887 /* logo.png in Resources */,
-				DC58C2022716A357000C7887 /* menu.png in Resources */,
 				DC58C1F927169183000C7887 /* Placement01.jpeg in Resources */,
 				DC58C1FB27169510000C7887 /* FirstViewController.png in Resources */,
 				DC58C1F527156824000C7887 /* Launch Screen.storyboard in Resources */,
-				DC58C2052716A357000C7887 /* ruler.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
