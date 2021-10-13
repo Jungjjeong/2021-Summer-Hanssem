@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Add-2.png",
+      "filename" : "placement.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Add-1.png",
+      "filename" : "placement-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Add.png",
+      "filename" : "placement-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -18,7 +18,6 @@
 		39C0B9591E9C6B1F003FCA0C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9571E9C6B1F003FCA0C /* SettingsViewController.swift */; };
 		39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9581E9C6B1F003FCA0C /* Utilities.swift */; };
 		39D4A8BE1EA1AF530006EC65 /* PlaneDebugVisualization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4A8BD1EA1AF530006EC65 /* PlaneDebugVisualization.swift */; };
-		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
 		582FB0721F43EAC600AD8041 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 582FB0711F43EAC600AD8041 /* .swiftlint.yml */; };
 		58DE9FC71FDDA042008E25AF /* VirtualObjectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DE9FC61FDDA041008E25AF /* VirtualObjectsManager.swift */; };
 		A35A11CF1EF4EB070072FE74 /* ScieneView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35A11CE1EF4EB070072FE74 /* ScieneView+Extension.swift */; };
@@ -27,8 +26,16 @@
 		C490DAC41E9AB63400210960 /* VirtualObjectSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C490DAC31E9AB63400210960 /* VirtualObjectSelectionViewController.swift */; };
 		C4E87DD91EA6B40F002117D6 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E87DD81EA6B40F002117D6 /* VirtualObject.swift */; };
 		C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */; };
+		DC58C1F327154AD0000C7887 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC58C1F227154AD0000C7887 /* FirstViewController.swift */; };
+		DC58C1F527156824000C7887 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1F427156824000C7887 /* Launch Screen.storyboard */; };
+		DC58C1F927169183000C7887 /* Placement01.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1F727169182000C7887 /* Placement01.jpeg */; };
+		DC58C1FB27169510000C7887 /* FirstViewController.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1FA2716950F000C7887 /* FirstViewController.png */; };
+		DC58C1FD27169520000C7887 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1FC27169520000C7887 /* logo.png */; };
+		DC58C2022716A357000C7887 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1FE2716A355000C7887 /* menu.png */; };
+		DC58C2032716A357000C7887 /* Add.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C1FF2716A355000C7887 /* Add.png */; };
+		DC58C2042716A357000C7887 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C2002716A356000C7887 /* refresh.png */; };
+		DC58C2052716A357000C7887 /* ruler.png in Resources */ = {isa = PBXBuildFile; fileRef = DC58C2012716A356000C7887 /* ruler.png */; };
 		E778840626B90F2200864B34 /* SizeMeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E778840526B90F2200864B34 /* SizeMeasurementView.swift */; };
-		E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */; };
 		E78C211826C0ED5600A58265 /* MainCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C211726C0ED5600A58265 /* MainCustomAlertView.swift */; };
 		E78C211B26C10BC300A58265 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78C211A26C10BC300A58265 /* ProgressViewController.swift */; };
 		E78C211E26C10C7600A58265 /* ProgressViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E78C211D26C10C7600A58265 /* ProgressViewController.storyboard */; };
@@ -53,7 +60,6 @@
 		39C0B9571E9C6B1F003FCA0C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		39C0B9581E9C6B1F003FCA0C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		39D4A8BD1EA1AF530006EC65 /* PlaneDebugVisualization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneDebugVisualization.swift; sourceTree = "<group>"; };
-		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		582FB0711F43EAC600AD8041 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		58DE9FC61FDDA041008E25AF /* VirtualObjectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectsManager.swift; sourceTree = "<group>"; };
 		A35A11CE1EF4EB070072FE74 /* ScieneView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScieneView+Extension.swift"; sourceTree = "<group>"; };
@@ -63,8 +69,16 @@
 		C490DAC31E9AB63400210960 /* VirtualObjectSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualObjectSelectionViewController.swift; sourceTree = "<group>"; };
 		C4E87DD81EA6B40F002117D6 /* VirtualObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VirtualObject.swift; path = ../VirtualObject.swift; sourceTree = "<group>"; };
 		C4FBC02A1EC6438B003F7864 /* ARCameraTrackingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARCameraTrackingState.swift; sourceTree = "<group>"; };
+		DC58C1F227154AD0000C7887 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		DC58C1F427156824000C7887 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		DC58C1F727169182000C7887 /* Placement01.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Placement01.jpeg; sourceTree = "<group>"; };
+		DC58C1FA2716950F000C7887 /* FirstViewController.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FirstViewController.png; sourceTree = "<group>"; };
+		DC58C1FC27169520000C7887 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		DC58C1FE2716A355000C7887 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		DC58C1FF2716A355000C7887 /* Add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Add.png; sourceTree = "<group>"; };
+		DC58C2002716A356000C7887 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		DC58C2012716A356000C7887 /* ruler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ruler.png; sourceTree = "<group>"; };
 		E778840526B90F2200864B34 /* SizeMeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeMeasurementView.swift; sourceTree = "<group>"; };
-		E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
 		E78C211726C0ED5600A58265 /* MainCustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCustomAlertView.swift; sourceTree = "<group>"; };
 		E78C211A26C10BC300A58265 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		E78C211D26C10C7600A58265 /* ProgressViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProgressViewController.storyboard; sourceTree = "<group>"; };
@@ -94,7 +108,6 @@
 				392BB82B1EA19A7C00FBBAC8 /* Plane.swift */,
 				39D4A8BD1EA1AF530006EC65 /* PlaneDebugVisualization.swift */,
 				39C0B9501E9C63CB003FCA0C /* HitTestVisualization.swift */,
-				E78A1D3F26A55ABF006881F4 /* UIRoundPrimaryButton.swift */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -112,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */,
+				DC58C1F227154AD0000C7887 /* FirstViewController.swift */,
 				3929C48D1E89EC2C00E00B60 /* MainViewController.swift */,
 				39C0B9571E9C6B1F003FCA0C /* SettingsViewController.swift */,
 				C490DAC31E9AB63400210960 /* VirtualObjectSelectionViewController.swift */,
@@ -120,15 +134,22 @@
 				39C0B9581E9C6B1F003FCA0C /* Utilities.swift */,
 				C41366B81EB80DD400EC054A /* TextManager.swift */,
 				E778840526B90F2200864B34 /* SizeMeasurementView.swift */,
+				DC58C1F727169182000C7887 /* Placement01.jpeg */,
+				DC58C1FA2716950F000C7887 /* FirstViewController.png */,
+				DC58C1FC27169520000C7887 /* logo.png */,
 				E78C211C26C10C0C00A58265 /* Pop Up View */,
 				113B64D01ECA81CA0071CBD1 /* UI Elements */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
 				3929C49E1E89EE4400E00B60 /* Models.scnassets */,
 				3929C4921E89EC2C00E00B60 /* Assets.xcassets */,
 				3929C4971E89EC2C00E00B60 /* Info.plist */,
+				DC58C1F427156824000C7887 /* Launch Screen.storyboard */,
 				3929C48F1E89EC2C00E00B60 /* Main.storyboard */,
 				E78C211D26C10C7600A58265 /* ProgressViewController.storyboard */,
-				39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */,
+				DC58C1FF2716A355000C7887 /* Add.png */,
+				DC58C1FE2716A355000C7887 /* menu.png */,
+				DC58C2002716A356000C7887 /* refresh.png */,
+				DC58C2012716A356000C7887 /* ruler.png */,
 				582FB0711F43EAC600AD8041 /* .swiftlint.yml */,
 			);
 			path = ARKitProject;
@@ -220,11 +241,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				582FB0721F43EAC600AD8041 /* .swiftlint.yml in Resources */,
+				DC58C2042716A357000C7887 /* refresh.png in Resources */,
 				3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */,
-				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
 				E78C211E26C10C7600A58265 /* ProgressViewController.storyboard in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,
+				DC58C2032716A357000C7887 /* Add.png in Resources */,
+				DC58C1FD27169520000C7887 /* logo.png in Resources */,
+				DC58C2022716A357000C7887 /* menu.png in Resources */,
+				DC58C1F927169183000C7887 /* Placement01.jpeg in Resources */,
+				DC58C1FB27169510000C7887 /* FirstViewController.png in Resources */,
+				DC58C1F527156824000C7887 /* Launch Screen.storyboard in Resources */,
+				DC58C2052716A357000C7887 /* ruler.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +285,6 @@
 				A35A11CF1EF4EB070072FE74 /* ScieneView+Extension.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* MainViewController.swift in Sources */,
 				E778840626B90F2200864B34 /* SizeMeasurementView.swift in Sources */,
-				E78A1D4026A55ABF006881F4 /* UIRoundPrimaryButton.swift in Sources */,
 				C41366B91EB80DD400EC054A /* TextManager.swift in Sources */,
 				E7963A9426A8FDB600BDF22D /* Teapot.swift in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
@@ -272,6 +299,7 @@
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
 				C4FBC02B1EC6438B003F7864 /* ARCameraTrackingState.swift in Sources */,
+				DC58C1F327154AD0000C7887 /* FirstViewController.swift in Sources */,
 				E7A0E57726BD05D800463FC5 /* moa_rose.swift in Sources */,
 				E79813A926B3D9A600712D98 /* fender_stratocaster.swift in Sources */,
 				58DE9FC71FDDA042008E25AF /* VirtualObjectsManager.swift in Sources */,
