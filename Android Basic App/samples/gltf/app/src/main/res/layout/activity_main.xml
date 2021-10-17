@@ -16,43 +16,43 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="50dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.65999997"
-        app:srcCompat="@drawable/mainImage"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/mainimg" />
 
     <Button
         android:id="@+id/button_list"
         style="@android:style/Widget.Button"
-        android:layout_width="250sp"
+        android:layout_width="270sp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="170dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/round_button"
         android:fontFamily="@font/app_main_font"
         android:onClick="onClickViewerButton"
         android:text="@string/button_Distance"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_input"
         style="@android:style/Widget.Button"
-        android:layout_width="250sp"
+        android:layout_width="270sp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/round_button"
         android:fontFamily="@font/app_main_font"
         android:onClick="onClickARButton"
         android:text="@string/button_AR"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_list"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -100,12 +100,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="70dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/description04"
         android:textColor="#000000"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button_input"
+        app:layout_constraintBottom_toTopOf="@+id/button_list"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="TODO" />
 
 </android.support.constraint.ConstraintLayout>
