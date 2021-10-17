@@ -65,6 +65,8 @@ public class GltfActivity extends AppCompatActivity {
 
 
 
+
+
     private static class AnimationInstance { // animation을 만들기 위해 사용되는 데이터들
         Animator animator;
         Long startTime;
@@ -197,23 +199,11 @@ public class GltfActivity extends AppCompatActivity {
             if(id==R.id.menu_668317){
                 fileUri = Glburi[0];
                 buildModel(weakActivity,getBaseContext(), fileUri);
-            }else if(id == R.id.menu_668318){
-                fileUri = Glburi[1];
-                buildModel(weakActivity,getBaseContext(), fileUri);
-            }else if(id == R.id.menu_681946){
-                fileUri = Glburi[2];
-                buildModel(weakActivity,getBaseContext(), fileUri);
             }else if(id == R.id.menu_681947){
                 fileUri = Glburi[3];
                 buildModel(weakActivity,getBaseContext(), fileUri);
-            }else if(id == R.id.menu_737686){
-                fileUri = Glburi[4];
-                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_737687){
                 fileUri = Glburi[5];
-                buildModel(weakActivity,getBaseContext(), fileUri );
-            }else if(id == R.id.menu_746525){
-                fileUri = Glburi[6];
                 buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_746526){
                 fileUri = Glburi[7];
@@ -221,17 +211,11 @@ public class GltfActivity extends AppCompatActivity {
             }else if(id == R.id.menu_746540){
                 fileUri = Glburi[8];
                 buildModel(weakActivity,getBaseContext(), fileUri );
-            }else if(id == R.id.menu_746541){
-                fileUri = Glburi[9];
-                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_772973){
                 fileUri = Glburi[10];
                 buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_777039){
                 fileUri = Glburi[11];
-                buildModel(weakActivity,getBaseContext(), fileUri );
-            }else if(id == R.id.menu_777040){
-                fileUri = Glburi[12];
                 buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_786840){
                 fileUri = Glburi[13];
@@ -239,26 +223,11 @@ public class GltfActivity extends AppCompatActivity {
             }else if(id == R.id.menu_786841){
                 fileUri = Glburi[14];
                 buildModel(weakActivity,getBaseContext(), fileUri );
-            }else if(id == R.id.menu_786842){
-                fileUri = Glburi[15];
-                buildModel(weakActivity,getBaseContext(), fileUri );
-            }else if(id == R.id.menu_787819){
-                fileUri = Glburi[16];
-                buildModel(weakActivity,getBaseContext(), fileUri );
-            }else if(id == R.id.menu_787823){
-                fileUri = Glburi[17];
-                buildModel(weakActivity,getBaseContext(), fileUri );
-            }else if(id == R.id.menu_796379){
-                fileUri = Glburi[18];
-                buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_796416){
                 fileUri = Glburi[19];
                 buildModel(weakActivity,getBaseContext(), fileUri );
             }else if(id == R.id.menu_799215){
                 fileUri = Glburi[20];
-                buildModel(weakActivity,getBaseContext(), fileUri );
-            }else if(id == R.id.menu_799220){
-                fileUri = Glburi[21];
                 buildModel(weakActivity,getBaseContext(), fileUri );
             }
 

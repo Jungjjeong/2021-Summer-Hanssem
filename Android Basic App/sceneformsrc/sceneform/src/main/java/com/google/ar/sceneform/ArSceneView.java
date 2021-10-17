@@ -375,6 +375,9 @@ public class ArSceneView extends SceneView {
     }
   }
 
+
+
+
   /** @return returns true if light estimation is enabled. */
   public boolean isLightEstimationEnabled() {
     return lightEstimationEnabled;
