@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import SafariServices
 
 class FirstViewController: UIViewController {
     
@@ -48,6 +48,12 @@ class FirstViewController: UIViewController {
 
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
+    
+    @IBAction func onClick_3D(_ sender: Any) {
+            guard let threedurl = URL(string: "http://210.94.185.38:8080/3D/test.html") else { return }
+            let safariVC = SFSafariViewController(url: threedurl)
+            present(safariVC, animated: true, completion: nil)
+        }
     
 }
 
